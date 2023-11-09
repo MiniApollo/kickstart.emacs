@@ -18,8 +18,8 @@
 This repository gives you a starting point for Gnu Emacs with good defaults, vim keybindings (evil-mode) and packages that most people want to use.
 This config is:
 - Single file org document
-- Modular and easily to configurable
-- Documented describing about it's purpuse
+- Modular and easily configurable
+- Documented describing about its purpuse
 
 Inspired by [[https://github.com/nvim-lua/kickstart.nvim][kickstart.nvim]]
 For more helpful information check out
@@ -48,7 +48,7 @@ Their content helped me to create this configuration
 - Diminish: Hiding or abbreviation of the modeline displays
 - Which key: Helping utility for keycords
 *** Recomended Packages
-If you want to see how to configure these look up their github or check out my [[https://github.com/MiniApollo/config/blob/main/emacs/config.org][config]]
+If you want to see how to configure these, look up their github or check out my [[https://github.com/MiniApollo/config/blob/main/emacs/config.org][config]]
 - DashBoard: Extensible startup screen
 - UndoTree: Visualizes the undo history
 - Drag Stuff: Makes it possible to move selected text, regions, lines
