@@ -4,6 +4,8 @@
 #+Startup: showeverything
 #+Options: toc:2
 
+[[./Emacs_KickStarter.png]]
+
 * Table Of Content :toc:
 - [[#introduction][Introduction]]
   - [[#packages][Packages]]
