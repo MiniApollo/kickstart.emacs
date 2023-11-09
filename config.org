@@ -1,0 +1,467 @@
+#+Title: Emacs Kickstarter
+#+Author: MiniApollo
+#+Description: A starting point for Gnu Emacs with good defaults and packages that most people want to use.
+#+Startup: showeverything
+#+Options: toc:2
+
+* Table Of Content :toc:
+- [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
+  - [[#startup-performance][Startup Performance]]
+  - [[#use-package-setup][Use Package setup]]
+  - [[#load-evil-mode][Load Evil Mode]]
+  - [[#general-keybindings][General Keybindings]]
+- [[#sane-defaults][SANE DEFAULTS]]
+- [[#set-theme][Set Theme]]
+- [[#transparency][Transparency]]
+- [[#fonts][Fonts]]
+  - [[#setting-fonts][Setting fonts]]
+  - [[#zooming-inout][Zooming In/Out]]
+- [[#modeline][Modeline]]
+- [[#projectile][Projectile]]
+- [[#language-support--lsp][Language support + Lsp]]
+  - [[#flycheck][Flycheck]]
+  - [[#lsp-mode][Lsp Mode]]
+  - [[#yasnippet][Yasnippet]]
+  - [[#language-modes][Language modes]]
+- [[#terminal][Terminal]]
+  - [[#vterm][Vterm]]
+- [[#other-packages][Other Packages]]
+  - [[#all-the-icons][ALL THE ICONS]]
+  - [[#nerd-icons][Nerd Icons]]
+  - [[#magit][Magit]]
+  - [[#company][Company]]
+  - [[#ivy-counsel][Ivy (counsel)]]
+  - [[#diminish][DIMINISH]]
+  - [[#which-key][WHICH-KEY]]
+- [[#runtime-performance][Runtime Performance]]
+
+* IMPORTANT PROGRAMS TO LOAD FIRST
+** Startup Performance 
+Make startup faster by reducing the frequency of garbage collection. This will be set back when startup finishes
+#+begin_src emacs-lisp
+    ;; The default is 800 kilobytes.  Measured in bytes.
+    (setq gc-cons-threshold (* 50 1000 1000))
+#+end_src
+
+** Use Package setup
+I used the default package manager package.el with use-package. Alternative package managers(straight.el, elpaca, etc..) are useful if you want to install packages from github 
+(Like if you want a specific not very popular package that is not avalible on elpa or melpa) 
+Or want UI (elpaca) and other things if you are interested check out their github or search for more package managers
+In my experience Package.el is not slow and gets the job done 
+To update/upgrade packages use the package-upgrade-all command 
+#+begin_src emacs-lisp
+    (require 'package)
+    (require 'use-package) ;; requires package.el and use-package so we can use it
+    (setq use-package-always-ensure t) ;; always ensures that a package is installed 
+
+    (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
+                             ("org" . "https://orgmode.org/elpa/")
+                             ("elpa" . "https://elpa.gnu.org/packages/")))
+
+    (package-initialize)
+    (unless package-archive-contents
+      (package-refresh-contents))
+
+    ;; Initialize use-package on non-Linux platforms
+    (unless (package-installed-p 'use-package)
+      (package-install 'use-package))
+#+end_src
+
+** Load Evil Mode
+Evil is an extensible vi/vim layer for Emacs.  Because…let’s face it.  The Vim keybindings are just plain better.
+Note: To paste without copy(yank) selected text use P (shift P evil-paste-before), because default is evil-paste-after 
+You can toggle evil mode with ctrl z (emacs-mode)
+#+begin_src emacs-lisp
+    (use-package evil
+      :init ;; tweak evil's configuration before loading it
+      (setq evil-want-keybinding nil) ;; Disable to load evil bindings to other modes (It's not consistent and not good)
+      (setq evil-want-C-u-scroll t) ;; Set  ctrl u to scrool up
+      (setq evil-want-C-i-jump nil) ;; Disables Ctrl i jump
+      (setq evil-undo-system 'undo-redo) ;; ctrl r to work (redo) 
+      (setq org-return-follows-link  t) ;; Setting RETURN key in org-mode to follow links
+      (evil-mode))
+    (use-package evil-collection
+      :after evil
+      :config
+      ;; Setting where to use evil-collection
+      (setq evil-collection-mode-list '(dired ibuffer magit))
+      (evil-collection-init))
+    ;; Unmap keys in 'evil-maps if not done, (setq org-return-follows-link t) will not work
+    (with-eval-after-load 'evil-maps
+      (define-key evil-motion-state-map (kbd "SPC") nil)
+      (define-key evil-motion-state-map (kbd "RET") nil)
+      (define-key evil-motion-state-map (kbd "TAB") nil))
+#+end_src
+
+** General Keybindings
+General is a keybinding framework to set keybindings easily 
+Learder key is what you will presess when want to access your keybindings (Space + . Find file)
+To search and replace start use query-replace-regexp one by one(SPACE to replace n to skip meta/alt ctrl %) [[https://stackoverflow.com/questions/270930/using-emacs-to-recursively-find-and-replace-in-text-files-not-already-open][Source]]
+#+begin_src emacs-lisp
+  (use-package general
+    :config
+    (general-evil-setup)
+    ;; set up 'SPC' as the global leader key
+    (general-create-definer start/leader-keys
+      :states '(normal insert visual emacs)
+      :keymaps 'override
+      :prefix "SPC" ;; set leader
+      :global-prefix "C-SPC") ;; access leader in insert mode
+
+    (start/leader-keys
+      "." '(find-file :wk "Find file")
+      "TAB" '(comment-line :wk "Comment lines")
+      "p" '(projectile-command-map :wk "Projectile command map"))
+
+    (start/leader-keys 
+      "f" '(:ignore t :wk "Find")
+      "f c" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config")
+      "f r" '(counsel-recentf :wk "Recent files"))
+
+    (start/leader-keys
+      "b" '(:ignore t :wk "Buffer Bookmarks")
+      "b b" '(switch-to-buffer :wk "Switch buffer")
+      "b k" '(kill-this-buffer :wk "Kill this buffer")
+      "b i" '(ibuffer :wk "Ibuffer")  
+      "b n" '(next-buffer :wk "Next buffer")
+      "b p" '(previous-buffer :wk "Previous buffer")
+      "b r" '(revert-buffer :wk "Reload buffer")
+      "b R" '(rename-buffer :wk "Rename buffer")
+      "b j" '(bookmark-jump :wk "Bookmark jump"))
+
+    (start/leader-keys
+     "d" '(:ignore t :wk "Dired")
+     "d v" '(dired :wk "Open dired")
+     "d j" '(dired-jump :wk "Dired jump to current"))
+
+    (start/leader-keys
+      "g" '(:ignore t :wk "Git")    
+      "g g" '(magit-status :wk "Magit status"))
+
+    (start/leader-keys
+      "h" '(:ignore t :wk "Help")
+      "h c" '(company-manual-begin :wk "Company completion at point")
+      "h r" '((lambda () (interactive)
+                (load-file "~/.config/emacs/init.el"))
+              :wk "Reload emacs config"))
+
+    (start/leader-keys
+      "s" '(:ignore t :wk "Show")    
+      "s v" '(vterm :wk "Show Vterm"))
+
+    (start/leader-keys
+      "t" '(:ignore t :wk "Toggle")
+      "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
+      "t t" '(visual-line-mode :wk "Toggle truncated lines (wrap)")))
+#+end_src
+
+* SANE DEFAULTS
+#+begin_src emacs-lisp
+    (delete-selection-mode 1)    ;; You can select text and delete it by typing.
+    (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
+    (electric-pair-mode 1)       ;; Turns on automatic parens pairing
+
+    (global-display-line-numbers-mode 1) ;; Display line numbers
+    (global-visual-line-mode t)  ;; Enable truncated lines
+    (menu-bar-mode -1)           ;; Disable the menu bar 
+    (scroll-bar-mode -1)         ;; Disable the scroll bar
+    (tool-bar-mode -1)           ;; Disable the tool bar
+
+    (setq mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling 
+
+    (setq scroll-conservatively 10) ;; Smooth scrolling when going down with scroll margin
+    (setq scroll-margin 8) 
+
+    (global-set-key [escape] 'keyboard-escape-quit) ;; Makes Escape quit prompts (Minibuffer Escape)
+    (setq make-backup-files nil) ; Stop creating ~ backup files
+    (blink-cursor-mode 0) ;; Don't blink cursor
+    (add-hook 'prog-mode-hook (lambda () (hs-minor-mode t))) ;; Enable folding hide show globally
+    (setq-default tab-width 4)
+#+end_src
+
+* Set Theme
+Set gruvbox theme if you want some themes to try out doom-themes
+#+begin_src emacs-lisp
+    (use-package gruvbox-theme
+      :init
+      (load-theme 'gruvbox-dark-medium t)) ;; We need to add t to trust this package
+#+end_src
+
+* Transparency
+With Emacs version 29, true transparency has been added.
+#+begin_src emacs-lisp
+    (add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
+#+end_src
+
+* Fonts 
+** Setting fonts
+#+begin_src emacs-lisp
+    (set-face-attribute 'default nil
+                        :font "JetBrains Mono"
+                        :height 120
+                        :weight 'medium)
+    ;; This sets the default font on all graphical frames created after restarting Emacs.
+    ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
+    ;; are not right unless I also add this method of setting the default font.
+    (add-to-list 'default-frame-alist '(font . "JetBrains Mono"))
+    (setq-default line-spacing 0.12)
+#+end_src
+
+** Zooming In/Out 
+You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTRL plus the mouse wheel for zooming in/out.
+#+begin_src emacs-lisp
+    (global-set-key (kbd "C-+") 'text-scale-increase)
+    (global-set-key (kbd "C--") 'text-scale-decrease)
+    (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+    (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+#+end_src
+
+* Modeline
+Replace the default modeline with a pretier more useful.
+#+begin_src emacs-lisp
+    (use-package doom-modeline
+      :ensure t
+      :init (doom-modeline-mode 1)
+      :config
+      (setq doom-modeline-height 25      ;; sets modeline height
+            doom-modeline-bar-width 5    ;; sets right bar width
+            doom-modeline-persp-name t   ;; adds perspective name to modeline
+            doom-modeline-persp-icon t)) ;; adds folder icon next to persp name
+#+end_src
+
+* Projectile 
+Projectile is a project interaction library for Emacs.
+#+begin_src emacs-lisp
+    (use-package projectile
+      :config
+      (projectile-mode 1)
+      :init
+      (setq projectile-switch-project-action #'projectile-dired)
+      (setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search first subdirectory level for projects
+    ;; Use Bookmarks for non git projects
+#+end_src
+
+* Language support + Lsp
+** Flycheck 
+Flycheck is recommended by lsp-mode for better error handling (lsp mode right side error display only works with flycheck)
+#+begin_src emacs-lisp
+    (use-package flycheck
+      :ensure t
+      :defer t
+      :diminish
+      :init (global-flycheck-mode))
+#+end_src
+
+** Lsp Mode
+Language Server Protocol Support for Emacs. 
+The build in (default) is now eglot but it requires to manualy download the lsp clients, doesn't support debuggers, lsp-mode is pretier and has more features,
+Eglot is faster and more minimal, but it requires manual setup
+*** Setup
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :init
+    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+    (setq lsp-keymap-prefix "C-c l")
+    ;; To Disable features https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+    :hook (;; Automatic Language Modes
+           (prog-mode . lsp)
+           ;; if you want which-key integration
+           (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp)
+  ;; optionally
+  (use-package lsp-ui 
+    :commands lsp-ui-mode)
+  ;; if you are ivy user
+  (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+#+end_src
+
+** Yasnippet 
+YASnippet is a template system for Emacs. And yasnippet-snippets is a snippet collection package. 
+To use it write out the full keyword (or use autocompletion) and press Tab
+#+begin_src emacs-lisp
+    (use-package yasnippet-snippets
+      :hook (prog-mode . yas-minor-mode))
+#+end_src
+
+** Language modes
+Its not required for every language like c,c++,C#,java,javascript etc.. to download language mode packages but for more specific languages it is necessary for syntax highlighting
+If you want to use TreeSitter. Check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]] 
+Currently its tedious to use Treesitter because emacs hasn't translated to it yet fully 
+*** Lua mode
+#+begin_src emacs-lisp
+    (use-package lua-mode
+      :mode "\\.lua\\'")
+#+end_src
+
+*** ORG MODE
+Org mode is one of the things that emacs is loved for you will understand if you start using it or read about what it can do (like this document is the source code)
+**** Enabling Table of Contents
+#+begin_src emacs-lisp
+    (use-package toc-org
+      :commands toc-org-enable
+      :init (add-hook 'org-mode-hook 'toc-org-enable))
+#+end_src
+
+**** Enabling Org Bullets
+Org-bullets gives us attractive bullets rather than asterisks.
+#+begin_src emacs-lisp
+    (add-hook 'org-mode-hook 'org-indent-mode)
+    (use-package org-bullets)
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+#+end_src
+
+**** Source Code Block Tag Expansion
+Org-tempo is not a separate package but a module within org that can be enabled.  
+Org-tempo allows for '<s' followed by TAB to expand to a begin_src tag.
+#+begin_src emacs-lisp
+    (with-eval-after-load 'org
+      (require 'org-tempo))
+#+end_src
+
+* Terminal
+** Vterm
+Vterm is a terminal emulator within Emacs.
+The 'shell-file-name' setting sets the shell to be used in M-x shell, M-x term, M-x ansi-term and M-x vterm.
+By default, the shell is set to 'fish' but could change it to 'bash' or 'zsh'.
+#+begin_src emacs-lisp
+    (use-package vterm
+      :commands (vterm))
+    (setq shell-file-name "/bin/bash"
+          vterm-max-scrollback 10000)
+#+end_src
+
+* Other Packages
+All the package setups that don't need much tweaking
+** ALL THE ICONS
+For icons and more helpful ui
+This is an icon set that can be used with dired, ibuffer and other Emacs programs.
+Don't forget to use all-the-icons-install-fonts
+#+begin_src emacs-lisp
+    (use-package all-the-icons
+      :ensure t
+      :if (display-graphic-p))
+#+end_src
+
+** Nerd Icons
+Includes more icons
+Don't forget to use nerd-icons-install-fonts
+For doom modeline
+#+begin_src emacs-lisp
+    (use-package nerd-icons
+      :ensure t
+      :if (display-graphic-p))
+
+    (use-package nerd-icons-dired
+      :hook (dired-mode . (lambda () (nerd-icons-dired-mode t))))
+#+end_src
+
+** Magit
+Complete text-based user interface to Git
+#+begin_src emacs-lisp
+    (use-package magit
+      :commands magit-status)
+#+end_src
+
+** Company  
+Company is a text completion framework for Emacs. The name stands for “complete anything”.
+Completion will start automatically after you type a few letters.
+Use M-n and M-p to select, <tab> to complete.
+#+begin_src emacs-lisp
+    (use-package company
+      :defer 2
+      :diminish
+      :bind (:map company-active-map
+                  ("<tab>" . company-complete-selection)) ;; You can delete the :bind region to use return (default)
+      :custom
+      (company-begin-commands '(self-insert-command))
+      (company-idle-delay 0.0)
+      (company-minimum-prefix-length 1)
+      (company-show-numbers t)
+      (company-tooltip-align-annotations 't)
+      (global-company-mode t))
+
+    (use-package company-box
+      :after compan
+      :diminish
+      :hook (company-mode . company-box-mode))
+#+end_src
+
+** Ivy (counsel)
+Ivy, a generic completion mechanism for Emacs.
+Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
+Ivy-rich allows us to add descriptions alongside the commands in M-x.
+#+begin_src emacs-lisp
+    (use-package counsel
+      :after ivy
+      :diminish
+      :config (counsel-mode))
+
+    (use-package ivy
+      :bind
+      ;; ivy-resume resumes the last Ivy-based completion.
+      (("C-c C-r" . ivy-resume)
+       ("C-x B" . ivy-switch-buffer-other-window))
+      :diminish
+      :custom
+      (setq ivy-use-virtual-buffers t)
+      (setq ivy-count-format "(%d/%d) ")
+      (setq enable-recursive-minibuffers t)
+      :config
+      (ivy-mode))
+
+    (use-package all-the-icons-ivy-rich
+      :ensure t
+      :init (all-the-icons-ivy-rich-mode 1))
+
+    (use-package ivy-rich
+      :after ivy
+      :ensure t
+      :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
+      :custom
+      (ivy-virtual-abbreviate 'full
+                              ivy-rich-switch-buffer-align-virtual-buffer t
+                              ivy-rich-path-style 'abbrev)
+      :config
+      (ivy-set-display-transformer 'ivy-switch-buffer
+                                   'ivy-rich-switch-buffer-transformer))
+    (use-package counsel-projectile
+      :config (counsel-projectile-mode))
+#+end_src
+
+** DIMINISH 
+This package implements hiding or abbreviation of the modeline displays (lighters) of minor-modes.
+With this package installed, you can add ‘:diminish’ to any use-package block to hide that particular mode in the modeline.
+#+begin_src emacs-lisp
+    (use-package diminish)
+#+end_src
+
+** WHICH-KEY
+Which-key is a helping utility for keycords (which key to press)
+#+begin_src emacs-lisp
+    (use-package which-key
+      :init
+      (which-key-mode 1)
+      :diminish
+      :config
+      (setq which-key-side-window-location 'bottom
+            which-key-sort-order #'which-key-key-order-alpha
+            which-key-sort-uppercase-first nil
+            which-key-add-column-padding 1
+            which-key-max-display-columns nil
+            which-key-min-display-lines 6
+            which-key-side-window-slot -10
+            which-key-side-window-max-height 0.25
+            which-key-idle-delay 0.8
+            which-key-max-description-length 25
+            which-key-allow-imprecise-window-fit nil
+            which-key-separator " → " ))
+#+end_src
+
+* Runtime Performance
+Dial the GC threshold back down so that garbage collection happens more frequently but in less time and increase Read Process Output Max so emacs can read more data
+#+begin_src emacs-lisp
+    ;; Make gc pauses faster by decreasing the threshold.
+    (setq gc-cons-threshold (* 2 1000 1000))
+    ;; Increase the amount of data which Emacs reads from the process
+    (setq read-process-output-max (* 1024 1024)) ;; 1mb
+#+end_src
