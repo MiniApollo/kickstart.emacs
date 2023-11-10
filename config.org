@@ -98,61 +98,61 @@ General is a keybinding framework to set keybindings easily
 Learder key is what you will presess when want to access your keybindings (Space + . Find file)
 To search and replace start use query-replace-regexp one by one(SPACE to replace n to skip meta/alt ctrl %) [[https://stackoverflow.com/questions/270930/using-emacs-to-recursively-find-and-replace-in-text-files-not-already-open][Source]]
 #+begin_src emacs-lisp
-  (use-package general
-    :config
-    (general-evil-setup)
-    ;; set up 'SPC' as the global leader key
-    (general-create-definer start/leader-keys
-      :states '(normal insert visual emacs)
-      :keymaps 'override
-      :prefix "SPC" ;; set leader
-      :global-prefix "C-SPC") ;; access leader in insert mode
+    (use-package general
+      :config
+      (general-evil-setup)
+      ;; set up 'SPC' as the global leader key
+      (general-create-definer start/leader-keys
+        :states '(normal insert visual emacs)
+        :keymaps 'override
+        :prefix "SPC" ;; set leader
+        :global-prefix "C-SPC") ;; access leader in insert mode
 
-    (start/leader-keys
-      "." '(find-file :wk "Find file")
-      "TAB" '(comment-line :wk "Comment lines")
-      "p" '(projectile-command-map :wk "Projectile command map"))
+      (start/leader-keys
+        "." '(find-file :wk "Find file")
+        "TAB" '(comment-line :wk "Comment lines")
+        "p" '(projectile-command-map :wk "Projectile command map"))
 
-    (start/leader-keys 
-      "f" '(:ignore t :wk "Find")
-      "f c" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config")
-      "f r" '(counsel-recentf :wk "Recent files"))
+      (start/leader-keys 
+        "f" '(:ignore t :wk "Find")
+        "f c" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config")
+        "f r" '(counsel-recentf :wk "Recent files"))
 
-    (start/leader-keys
-      "b" '(:ignore t :wk "Buffer Bookmarks")
-      "b b" '(switch-to-buffer :wk "Switch buffer")
-      "b k" '(kill-this-buffer :wk "Kill this buffer")
-      "b i" '(ibuffer :wk "Ibuffer")  
-      "b n" '(next-buffer :wk "Next buffer")
-      "b p" '(previous-buffer :wk "Previous buffer")
-      "b r" '(revert-buffer :wk "Reload buffer")
-      "b R" '(rename-buffer :wk "Rename buffer")
-      "b j" '(bookmark-jump :wk "Bookmark jump"))
+      (start/leader-keys
+        "b" '(:ignore t :wk "Buffer Bookmarks")
+        "b b" '(switch-to-buffer :wk "Switch buffer")
+        "b k" '(kill-this-buffer :wk "Kill this buffer")
+        "b i" '(ibuffer :wk "Ibuffer")  
+        "b n" '(next-buffer :wk "Next buffer")
+        "b p" '(previous-buffer :wk "Previous buffer")
+        "b r" '(revert-buffer :wk "Reload buffer")
+        "b R" '(rename-buffer :wk "Rename buffer")
+        "b j" '(bookmark-jump :wk "Bookmark jump"))
 
-    (start/leader-keys
-     "d" '(:ignore t :wk "Dired")
-     "d v" '(dired :wk "Open dired")
-     "d j" '(dired-jump :wk "Dired jump to current"))
+      (start/leader-keys
+        "d" '(:ignore t :wk "Dired")
+        "d v" '(dired :wk "Open dired")
+        "d j" '(dired-jump :wk "Dired jump to current"))
 
-    (start/leader-keys
-      "g" '(:ignore t :wk "Git")    
-      "g g" '(magit-status :wk "Magit status"))
+      (start/leader-keys
+        "g" '(:ignore t :wk "Git")    
+        "g g" '(magit-status :wk "Magit status"))
 
-    (start/leader-keys
-      "h" '(:ignore t :wk "Help")
-      "h c" '(company-manual-begin :wk "Company completion at point")
-      "h r" '((lambda () (interactive)
-                (load-file "~/.config/emacs/init.el"))
-              :wk "Reload emacs config"))
+      (start/leader-keys
+        "h" '(:ignore t :wk "Help")
+        "h c" '(company-manual-begin :wk "Company completion at point")
+        "h r" '((lambda () (interactive)
+                  (load-file "~/.config/emacs/init.el"))
+                :wk "Reload emacs config"))
 
-    (start/leader-keys
-      "s" '(:ignore t :wk "Show")    
-      "s v" '(vterm :wk "Show Vterm"))
+      (start/leader-keys
+        "s" '(:ignore t :wk "Show")    
+        "s v" '(vterm :wk "Show Vterm"))
 
-    (start/leader-keys
-      "t" '(:ignore t :wk "Toggle")
-      "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
-      "t t" '(visual-line-mode :wk "Toggle truncated lines (wrap)")))
+      (start/leader-keys
+        "t" '(:ignore t :wk "Toggle")
+        "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
+        "t t" '(visual-line-mode :wk "Toggle truncated lines (wrap)")))
 #+end_src
 
 * SANE DEFAULTS
@@ -168,7 +168,6 @@ To search and replace start use query-replace-regexp one by one(SPACE to replace
     (tool-bar-mode -1)           ;; Disable the tool bar
 
     (setq mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling 
-
     (setq scroll-conservatively 10) ;; Smooth scrolling when going down with scroll margin
     (setq scroll-margin 8) 
 
@@ -176,6 +175,8 @@ To search and replace start use query-replace-regexp one by one(SPACE to replace
     (setq make-backup-files nil) ; Stop creating ~ backup files
     (blink-cursor-mode 0) ;; Don't blink cursor
     (add-hook 'prog-mode-hook (lambda () (hs-minor-mode t))) ;; Enable folding hide show globally
+
+    (setq org-edit-src-content-indentation 4) ;; Set src block automatic indent to 4 instead of 2.
     (setq-default tab-width 4)
 #+end_src
 
@@ -197,13 +198,13 @@ With Emacs version 29, true transparency has been added.
 ** Setting fonts
 #+begin_src emacs-lisp
     (set-face-attribute 'default nil
-                        :font "JetBrains Mono"
+                        ;; :font "JetBrains Mono" ;; Set your favorite type of font or download JetBrains Mono
                         :height 120
                         :weight 'medium)
     ;; This sets the default font on all graphical frames created after restarting Emacs.
     ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
     ;; are not right unless I also add this method of setting the default font.
-    (add-to-list 'default-frame-alist '(font . "JetBrains Mono"))
+    ;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono")) ;; Set your favorite font
     (setq-default line-spacing 0.12)
 #+end_src
 
@@ -258,21 +259,21 @@ The build in (default) is now eglot but it requires to manualy download the lsp 
 Eglot is faster and more minimal, but it requires manual setup
 *** Setup
 #+begin_src emacs-lisp
-  (use-package lsp-mode
-    :init
-    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-    (setq lsp-keymap-prefix "C-c l")
-    ;; To Disable features https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
-    :hook (;; Automatic Language Modes
-           (prog-mode . lsp)
-           ;; if you want which-key integration
-           (lsp-mode . lsp-enable-which-key-integration))
-    :commands lsp)
-  ;; optionally
-  (use-package lsp-ui 
-    :commands lsp-ui-mode)
-  ;; if you are ivy user
-  (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+    (use-package lsp-mode
+      :init
+      ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+      (setq lsp-keymap-prefix "C-c l")
+      ;; To Disable features https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+      :hook (;; Automatic Language Modes
+             (prog-mode . lsp)
+             ;; if you want which-key integration
+             (lsp-mode . lsp-enable-which-key-integration))
+      :commands lsp)
+    ;; optionally
+    (use-package lsp-ui 
+      :commands lsp-ui-mode)
+    ;; if you are ivy user
+    (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 #+end_src
 
 ** Yasnippet 
