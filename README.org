@@ -87,3 +87,4 @@ Note: if you are on Windows you need to change the path (hit ctrl x ctrl f, find
 * Uninstallation
 1. Delete the emacs folder/directory for your OS (E.g. $HOME/.config/emacs)
 2. Uninstall Emacs
+[[./Kickstart_coding.png]]
