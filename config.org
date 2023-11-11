@@ -1,6 +1,7 @@
 #+Title: Emacs Kickstarter
 #+Author: MiniApollo
 #+Description: A starting point for Gnu Emacs with good defaults and packages that most people may want to use.
+#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 #+Startup: showeverything
 #+Options: toc:2
 
@@ -302,6 +303,26 @@ Org mode is one of the things that emacs is loved for.
 Once you've used it for a bit, you'll understand why people love it. Even reading about it can be inspiring!
 For example, this document is effectively the source code and descriptions bound into the one document,
 much like the literate programming ideas that Donald Knuth made famous.
+
+**** Auto-tangle Configuration file
+Auto-Tangle Org document configuration file for better startup times.
+If you want to do this don't forget to add this to the top of the org document (#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes)
+
+This snippet adds a hook to org-mode buffers so that efs/org-babel-tangle-config gets executed each time such a buffer gets saved.
+This function checks to see if the file being saved is the Emacs.org file you’re looking at right now, and if so,
+automatically exports the configuration here to the associated output files.
+#+begin_src emacs-lisp
+    ;; Automatically tangle our Emacs.org config file when we save it
+    (defun efs/org-babel-tangle-config ()
+      (when (string-equal (file-name-directory (buffer-file-name))
+                          (expand-file-name user-emacs-directory))
+        ;; Dynamic scoping to the rescue
+        (let ((org-confirm-babel-evaluate nil))
+          (org-babel-tangle))))
+
+    (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+#+end_src
+
 **** Enabling Table of Contents
 #+begin_src emacs-lisp
     (use-package toc-org
