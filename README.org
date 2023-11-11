@@ -10,11 +10,13 @@
 - [[#introduction][Introduction]]
   - [[#packages][Packages]]
 - [[#installation][Installation]]
-  - [[#1-install-gnu-emacs][1. Install Gnu Emacs]]
-  - [[#2-clone-the-repository-to-the-configuration-location][2. Clone the repository to the configuration location]]
-  - [[#3-start-emacs][3. Start Emacs]]
+  - [[#1-backup-your-previous-configuration][1. Backup your previous configuration]]
+  - [[#2-install-gnu-emacs][2. Install Gnu Emacs]]
+  - [[#3-clone-the-repository-to-the-configuration-location][3. Clone the repository to the configuration location]]
+  - [[#4-start-emacs][4. Start Emacs]]
 - [[#post-installation][Post Installation]]
 - [[#uninstallation][Uninstallation]]
+- [[#gallery][Gallery]]
 
 * Introduction
 This repository gives you a starting point for Gnu Emacs with good defaults, vim keybindings (evil-mode) and packages that most people want to use.
@@ -58,11 +60,13 @@ If you want to see how to configure these, look up their github repositories or 
 - Rainbow Mode :: Display the actual color as a background for any hex color value (ex. #ffffff)
 - Treesitter :: Not really a package, but a separate dependency
 * Installation
-** 1. Install Gnu Emacs
+** 1. Backup your previous configuration
+If any exists.
+** 2. Install Gnu Emacs
 - Linux :: Install it from your Distros Repository
 - Mac :: Install it using homeBrew or download it from the website
 - Windows :: Download it from the website or use a package manager
-** 2. Clone the repository to the configuration location
+** 3. Clone the repository to the configuration location
 *** Linux and Mac
 #+begin_src bash
   git clone https://github.com/MiniApollo/kickstart.emacs.git "${XDG_CONFIG_HOME:-$HOME/.config}"/emacs
@@ -76,7 +80,7 @@ If you want to see how to configure these, look up their github repositories or 
 #+begin_src bash
   git clone https://github.com/MiniApollo/kickstart.emacs.git $env:USERPROFILE\AppData\Local\emacs\
 #+end_src
-** 3. Start Emacs
+** 4. Start Emacs
 Emacs will install all the requested packages (it can take a minute).
 
 * Post Installation
@@ -87,4 +91,6 @@ Note: if you are on Windows you need to change the path (hit ctrl x ctrl f, find
 * Uninstallation
 1. Delete the emacs folder/directory for your OS (E.g. $HOME/.config/emacs)
 2. Uninstall Emacs
+
+* Gallery
 [[./Kickstart_coding.png]]
