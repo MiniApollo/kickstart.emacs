@@ -1,30 +1,30 @@
-#+Title: KickStart.emacs 
+#+Title: KickStart.emacs
 #+Author: MiniApollo
-#+Description: A starting point for Gnu Emacs with good defaults and packages that most people want to use.
+#+Description: A starting point for Gnu Emacs with good defaults and packages that most people may want to use.
 #+Startup: showeverything
 #+Options: toc:2
 
 [[./Emacs_KickStarter.png]]
 
-* Table Of Content :toc:
+* Table Of Contents :toc:
 - [[#introduction][Introduction]]
   - [[#packages][Packages]]
 - [[#installation][Installation]]
-  - [[#1-install-gnu-emacs][1 Install Gnu Emacs]]
-  - [[#2-clone-the-repository][2. Clone the repository]]
+  - [[#1-install-gnu-emacs][1. Install Gnu Emacs]]
+  - [[#2-clone-the-repository-to-the-configuration-location][2. Clone the repository to the configuration location]]
   - [[#3-start-emacs][3. Start Emacs]]
 - [[#post-installation][Post Installation]]
 - [[#uninstallation][Uninstallation]]
 
-* Introduction 
+* Introduction
 This repository gives you a starting point for Gnu Emacs with good defaults, vim keybindings (evil-mode) and packages that most people want to use.
 This config is:
-- Single file org document
+- A single file org document
 - Modular and easily configurable
-- Documented describing about its purpuse
+- Documented describing its purpuse
 
 Inspired by [[https://github.com/nvim-lua/kickstart.nvim][kickstart.nvim]]
-For more helpful information check out
+For more helpful information check out:
 - [[https://www.youtube.com/watch?v=d1fgypEiQkE&list=PL5--8gKSku15e8lXf7aLICFmAHQVo0KXX][DistroTube]]
 - [[https://www.youtube.com/watch?v=74zOY-vgkyw&list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][System Crafters]]
 Their content helped me to create this configuration
@@ -33,13 +33,13 @@ Their content helped me to create this configuration
 - Package Manager: Package.el with Use-package (built in)
 - Evil mode: Evil is an extensible vi/vim layer
 - General: Keybindings
-- Gruvbox-theme: Theme
-- Doom-modeline: Pretier more useful modeline
+- Gruvbox-theme: Color scheme
+- Doom-modeline: Prettier, more useful modeline
 - Projectile: Project interaction library
 - Flycheck: Better error handling
 - Lsp Mode: Language Server Protocol Support
 - Yasnippet: Template system and snippet collection package
-- Lua-mode (example)
+- Lua-mode: (example)
 - Some Org mode packages (toc-org-enable, org-bullets)
 - Vterm: Fast terminal emulator within Emacs
 - All the icons: Icon set
@@ -48,47 +48,42 @@ Their content helped me to create this configuration
 - Company: Text completion framework
 - Ivy: Generic completion mechanism
 - Diminish: Hiding or abbreviation of the modeline displays
-- Which key: Helping utility for keycords
-*** Recomended Packages
-If you want to see how to configure these, look up their github or check out my [[https://github.com/MiniApollo/config/blob/main/emacs/config.org][config]]
-- DashBoard: Extensible startup screen
-- UndoTree: Visualizes the undo history
-- Drag Stuff: Makes it possible to move selected text, regions, lines
-- Rainbow Delimiters: Add colors to brackets
-- Rainbow Mode: Display the actual color as a background for any hex color value (ex. #ffffff)
-- Treesiter (not really a package)
-
+- Which key: Helper utility for keychords
+*** Recommended Packages
+If you want to see how to configure these, look up their github repositories or check out my [[https://github.com/MiniApollo/config/blob/main/emacs/config.org][config]].
+- DashBoard :: Extensible startup screen
+- UndoTree :: Visualizes the undo history
+- Drag Stuff :: Makes it possible to move selected text, regions and lines
+- Rainbow Delimiters :: Add colors to brackets
+- Rainbow Mode :: Display the actual color as a background for any hex color value (ex. #ffffff)
+- Treesitter :: Not really a package, but a separate dependency
 * Installation
-** 1 Install Gnu Emacs 
-*** Linux 
-Install it from your Distros Repository
-*** Mac
-Install it using homeBrew or download it from the website
-*** Windows
-Download it from the website or use a package manager
-** 2. Clone the repository
-To the configuration location
+** 1. Install Gnu Emacs
+- Linux :: Install it from your Distros Repository
+- Mac :: Install it using homeBrew or download it from the website
+- Windows :: Download it from the website or use a package manager
+** 2. Clone the repository to the configuration location
 *** Linux and Mac
 #+begin_src bash
   git clone https://github.com/MiniApollo/kickstart.emacs.git "${XDG_CONFIG_HOME:-$HOME/.config}"/emacs
 #+end_src
 *** Windows
-CMD
+- CMD ::
 #+begin_src bash
-  git clone https://github.com/MiniApollo/kickstart.emacs.git %userprofile%\AppData\Local\emacs\ 
+  git clone https://github.com/MiniApollo/kickstart.emacs.git %userprofile%\AppData\Local\emacs\
 #+end_src
-Powershell
+- Powershell ::
 #+begin_src bash
-  git clone https://github.com/MiniApollo/kickstart.emacs.git $env:USERPROFILE\AppData\Local\emacs\ 
+  git clone https://github.com/MiniApollo/kickstart.emacs.git $env:USERPROFILE\AppData\Local\emacs\
 #+end_src
 ** 3. Start Emacs
-It will install all the set packages (it can take a minute)
+Emacs will install all the requested packages (it can take a minute).
 
 * Post Installation
-1. Hit Space f c to open the config file at ($HOME/.config/emacs)
-   Note: if your are on windows you need to change the path (hit ctrl x ctrl f, Find the config file and in general f region replace the path)
-2. Now you can Edit and add more configuration
+1. Hit Space f c to open the config file at $HOME/.config/emacs
+Note: if you are on Windows you need to change the path (hit ctrl x ctrl f, find the config file and in general f region replace the path)
+2. Now you can Edit and add more configuration.
 
 * Uninstallation
-1. Delete the emacs folder/directory on your OS (E.g. $HOME/.config/emacs)
+1. Delete the emacs folder/directory for your OS (E.g. $HOME/.config/emacs)
 2. Uninstall Emacs
