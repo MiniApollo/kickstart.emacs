@@ -19,7 +19,7 @@
 - [[#gallery][Gallery]]
 
 * Introduction
-This repository gives you a starting point for Gnu Emacs with good defaults, vim keybindings (evil-mode) and packages that most people want to use.
+This repository gives you a starting point for Gnu Emacs with good defaults, vim keybindings (evil-mode) and packages that most people may want to use.
 This config is:
 - A single file org document
 - Modular and easily configurable
