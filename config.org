@@ -1,10 +1,10 @@
 #+Title: Emacs Kickstarter
 #+Author: MiniApollo
-#+Description: A starting point for Gnu Emacs with good defaults and packages that most people want to use.
+#+Description: A starting point for Gnu Emacs with good defaults and packages that most people may want to use.
 #+Startup: showeverything
 #+Options: toc:2
 
-* Table Of Content :toc:
+* Table Of Contents :toc:
 - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
   - [[#startup-performance][Startup Performance]]
   - [[#use-package-setup][Use Package setup]]
@@ -36,23 +36,26 @@
 - [[#runtime-performance][Runtime Performance]]
 
 * IMPORTANT PROGRAMS TO LOAD FIRST
-** Startup Performance 
-Make startup faster by reducing the frequency of garbage collection. This will be set back when startup finishes
+** Startup Performance
+Make startup faster by reducing the frequency of garbage collection. This will be set back when startup finishes.
 #+begin_src emacs-lisp
     ;; The default is 800 kilobytes.  Measured in bytes.
     (setq gc-cons-threshold (* 50 1000 1000))
 #+end_src
 
 ** Use Package setup
-I used the default package manager package.el with use-package. Alternative package managers(straight.el, elpaca, etc..) are useful if you want to install packages from github 
-(Like if you want a specific not very popular package that is not avalible on elpa or melpa) 
-Or want UI (elpaca) and other things if you are interested check out their github or search for more package managers
-In my experience Package.el is not slow and gets the job done 
-To update/upgrade packages use the package-upgrade-all command 
+I used the default package manager package.el with use-package. Alternative package managers (straight.el, elpaca, etc..) are useful if you want to
+install packages from github, if you want a specific, not very popular package that is not available on elpa or melpa.
+or you want UI (elpaca) and other things.
+
+If you are interested in these other package managers, check out their github repositories or search for more package managers.
+In my experience Package.el is not slow and gets the job done.
+
+To update/upgrade packages, use the package-upgrade-all command.
 #+begin_src emacs-lisp
     (require 'package)
     (require 'use-package) ;; requires package.el and use-package so we can use it
-    (setq use-package-always-ensure t) ;; always ensures that a package is installed 
+    (setq use-package-always-ensure t) ;; always ensures that a package is installed
 
     (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
                              ("org" . "https://orgmode.org/elpa/")
@@ -69,16 +72,16 @@ To update/upgrade packages use the package-upgrade-all command
 
 ** Load Evil Mode
 Evil is an extensible vi/vim layer for Emacs.  Because…let’s face it.  The Vim keybindings are just plain better.
-Note: To paste without copy(yank) selected text use P (shift P evil-paste-before), because default is evil-paste-after 
+Note: To paste without copy (yank) selected text use P (shift P evil-paste-before), because default is evil-paste-after.
 You can toggle evil mode with ctrl z (emacs-mode)
 #+begin_src emacs-lisp
     (use-package evil
       :init ;; tweak evil's configuration before loading it
-      (setq evil-want-keybinding nil) ;; Disable to load evil bindings to other modes (It's not consistent and not good)
-      (setq evil-want-C-u-scroll t) ;; Set  ctrl u to scrool up
-      (setq evil-want-C-i-jump nil) ;; Disables Ctrl i jump
-      (setq evil-undo-system 'undo-redo) ;; ctrl r to work (redo) 
-      (setq org-return-follows-link  t) ;; Setting RETURN key in org-mode to follow links
+      (setq evil-want-keybinding nil) ;; Disable evil bindings in other modes (It's not consistent and not good)
+      (setq evil-want-C-u-scroll t) ;; Set  C-u to scrool up
+      (setq evil-want-C-i-jump nil) ;; Disables C-i jump
+      (setq evil-undo-system 'undo-redo) ;; C-r to redo
+      (setq org-return-follows-link  t) ;; Sets RETURN key in org-mode to follow links
       (evil-mode))
     (use-package evil-collection
       :after evil
@@ -86,7 +89,7 @@ You can toggle evil mode with ctrl z (emacs-mode)
       ;; Setting where to use evil-collection
       (setq evil-collection-mode-list '(dired ibuffer magit))
       (evil-collection-init))
-    ;; Unmap keys in 'evil-maps if not done, (setq org-return-follows-link t) will not work
+    ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
     (with-eval-after-load 'evil-maps
       (define-key evil-motion-state-map (kbd "SPC") nil)
       (define-key evil-motion-state-map (kbd "RET") nil)
@@ -94,9 +97,9 @@ You can toggle evil mode with ctrl z (emacs-mode)
 #+end_src
 
 ** General Keybindings
-General is a keybinding framework to set keybindings easily 
-Learder key is what you will presess when want to access your keybindings (Space + . Find file)
-To search and replace start use query-replace-regexp one by one(SPACE to replace n to skip meta/alt ctrl %) [[https://stackoverflow.com/questions/270930/using-emacs-to-recursively-find-and-replace-in-text-files-not-already-open][Source]]
+General is a keybinding framework to set keybindings easily.
+The Leader key is what you will press when you want to access your keybindings (Space + . Find file).
+To search and replace start use query-replace-regexp one by one (SPACE to replace n to skip meta/alt ctrl %) [[https://stackoverflow.com/questions/270930/using-emacs-to-recursively-find-and-replace-in-text-files-not-already-open][Source]]
 #+begin_src emacs-lisp
     (use-package general
       :config
@@ -113,7 +116,7 @@ To search and replace start use query-replace-regexp one by one(SPACE to replace
         "TAB" '(comment-line :wk "Comment lines")
         "p" '(projectile-command-map :wk "Projectile command map"))
 
-      (start/leader-keys 
+      (start/leader-keys
         "f" '(:ignore t :wk "Find")
         "f c" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config")
         "f r" '(counsel-recentf :wk "Recent files"))
@@ -122,7 +125,7 @@ To search and replace start use query-replace-regexp one by one(SPACE to replace
         "b" '(:ignore t :wk "Buffer Bookmarks")
         "b b" '(switch-to-buffer :wk "Switch buffer")
         "b k" '(kill-this-buffer :wk "Kill this buffer")
-        "b i" '(ibuffer :wk "Ibuffer")  
+        "b i" '(ibuffer :wk "Ibuffer")
         "b n" '(next-buffer :wk "Next buffer")
         "b p" '(previous-buffer :wk "Previous buffer")
         "b r" '(revert-buffer :wk "Reload buffer")
@@ -135,7 +138,7 @@ To search and replace start use query-replace-regexp one by one(SPACE to replace
         "d j" '(dired-jump :wk "Dired jump to current"))
 
       (start/leader-keys
-        "g" '(:ignore t :wk "Git")    
+        "g" '(:ignore t :wk "Git")
         "g g" '(magit-status :wk "Magit status"))
 
       (start/leader-keys
@@ -146,7 +149,7 @@ To search and replace start use query-replace-regexp one by one(SPACE to replace
                 :wk "Reload emacs config"))
 
       (start/leader-keys
-        "s" '(:ignore t :wk "Show")    
+        "s" '(:ignore t :wk "Show")
         "s v" '(vterm :wk "Show Vterm"))
 
       (start/leader-keys
@@ -163,18 +166,18 @@ To search and replace start use query-replace-regexp one by one(SPACE to replace
 
     (global-display-line-numbers-mode 1) ;; Display line numbers
     (global-visual-line-mode t)  ;; Enable truncated lines
-    (menu-bar-mode -1)           ;; Disable the menu bar 
+    (menu-bar-mode -1)           ;; Disable the menu bar
     (scroll-bar-mode -1)         ;; Disable the scroll bar
     (tool-bar-mode -1)           ;; Disable the tool bar
 
-    (setq mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling 
+    (setq mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling
     (setq scroll-conservatively 10) ;; Smooth scrolling when going down with scroll margin
-    (setq scroll-margin 8) 
+    (setq scroll-margin 8)
 
     (global-set-key [escape] 'keyboard-escape-quit) ;; Makes Escape quit prompts (Minibuffer Escape)
     (setq make-backup-files nil) ; Stop creating ~ backup files
     (blink-cursor-mode 0) ;; Don't blink cursor
-    (add-hook 'prog-mode-hook (lambda () (hs-minor-mode t))) ;; Enable folding hide show globally
+    (add-hook 'prog-mode-hook (lambda () (hs-minor-mode t))) ;; Enable folding hide/show globally
 
     (setq org-edit-src-content-indentation 4) ;; Set src block automatic indent to 4 instead of 2.
     (setq-default tab-width 4)
@@ -194,7 +197,7 @@ With Emacs version 29, true transparency has been added.
     (add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
 #+end_src
 
-* Fonts 
+* Fonts
 ** Setting fonts
 #+begin_src emacs-lisp
     (set-face-attribute 'default nil
@@ -208,7 +211,7 @@ With Emacs version 29, true transparency has been added.
     (setq-default line-spacing 0.12)
 #+end_src
 
-** Zooming In/Out 
+** Zooming In/Out
 You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTRL plus the mouse wheel for zooming in/out.
 #+begin_src emacs-lisp
     (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -230,7 +233,7 @@ Replace the default modeline with a pretier more useful.
             doom-modeline-persp-icon t)) ;; adds folder icon next to persp name
 #+end_src
 
-* Projectile 
+* Projectile
 Projectile is a project interaction library for Emacs.
 #+begin_src emacs-lisp
     (use-package projectile
@@ -243,7 +246,7 @@ Projectile is a project interaction library for Emacs.
 #+end_src
 
 * Language support + Lsp
-** Flycheck 
+** Flycheck
 Flycheck is recommended by lsp-mode for better error handling (lsp mode right side error display only works with flycheck)
 #+begin_src emacs-lisp
     (use-package flycheck
@@ -254,7 +257,7 @@ Flycheck is recommended by lsp-mode for better error handling (lsp mode right si
 #+end_src
 
 ** Lsp Mode
-Language Server Protocol Support for Emacs. 
+Language Server Protocol Support for Emacs.
 The build in (default) is now eglot but it requires to manualy download the lsp clients, doesn't support debuggers, lsp-mode is pretier and has more features,
 Eglot is faster and more minimal, but it requires manual setup
 *** Setup
@@ -270,14 +273,14 @@ Eglot is faster and more minimal, but it requires manual setup
              (lsp-mode . lsp-enable-which-key-integration))
       :commands lsp)
     ;; optionally
-    (use-package lsp-ui 
+    (use-package lsp-ui
       :commands lsp-ui-mode)
     ;; if you are ivy user
     (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 #+end_src
 
-** Yasnippet 
-YASnippet is a template system for Emacs. And yasnippet-snippets is a snippet collection package. 
+** Yasnippet
+YASnippet is a template system for Emacs. And yasnippet-snippets is a snippet collection package.
 To use it write out the full keyword (or use autocompletion) and press Tab
 #+begin_src emacs-lisp
     (use-package yasnippet-snippets
@@ -286,8 +289,8 @@ To use it write out the full keyword (or use autocompletion) and press Tab
 
 ** Language modes
 Its not required for every language like c,c++,C#,java,javascript etc.. to download language mode packages but for more specific languages it is necessary for syntax highlighting
-If you want to use TreeSitter. Check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]] 
-Currently its tedious to use Treesitter because emacs hasn't translated to it yet fully 
+If you want to use TreeSitter. Check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]]
+Currently its tedious to use Treesitter because emacs hasn't translated to it yet fully
 *** Lua mode
 #+begin_src emacs-lisp
     (use-package lua-mode
@@ -295,7 +298,10 @@ Currently its tedious to use Treesitter because emacs hasn't translated to it ye
 #+end_src
 
 *** ORG MODE
-Org mode is one of the things that emacs is loved for you will understand if you start using it or read about what it can do (like this document is the source code)
+Org mode is one of the things that emacs is loved for.
+Once you've used it for a bit, you'll understand why people love it. Even reading about it can be inspiring!
+For example, this document is effectively the source code and descriptions bound into the one document,
+much like the literate programming ideas that Donald Knuth made famous.
 **** Enabling Table of Contents
 #+begin_src emacs-lisp
     (use-package toc-org
@@ -312,7 +318,7 @@ Org-bullets gives us attractive bullets rather than asterisks.
 #+end_src
 
 **** Source Code Block Tag Expansion
-Org-tempo is not a separate package but a module within org that can be enabled.  
+Org-tempo is not a separate package but a module within org that can be enabled.
 Org-tempo allows for '<s' followed by TAB to expand to a begin_src tag.
 #+begin_src emacs-lisp
     (with-eval-after-load 'org
@@ -334,9 +340,9 @@ By default, the shell is set to 'fish' but could change it to 'bash' or 'zsh'.
 * Other Packages
 All the package setups that don't need much tweaking
 ** ALL THE ICONS
-For icons and more helpful ui
+For icons and more helpful ui.
 This is an icon set that can be used with dired, ibuffer and other Emacs programs.
-Don't forget to use all-the-icons-install-fonts
+Don't forget to use all-the-icons-install-fonts.
 #+begin_src emacs-lisp
     (use-package all-the-icons
       :ensure t
@@ -344,8 +350,8 @@ Don't forget to use all-the-icons-install-fonts
 #+end_src
 
 ** Nerd Icons
-Includes more icons
-Don't forget to use nerd-icons-install-fonts
+Includes more icons.
+Don't forget to use nerd-icons-install-fonts.
 For doom modeline
 #+begin_src emacs-lisp
     (use-package nerd-icons
@@ -357,13 +363,13 @@ For doom modeline
 #+end_src
 
 ** Magit
-Complete text-based user interface to Git
+Complete text-based user interface to Git.
 #+begin_src emacs-lisp
     (use-package magit
       :commands magit-status)
 #+end_src
 
-** Company  
+** Company
 Company is a text completion framework for Emacs. The name stands for “complete anything”.
 Completion will start automatically after you type a few letters.
 Use M-n and M-p to select, <tab> to complete.
@@ -429,7 +435,7 @@ Ivy-rich allows us to add descriptions alongside the commands in M-x.
       :config (counsel-projectile-mode))
 #+end_src
 
-** DIMINISH 
+** DIMINISH
 This package implements hiding or abbreviation of the modeline displays (lighters) of minor-modes.
 With this package installed, you can add ‘:diminish’ to any use-package block to hide that particular mode in the modeline.
 #+begin_src emacs-lisp
@@ -437,7 +443,7 @@ With this package installed, you can add ‘:diminish’ to any use-package bloc
 #+end_src
 
 ** WHICH-KEY
-Which-key is a helping utility for keycords (which key to press)
+Which-key is a helper utility for keychords (which key to press)
 #+begin_src emacs-lisp
     (use-package which-key
       :init
@@ -459,7 +465,7 @@ Which-key is a helping utility for keycords (which key to press)
 #+end_src
 
 * Runtime Performance
-Dial the GC threshold back down so that garbage collection happens more frequently but in less time and increase Read Process Output Max so emacs can read more data
+Dial the GC threshold back down so that garbage collection happens more frequently but in less time. We also increase Read Process Output Max so emacs can read more data.
 #+begin_src emacs-lisp
     ;; Make gc pauses faster by decreasing the threshold.
     (setq gc-cons-threshold (* 2 1000 1000))
