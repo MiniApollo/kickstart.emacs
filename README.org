@@ -85,6 +85,11 @@ Emacs will install all the requested packages (it can take a minute).
 Note: If you see erros when package installation is finished just restart Emacs
 
 * Post Installation
+*** Install fonts
+Run the following commands with M-x (alt x) C-y to paste
+- all-the-icons-install-fonts
+- nerd-icons-install-fonts
+*** Open the configuration file
 1. Hit Space f c to open the config file at $HOME/.config/emacs
 Note: if you are on Windows you need to change the path (hit ctrl x ctrl f, find the config file and in general f region replace the path)
 2. Now you can Edit and add more configuration.
