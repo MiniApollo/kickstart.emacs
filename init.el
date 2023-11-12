@@ -4,18 +4,9 @@
 (require 'package)
 (require 'use-package) ;; requires package.el and use-package so we can use it
 (setq use-package-always-ensure t) ;; always ensures that a package is installed
-
 (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
                          ("org" . "https://orgmode.org/elpa/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
-
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
 
 (use-package evil
   :init ;; tweak evil's configuration before loading it

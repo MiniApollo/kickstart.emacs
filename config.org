@@ -8,7 +8,7 @@
 * Table Of Contents :toc:
 - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
   - [[#startup-performance][Startup Performance]]
-  - [[#use-package-setup][Use Package setup]]
+  - [[#use-package][Use Package]]
   - [[#load-evil-mode][Load Evil Mode]]
   - [[#general-keybindings][General Keybindings]]
 - [[#sane-defaults][SANE DEFAULTS]]
@@ -44,7 +44,7 @@ Make startup faster by reducing the frequency of garbage collection. This will b
     (setq gc-cons-threshold (* 50 1000 1000))
 #+end_src
 
-** Use Package setup
+** Use Package
 I used the default package manager package.el with use-package. Alternative package managers (straight.el, elpaca, etc..) are useful if you want to
 install packages from github, if you want a specific, not very popular package that is not available on elpa or melpa.
 or you want UI (elpaca) and other things.
@@ -53,22 +53,14 @@ If you are interested in these other package managers, check out their github re
 In my experience Package.el is not slow and gets the job done.
 
 To update/upgrade packages, use the package-upgrade-all command.
+With Emacs 29 use-package is now build in.
 #+begin_src emacs-lisp
     (require 'package)
     (require 'use-package) ;; requires package.el and use-package so we can use it
     (setq use-package-always-ensure t) ;; always ensures that a package is installed
-
     (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
                              ("org" . "https://orgmode.org/elpa/")
                              ("elpa" . "https://elpa.gnu.org/packages/")))
-
-    (package-initialize)
-    (unless package-archive-contents
-      (package-refresh-contents))
-
-    ;; Initialize use-package on non-Linux platforms
-    (unless (package-installed-p 'use-package)
-      (package-install 'use-package))
 #+end_src
 
 ** Load Evil Mode
@@ -303,7 +295,6 @@ Org mode is one of the things that emacs is loved for.
 Once you've used it for a bit, you'll understand why people love it. Even reading about it can be inspiring!
 For example, this document is effectively the source code and descriptions bound into the one document,
 much like the literate programming ideas that Donald Knuth made famous.
-
 **** Auto-tangle Configuration file
 Auto-Tangle Org document configuration file for better startup times.
 If you want to do this don't forget to add this to the top of the org document (#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes)
