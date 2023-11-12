@@ -82,6 +82,7 @@ If any exists.
 #+end_src
 ** 4. Start Emacs
 Emacs will install all the requested packages (it can take a minute).
+Note: If you see erros when package installation is finished just restart Emacs
 
 * Post Installation
 1. Hit Space f c to open the config file at $HOME/.config/emacs
