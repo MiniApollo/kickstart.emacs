@@ -217,7 +217,6 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
 Replace the default modeline with a pretier more useful.
 #+begin_src emacs-lisp
     (use-package doom-modeline
-      :ensure t
       :init (doom-modeline-mode 1)
       :config
       (setq doom-modeline-height 25      ;; sets modeline height
@@ -243,7 +242,6 @@ Projectile is a project interaction library for Emacs.
 Flycheck is recommended by lsp-mode for better error handling (lsp mode right side error display only works with flycheck)
 #+begin_src emacs-lisp
     (use-package flycheck
-      :ensure t
       :defer t
       :diminish
       :init (global-flycheck-mode))
@@ -359,7 +357,6 @@ We use Nerd icons because it has more, better icons and all-the-icons only suppo
 While nerd-icons supports both GUI and TUI.
 #+begin_src emacs-lisp
     (use-package nerd-icons
-      :ensure t
       :if (display-graphic-p))
 
     (use-package nerd-icons-dired
@@ -430,7 +427,6 @@ Ivy-rich allows us to add descriptions alongside the commands in M-x.
 
     (use-package ivy-rich
       :after ivy
-      :ensure t
       :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
       :custom
       (ivy-virtual-abbreviate 'full

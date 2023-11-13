@@ -129,7 +129,6 @@
 (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1)
   :config
   (setq doom-modeline-height 25      ;; sets modeline height
@@ -146,7 +145,6 @@
 ;; Use Bookmarks for non git projects
 
 (use-package flycheck
-  :ensure t
   :defer t
   :diminish
   :init (global-flycheck-mode))
@@ -198,7 +196,6 @@
   :hook('eshell-load-hook #'eat-eshell-mode))
 
 (use-package nerd-icons
-  :ensure t
   :if (display-graphic-p))
 
 (use-package nerd-icons-dired
@@ -253,7 +250,6 @@
 
 (use-package ivy-rich
   :after ivy
-  :ensure t
   :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
   :custom
   (ivy-virtual-abbreviate 'full
