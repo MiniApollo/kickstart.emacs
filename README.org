@@ -41,11 +41,10 @@ Their content helped me to create this configuration
 - Flycheck: Better error handling
 - Lsp Mode: Language Server Protocol Support
 - Yasnippet: Template system and snippet collection package
-- Lua-mode: (example)
+- Lua-mode: (example commented out)
 - Some Org mode packages (toc-org-enable, org-bullets)
-- Vterm: Fast terminal emulator within Emacs
-- All the icons: Icon set
-- Nerd Icons: Includes more icons (doom-modeline)
+- Eat: Fast terminal emulator within Emacs
+- Nerd Icons: For icons and more helpful ui (Supports both GUI and TUI)
 - Magit: Complete text-based user interface to Git
 - Company: Text completion framework
 - Ivy: Generic completion mechanism
