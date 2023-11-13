@@ -89,6 +89,7 @@
 (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
 (electric-pair-mode 1)       ;; Turns on automatic parens pairing
 
+(global-auto-revert-mode t)  ;; Automatically reload file and show changes if the file has changed
 (global-display-line-numbers-mode 1) ;; Display line numbers
 (global-visual-line-mode t)  ;; Enable truncated lines
 (menu-bar-mode -1)           ;; Disable the menu bar
@@ -99,8 +100,8 @@
 (setq scroll-conservatively 10) ;; Smooth scrolling when going down with scroll margin
 (setq scroll-margin 8)
 
-(global-set-key [escape] 'keyboard-escape-quit) ;; Makes Escape quit prompts (Minibuffer Escape)
 (setq make-backup-files nil) ; Stop creating ~ backup files
+(global-set-key [escape] 'keyboard-escape-quit) ;; Makes Escape quit prompts (Minibuffer Escape)
 (blink-cursor-mode 0) ;; Don't blink cursor
 (add-hook 'prog-mode-hook (lambda () (hs-minor-mode t))) ;; Enable folding hide/show globally
 
@@ -171,8 +172,8 @@
 (use-package lua-mode
   :mode "\\.lua\\'")
 
-;; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
+  "Automatically tangle our Emacs.org config file when we save it. Credit to Emacs From Scratch for this one!"
   (when (string-equal (file-name-directory (buffer-file-name))
                       (expand-file-name user-emacs-directory))
     ;; Dynamic scoping to the rescue
