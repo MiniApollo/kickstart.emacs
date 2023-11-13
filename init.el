@@ -169,9 +169,6 @@
 (use-package yasnippet-snippets
   :hook (prog-mode . yas-minor-mode))
 
-(use-package lua-mode
-  :mode "\\.lua\\'")
-
 (defun efs/org-babel-tangle-config ()
   "Automatically tangle our Emacs.org config file when we save it. Credit to Emacs From Scratch for this one!"
   (when (string-equal (file-name-directory (buffer-file-name))

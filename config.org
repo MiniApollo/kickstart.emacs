@@ -280,15 +280,15 @@ To use it write out the full keyword (or use autocompletion) and press Tab
 #+end_src
 
 ** Language modes
-Its not required for every language like c,c++,C#,java,javascript etc.. to download language mode packages but for more specific languages it is necessary for syntax highlighting
-If you want to use TreeSitter. Check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]]
-Currently its tedious to use Treesitter because emacs hasn't translated to it yet fully
+Its not required for every language like c,c++,C#,java,javascript etc.. to download language mode packages but for more specific languages it is necessary for syntax highlighting.
+If you want to use TreeSitter. Check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]].
+Currently its tedious to use Treesitter because emacs has not yet fully migrated to it.
 *** Lua mode
-#+begin_src emacs-lisp
-    (use-package lua-mode
-      :mode "\\.lua\\'")
-#+end_src
-
+Example how to setup a language mode (if you don't want it feel free to delete it)
+# #+begin_src emacs-lisp
+#     (use-package lua-mode
+#       :mode "\\.lua\\'")
+# #+end_src
 *** ORG MODE
 Org mode is one of the things that emacs is loved for.
 Once you've used it for a bit, you'll understand why people love it. Even reading about it can be inspiring!
