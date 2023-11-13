@@ -25,7 +25,7 @@
   - [[#yasnippet][Yasnippet]]
   - [[#language-modes][Language modes]]
 - [[#terminal][Terminal]]
-  - [[#vterm][Vterm]]
+  - [[#eat][Eat]]
 - [[#other-packages][Other Packages]]
   - [[#all-the-icons][ALL THE ICONS]]
   - [[#nerd-icons][Nerd Icons]]
@@ -60,7 +60,8 @@ With Emacs 29 use-package is now build in.
     (setq use-package-always-ensure t) ;; always ensures that a package is installed
     (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
                              ("org" . "https://orgmode.org/elpa/")
-                             ("elpa" . "https://elpa.gnu.org/packages/")))
+                             ("elpa" . "https://elpa.gnu.org/packages/")
+                             ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; For Eat Terminal
 #+end_src
 
 ** Load Evil Mode
@@ -143,7 +144,7 @@ To search and replace start use query-replace-regexp one by one (SPACE to replac
 
       (start/leader-keys
         "s" '(:ignore t :wk "Show")
-        "s v" '(vterm :wk "Show Vterm"))
+        "s e" '(eat :wk "Show Eat"))
 
       (start/leader-keys
         "t" '(:ignore t :wk "Toggle")
@@ -338,15 +339,13 @@ Org-tempo allows for '<s' followed by TAB to expand to a begin_src tag.
 #+end_src
 
 * Terminal
-** Vterm
-Vterm is a terminal emulator within Emacs.
-The 'shell-file-name' setting sets the shell to be used in M-x shell, M-x term, M-x ansi-term and M-x vterm.
-By default, the shell is set to 'fish' but could change it to 'bash' or 'zsh'.
+** Eat
+Eat(Emulate A Terminal) is a terminal emulator within Emacs.
+Its more portable and less overhead for users over like vterm or eshell.
+We setup eat with eshell if you want to use bash, zsh etc.. Check out their git [[https://codeberg.org/akib/emacs-eat][repository]] how to do it.
 #+begin_src emacs-lisp
-    (use-package vterm
-      :commands (vterm))
-    (setq shell-file-name "/bin/bash"
-          vterm-max-scrollback 10000)
+    (use-package eat
+      :hook('eshell-load-hook #'eat-eshell-mode))
 #+end_src
 
 * Other Packages

@@ -6,7 +6,8 @@
 (setq use-package-always-ensure t) ;; always ensures that a package is installed
 (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
                          ("org" . "https://orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
+                         ("elpa" . "https://elpa.gnu.org/packages/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; For Eat Terminal
 
 (use-package evil
   :init ;; tweak evil's configuration before loading it
@@ -77,7 +78,7 @@
 
   (start/leader-keys
     "s" '(:ignore t :wk "Show")
-    "s v" '(vterm :wk "Show Vterm"))
+    "s e" '(eat :wk "Show Eat"))
 
   (start/leader-keys
     "t" '(:ignore t :wk "Toggle")
@@ -193,14 +194,11 @@
 (with-eval-after-load 'org
   (require 'org-tempo))
 
-(use-package vterm
-  :commands (vterm))
-(setq shell-file-name "/bin/bash"
-      vterm-max-scrollback 10000)
-
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))
+(use-package eat
+  :hook('eshell-load-hook #'eat-eshell-mode))
 
 (use-package nerd-icons
   :ensure t
