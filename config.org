@@ -27,7 +27,6 @@
 - [[#terminal][Terminal]]
   - [[#eat][Eat]]
 - [[#other-packages][Other Packages]]
-  - [[#all-the-icons][ALL THE ICONS]]
   - [[#nerd-icons][Nerd Icons]]
   - [[#magit][Magit]]
   - [[#company][Company]]
@@ -350,20 +349,14 @@ We setup eat with eshell if you want to use bash, zsh etc.. Check out their git 
 
 * Other Packages
 All the package setups that don't need much tweaking
-** ALL THE ICONS
+** Nerd Icons
 For icons and more helpful ui.
 This is an icon set that can be used with dired, ibuffer and other Emacs programs.
-Don't forget to use all-the-icons-install-fonts.
-#+begin_src emacs-lisp
-    (use-package all-the-icons
-      :ensure t
-      :if (display-graphic-p))
-#+end_src
 
-** Nerd Icons
-Includes more icons.
 Don't forget to use nerd-icons-install-fonts.
-For doom modeline
+
+We use Nerd icons because it has more, better icons and all-the-icons only supports GUI.
+While nerd-icons supports both GUI and TUI.
 #+begin_src emacs-lisp
     (use-package nerd-icons
       :ensure t
@@ -371,6 +364,9 @@ For doom modeline
 
     (use-package nerd-icons-dired
       :hook (dired-mode . (lambda () (nerd-icons-dired-mode t))))
+
+    (use-package nerd-icons-ibuffer
+      :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 #+end_src
 
 ** Magit
@@ -427,9 +423,10 @@ Ivy-rich allows us to add descriptions alongside the commands in M-x.
       :config
       (ivy-mode))
 
-    (use-package all-the-icons-ivy-rich
-      :ensure t
-      :init (all-the-icons-ivy-rich-mode 1))
+    (use-package nerd-icons-ivy-rich
+      :init
+      (nerd-icons-ivy-rich-mode 1)
+      (ivy-rich-mode 1))
 
     (use-package ivy-rich
       :after ivy

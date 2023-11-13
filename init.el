@@ -194,9 +194,6 @@
 (with-eval-after-load 'org
   (require 'org-tempo))
 
-(use-package all-the-icons
-  :ensure t
-  :if (display-graphic-p))
 (use-package eat
   :hook('eshell-load-hook #'eat-eshell-mode))
 
@@ -206,6 +203,9 @@
 
 (use-package nerd-icons-dired
   :hook (dired-mode . (lambda () (nerd-icons-dired-mode t))))
+
+(use-package nerd-icons-ibuffer
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 (use-package magit
   :commands magit-status)
@@ -246,9 +246,10 @@
   :config
   (ivy-mode))
 
-(use-package all-the-icons-ivy-rich
-  :ensure t
-  :init (all-the-icons-ivy-rich-mode 1))
+(use-package nerd-icons-ivy-rich
+  :init
+  (nerd-icons-ivy-rich-mode 1)
+  (ivy-rich-mode 1))
 
 (use-package ivy-rich
   :after ivy
