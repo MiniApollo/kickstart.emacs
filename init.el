@@ -101,6 +101,10 @@
 (setq scroll-margin 8)
 
 (setq make-backup-files nil) ; Stop creating ~ backup files
+;; Move customization variables to a separate file and load it, avoid filling up init.el with unnecessary variables
+(setq custom-file (locate-user-emacs-file "custom-vars.el"))
+(load custom-file 'noerror 'nomessage)
+
 (global-set-key [escape] 'keyboard-escape-quit) ;; Makes Escape quit prompts (Minibuffer Escape)
 (blink-cursor-mode 0) ;; Don't blink cursor
 (add-hook 'prog-mode-hook (lambda () (hs-minor-mode t))) ;; Enable folding hide/show globally
