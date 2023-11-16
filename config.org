@@ -28,8 +28,8 @@
   - [[#eat][Eat]]
 - [[#other-packages][Other Packages]]
   - [[#nerd-icons][Nerd Icons]]
-  - [[#magit][Magit]]
   - [[#company][Company]]
+  - [[#git][Git]]
   - [[#ivy-counsel][Ivy (counsel)]]
   - [[#diminish][DIMINISH]]
   - [[#which-key][WHICH-KEY]]
@@ -367,11 +367,20 @@ While nerd-icons supports both GUI and TUI.
       :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 #+end_src
 
-** Magit
+** Git
+*** Magit
 Complete text-based user interface to Git.
 #+begin_src emacs-lisp
     (use-package magit
       :commands magit-status)
+#+end_src
+*** Diff-hl
+Highlights uncommitted changes on the left side of the window (area also known as the "gutter"), allows you to jump between and revert them selectively.
+#+begin_src emacs-lisp
+    (use-package diff-hl
+      :hook ((magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
+             (magit-post-refresh-hook . diff-hl-magit-post-refresh))
+      :init (global-diff-hl-mode))
 #+end_src
 
 ** Company

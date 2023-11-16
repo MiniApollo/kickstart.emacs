@@ -210,6 +210,11 @@
   :diminish
   :bind (:map company-active-map
               ("<tab>" . company-complete-selection)) ;; You can delete the :bind region to use return (default)
+(use-package diff-hl
+  :hook ((magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
+         (magit-post-refresh-hook . diff-hl-magit-post-refresh))
+  :init (global-diff-hl-mode))
+
   :custom
   (company-begin-commands '(self-insert-command))
   (company-idle-delay 0.0)
