@@ -21,7 +21,7 @@
   :after evil
   :config
   ;; Setting where to use evil-collection
-  (setq evil-collection-mode-list '(dired ibuffer magit))
+  (setq evil-collection-mode-list '(dired ibuffer magit corfu))
   (evil-collection-init))
 ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
 (with-eval-after-load 'evil-maps
@@ -209,28 +209,39 @@
 (use-package magit
   :commands magit-status)
 
-(use-package company
-  :defer 2
-  :diminish
-  :bind (:map company-active-map
-              ("<tab>" . company-complete-selection)) ;; You can delete the :bind region to use return (default)
 (use-package diff-hl
   :hook ((magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
          (magit-post-refresh-hook . diff-hl-magit-post-refresh))
   :init (global-diff-hl-mode))
 
+(use-package corfu
+  ;; Optional customizations
   :custom
-  (company-begin-commands '(self-insert-command))
-  (company-idle-delay 0.0)
-  (company-minimum-prefix-length 1)
-  (company-show-numbers t)
-  (company-tooltip-align-annotations 't)
-  (global-company-mode t))
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto-prefix 2)          ;; Minimum length of prefix for auto completion.
+  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
 
-(use-package company-box
-  :after compan
-  :diminish
-  :hook (company-mode . company-box-mode))
+  ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
+  ;; be used globally (M-/).  See also the customization variable
+  ;; `global-corfu-modes' to exclude certain modes.
+  :init
+  (global-corfu-mode))
+
+;; A few more useful configurations...
+(use-package emacs
+  :init
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete))
+
+(use-package nerd-icons-corfu
+  :after corfu
+  :init (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 (use-package counsel
   :after ivy
