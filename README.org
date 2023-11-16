@@ -85,9 +85,9 @@ Note: If you see erros when package installation is finished just restart Emacs
 
 * Post Installation
 *** Install fonts
-Run the following commands with M-x (alt x) C-y to paste
-- all-the-icons-install-fonts
+Run the following command with M-x (alt x) C-y to paste
 - nerd-icons-install-fonts
+Change or install JetBrains Mono font
 *** Open the configuration file
 1. Hit Space f c to open the config file at $HOME/.config/emacs
 Note: if you are on Windows you need to change the path (hit ctrl x ctrl f, find the config file and in general f region replace the path)
