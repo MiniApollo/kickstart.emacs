@@ -303,27 +303,30 @@ Example how to setup a language mode (if you don't want it feel free to delete i
 #     (use-package lua-mode
 #       :mode "\\.lua\\'") ;; Only start in a lua file
 # #+end_src
+
 *** ORG MODE
 Org mode is one of the things that emacs is loved for.
 Once you've used it for a bit, you'll understand why people love it. Even reading about it can be inspiring!
 For example, this document is effectively the source code and descriptions bound into the one document,
 much like the literate programming ideas that Donald Knuth made famous.
+**** Useful tweaks
 #+begin_src emacs-lisp
+    (add-hook 'org-mode-hook 'org-indent-mode) ;; Indent text
 #+end_src
 
 **** Enabling Table of Contents
 #+begin_src emacs-lisp
-    (use-package toc-org
-      :commands toc-org-enable
-      :init (add-hook 'org-mode-hook 'toc-org-enable))
+	(use-package toc-org
+	  :commands toc-org-enable
+	  :init (add-hook 'org-mode-hook 'toc-org-enable))
 #+end_src
 
 **** Enabling Org Bullets
 Org-bullets gives us attractive bullets rather than asterisks.
 #+begin_src emacs-lisp
-    (add-hook 'org-mode-hook 'org-indent-mode)
-    (use-package org-bullets)
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+    (use-package org-bullets
+      :hook (org-mode . org-bullets-mode)
+      :after org)
 #+end_src
 
 **** Source Code Block Tag Expansion

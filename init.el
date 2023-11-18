@@ -168,15 +168,15 @@
 (use-package yasnippet-snippets
   :hook (prog-mode . yas-minor-mode))
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+(add-hook 'org-mode-hook 'org-indent-mode) ;; Indent text
 
 (use-package toc-org
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
 
-(add-hook 'org-mode-hook 'org-indent-mode)
-(use-package org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode)
+  :after org)
 
 (with-eval-after-load 'org
   (require 'org-tempo))
