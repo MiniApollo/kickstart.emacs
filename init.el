@@ -1,6 +1,16 @@
 ;; The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
 
+(defun efs/org-babel-tangle-config ()
+  "Automatically tangle our Emacs.org config file when we save it. Credit to Emacs From Scratch for this one!"
+  (when (string-equal (file-name-directory (buffer-file-name))
+                      (expand-file-name user-emacs-directory))
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+
 (require 'package)
 (require 'use-package) ;; requires package.el and use-package so we can use it
 (setq use-package-always-ensure t) ;; always ensures that a package is installed
@@ -157,14 +167,6 @@
 
 (use-package yasnippet-snippets
   :hook (prog-mode . yas-minor-mode))
-
-(defun efs/org-babel-tangle-config ()
-  "Automatically tangle our Emacs.org config file when we save it. Credit to Emacs From Scratch for this one!"
-  (when (string-equal (file-name-directory (buffer-file-name))
-                      (expand-file-name user-emacs-directory))
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
