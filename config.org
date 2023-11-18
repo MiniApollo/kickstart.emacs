@@ -88,7 +88,7 @@ With Emacs 29 use-package is now build in.
 ** Load Evil Mode
 Evil is an extensible vi/vim layer for Emacs.  Because…let’s face it.  The Vim keybindings are just plain better.
 Note: To paste without copy (yank) selected text use P (shift P evil-paste-before), because default is evil-paste-after.
-You can toggle evil mode with ctrl z (emacs-mode)
+You can toggle evil mode with C-z (emacs-mode)
 #+begin_src emacs-lisp
     (use-package evil
       :init ;; tweak evil's configuration before loading it
@@ -114,7 +114,7 @@ You can toggle evil mode with ctrl z (emacs-mode)
 ** General Keybindings
 General is a keybinding framework to set keybindings easily.
 The Leader key is what you will press when you want to access your keybindings (Space + . Find file).
-To search and replace start use query-replace-regexp one by one (SPACE to replace n to skip meta/alt ctrl %) [[https://stackoverflow.com/questions/270930/using-emacs-to-recursively-find-and-replace-in-text-files-not-already-open][Source]]
+To search and replace start use query-replace-regexp one by one C-M-% (SPACE to replace n to skip) [[https://stackoverflow.com/questions/270930/using-emacs-to-recursively-find-and-replace-in-text-files-not-already-open][Source]]
 #+begin_src emacs-lisp
     (use-package general
       :config
@@ -232,7 +232,7 @@ With Emacs version 29, true transparency has been added.
 #+end_src
 
 ** Zooming In/Out
-You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTRL plus the mouse wheel for zooming in/out.
+You can use the bindings C-+ C-- for zooming in/out. You can also use CTRL plus the mouse wheel for zooming in/out.
 #+begin_src emacs-lisp
     (global-set-key (kbd "C-+") 'text-scale-increase)
     (global-set-key (kbd "C--") 'text-scale-decrease)
@@ -276,9 +276,9 @@ After that just add-hook with eglot-ensure to automatically start eglot for a gi
 As an example to use C, C++ you need to install clangd(or ccls) and uncomment the following lines. Now the language server will start automatically when opening any c,c++ file.
 Another harder example is Lua. Download lua-language-server from their git repository, add it to your PATH (lua-language-server/bin, make it executable lua-language-server)
 and add a hook (or use a package manager).
+
 If you can use a package manager just install it and add a hook
 #+begin_src emacs-lisp
-    (require 'eglot)
     ;; Automatically start eglot for a given file type.
     ;; (add-hook 'c-mode-hook 'eglot-ensure)
     ;; (add-hook 'c++-mode-hook 'eglot-ensure)
@@ -294,7 +294,7 @@ To use it write out the full keyword (or use autocompletion) and press Tab
 #+end_src
 
 ** Language modes
-Its not required for every language like c,c++,C#,java,javascript etc.. to download language mode packages, but for more specific languages it is necessary for syntax highlighting.
+Its not required for every language like C,C++,C#,Java,Javascript etc.. to download language mode packages, but for more specific languages it is necessary for syntax highlighting.
 If you want to use TreeSitter. Check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]].
 Currently its tedious to use Treesitter because emacs has not yet fully migrated to it.
 *** Lua mode
@@ -344,7 +344,7 @@ Its more portable and less overhead for users over like vterm or eshell.
 We setup eat with eshell if you want to use bash, zsh etc.. Check out their git [[https://codeberg.org/akib/emacs-eat][repository]] how to do it.
 #+begin_src emacs-lisp
     (use-package eat
-      :hook('eshell-load-hook #'eat-eshell-mode))
+      :hook ('eshell-load-hook #'eat-eshell-mode))
 #+end_src
 
 * Other Packages
@@ -375,6 +375,7 @@ Complete text-based user interface to Git.
     (use-package magit
       :commands magit-status)
 #+end_src
+
 *** Diff-hl
 Highlights uncommitted changes on the left side of the window (area also known as the "gutter"), allows you to jump between and revert them selectively.
 #+begin_src emacs-lisp

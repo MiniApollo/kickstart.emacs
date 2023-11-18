@@ -159,7 +159,6 @@
   (setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search first subdirectory level for projects
 ;; Use Bookmarks for non git projects
 
-(require 'eglot)
 ;; Automatically start eglot for a given file type.
 ;; (add-hook 'c-mode-hook 'eglot-ensure)
 ;; (add-hook 'c++-mode-hook 'eglot-ensure)
@@ -182,7 +181,7 @@
   (require 'org-tempo))
 
 (use-package eat
-  :hook('eshell-load-hook #'eat-eshell-mode))
+  :hook ('eshell-load-hook #'eat-eshell-mode))
 
 (use-package nerd-icons
   :if (display-graphic-p))
