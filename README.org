@@ -38,15 +38,14 @@ Their content helped me to create this configuration
 - Gruvbox-theme: Color scheme
 - Doom-modeline: Prettier, more useful modeline
 - Projectile: Project interaction library
-- Flycheck: Better error handling
-- Lsp Mode: Language Server Protocol Support
+- Eglot: Language Server Protocol Support
 - Yasnippet: Template system and snippet collection package
-- Lua-mode: (example commented out)
 - Some Org mode packages (toc-org-enable, org-bullets)
 - Eat: Fast terminal emulator within Emacs
 - Nerd Icons: For icons and more helpful ui (Supports both GUI and TUI)
 - Magit: Complete text-based user interface to Git
-- Company: Text completion framework
+- Diff-hl: Highlights uncommitted changes
+- Corfu: Enhances in-buffer completion
 - Ivy: Generic completion mechanism
 - Diminish: Hiding or abbreviation of the modeline displays
 - Which key: Helper utility for keychords
@@ -94,8 +93,8 @@ Note: if you are on Windows you need to change the path (hit ctrl x ctrl f, find
 2. Now you can Edit and add more configuration.
 
 * Uninstallation
-1. Delete the emacs folder/directory for your OS (E.g. $HOME/.config/emacs)
-2. Uninstall Emacs
+To uninstall kickstart.emacs, you need to remove the following directory:
+- Delete the emacs folder/directory for your OS (E.g. $HOME/.config/emacs/)
 
 * Gallery
 [[./Kickstart_coding.png]]
