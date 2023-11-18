@@ -149,26 +149,11 @@
   (setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search first subdirectory level for projects
 ;; Use Bookmarks for non git projects
 
-(use-package flycheck
-  :defer t
-  :diminish
-  :init (global-flycheck-mode))
-
-(use-package lsp-mode
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  ;; To Disable features https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
-  :hook (;; Automatic Language Modes
-         (prog-mode . lsp)
-         ;; if you want which-key integration
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
-;; optionally
-(use-package lsp-ui
-  :commands lsp-ui-mode)
-;; if you are ivy user
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(require 'eglot)
+;; Automatically start eglot for a given file type.
+;; (add-hook 'c-mode-hook 'eglot-ensure)
+;; (add-hook 'c++-mode-hook 'eglot-ensure)
+;; (add-hook 'lua-mode-hook 'eglot-ensure)
 
 (use-package yasnippet-snippets
   :hook (prog-mode . yas-minor-mode))

@@ -20,8 +20,7 @@
 - [[#modeline][Modeline]]
 - [[#projectile][Projectile]]
 - [[#language-support--lsp][Language support + Lsp]]
-  - [[#flycheck][Flycheck]]
-  - [[#lsp-mode][Lsp Mode]]
+  - [[#eglot][Eglot]]
   - [[#yasnippet][Yasnippet]]
   - [[#language-modes][Language modes]]
 - [[#terminal][Terminal]]
@@ -243,36 +242,24 @@ Projectile is a project interaction library for Emacs.
 #+end_src
 
 * Language support + Lsp
-** Flycheck
-Flycheck is recommended by lsp-mode for better error handling (lsp mode right side error display only works with flycheck)
-#+begin_src emacs-lisp
-    (use-package flycheck
-      :defer t
-      :diminish
-      :init (global-flycheck-mode))
-#+end_src
+** Eglot
+Language Server Protocol Support for Emacs. The build in is now Eglot (with emacs 29).
+Eglot is fast and minimal, but requires manual setup for LSP servers (downloading).
+For more [[https://www.gnu.org/software/emacs/manual/html_mono/eglot.html][information how to use.]] One altertative to Eglot is Lsp-mode, check out the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] page for more information.
 
-** Lsp Mode
-Language Server Protocol Support for Emacs.
-The build in (default) is now eglot but it requires to manualy download the lsp clients, doesn't support debuggers, lsp-mode is pretier and has more features,
-Eglot is faster and more minimal, but it requires manual setup
-*** Setup
+Eglot is easy to set up, but the only difficult part is downloading and setting up the lsp servers.
+After that just add-hook with eglot-ensure to automatically start eglot for a given file type. And you are done.
+
+As an example to use C, C++ you need to install clangd(or ccls) and uncomment the following lines. Now the language server will start automatically when opening any c,c++ file.
+Another harder example is Lua. Download lua-language-server from their git repository, add it to your PATH (lua-language-server/bin, make it executable lua-language-server)
+and add a hook (or use a package manager).
+If you can use a package manager just install it and add a hook
 #+begin_src emacs-lisp
-    (use-package lsp-mode
-      :init
-      ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-      (setq lsp-keymap-prefix "C-c l")
-      ;; To Disable features https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
-      :hook (;; Automatic Language Modes
-             (prog-mode . lsp)
-             ;; if you want which-key integration
-             (lsp-mode . lsp-enable-which-key-integration))
-      :commands lsp)
-    ;; optionally
-    (use-package lsp-ui
-      :commands lsp-ui-mode)
-    ;; if you are ivy user
-    (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+    (require 'eglot)
+    ;; Automatically start eglot for a given file type.
+    ;; (add-hook 'c-mode-hook 'eglot-ensure)
+    ;; (add-hook 'c++-mode-hook 'eglot-ensure)
+    ;; (add-hook 'lua-mode-hook 'eglot-ensure)
 #+end_src
 
 ** Yasnippet
