@@ -51,12 +51,14 @@ Their content helped me to create this configuration
 - Which key: Helper utility for keychords
 *** Recommended Packages
 If you want to see how to configure these, look up their github repositories or check out my [[https://github.com/MiniApollo/config/blob/main/emacs/config.org][config]].
-- DashBoard :: Extensible startup screen
-- UndoTree :: Visualizes the undo history
-- Drag Stuff :: Makes it possible to move selected text, regions and lines
-- Rainbow Delimiters :: Add colors to brackets
-- Rainbow Mode :: Display the actual color as a background for any hex color value (ex. #ffffff)
-- Treesitter :: Not really a package, but a separate dependency
+- DashBoard :: Extensible startup screen.
+- Drag Stuff :: Makes it possible to move selected text, regions and lines.
+- Rainbow Delimiters :: Add colors to brackets.
+- Rainbow Mode :: Display the actual color as a background for any hex color value (ex. #ffffff).
+- Vundo with undo-fu-session :: Visualizes the undo history with more emacs native features (alternative undotree).
+- Sudo-edit :: Utilities for opening files with root privileges (also works with doas).
+- Treesitter :: Not really a package, but a separate dependency for better syntax highlighting.
+- Ws-butler :: Removes whitespace from the ends of lines.
 * Installation
 ** 1. Backup your previous configuration
 If any exists.
