@@ -10,10 +10,11 @@
 - [[#introduction][Introduction]]
   - [[#packages][Packages]]
 - [[#installation][Installation]]
-  - [[#1-backup-your-previous-configuration][1. Backup your previous configuration]]
-  - [[#2-install-gnu-emacs][2. Install Gnu Emacs]]
-  - [[#3-clone-the-repository-to-the-configuration-location][3. Clone the repository to the configuration location]]
-  - [[#4-start-emacs][4. Start Emacs]]
+  - [[#1-requirements][1. Requirements]]
+  - [[#2-backup-your-previous-configuration][2. Backup your previous configuration]]
+  - [[#3-install-gnu-emacs][3. Install Gnu Emacs]]
+  - [[#4-clone-the-repository-to-the-configuration-location][4. Clone the repository to the configuration location]]
+  - [[#5-start-emacs][5. Start Emacs]]
 - [[#post-installation][Post Installation]]
 - [[#uninstallation][Uninstallation]]
 - [[#gallery][Gallery]]
@@ -60,13 +61,16 @@ If you want to see how to configure these, look up their github repositories or 
 - Treesitter :: Not really a package, but a separate dependency for better syntax highlighting.
 - Ws-butler :: Removes whitespace from the ends of lines.
 * Installation
-** 1. Backup your previous configuration
+** 1. Requirements
+    - Gnu Emacs 29.1 (Latest stable release)
+    - Git (To clone/download this repository)
+** 2. Backup your previous configuration
 If any exists.
-** 2. Install Gnu Emacs
+** 3. Install Gnu Emacs
 - Linux :: Install it from your Distros Repository
 - Mac :: Install it using homeBrew or download it from the website
 - Windows :: Download it from the website or use a package manager
-** 3. Clone the repository to the configuration location
+** 4. Clone the repository to the configuration location
 *** Linux and Mac
 #+begin_src bash
   git clone https://github.com/MiniApollo/kickstart.emacs.git "${XDG_CONFIG_HOME:-$HOME/.config}"/emacs
@@ -80,7 +84,7 @@ If any exists.
 #+begin_src bash
   git clone https://github.com/MiniApollo/kickstart.emacs.git $env:USERPROFILE\AppData\Local\emacs\
 #+end_src
-** 4. Start Emacs
+** 5. Start Emacs
 Emacs will install all the requested packages (it can take a minute).
 Note: If you see erros when package installation is finished just restart Emacs
 
