@@ -76,8 +76,7 @@ In my experience Package.el is not slow and gets the job done.
 To update/upgrade packages, use the package-upgrade-all command.
 With Emacs 29 use-package is now build in.
 #+begin_src emacs-lisp
-    (require 'package)
-    (require 'use-package) ;; requires package.el and use-package so we can use it
+    (require 'use-package-ensure) ;; This line is currenly needed, there is a bug with always-ensure, it doesn't get loaded if we just setq t
     (setq use-package-always-ensure t) ;; always ensures that a package is installed
     (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
                              ("org" . "https://orgmode.org/elpa/")
@@ -316,9 +315,9 @@ much like the literate programming ideas that Donald Knuth made famous.
 
 **** Enabling Table of Contents
 #+begin_src emacs-lisp
-	(use-package toc-org
-	  :commands toc-org-enable
-	  :init (add-hook 'org-mode-hook 'toc-org-enable))
+    (use-package toc-org
+      :commands toc-org-enable
+      :init (add-hook 'org-mode-hook 'toc-org-enable))
 #+end_src
 
 **** Enabling Org Bullets

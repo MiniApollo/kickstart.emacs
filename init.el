@@ -11,8 +11,7 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
-(require 'package)
-(require 'use-package) ;; requires package.el and use-package so we can use it
+(require 'use-package-ensure) ;; This line is currenly needed, there is a bug with always-ensure, it doesn't get loaded if we just setq t
 (setq use-package-always-ensure t) ;; always ensures that a package is installed
 (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
                          ("org" . "https://orgmode.org/elpa/")
