@@ -159,9 +159,15 @@
 ;; Use Bookmarks for non git projects
 
 ;; Automatically start eglot for a given file type.
-;; (add-hook 'c-mode-hook 'eglot-ensure)
-;; (add-hook 'c++-mode-hook 'eglot-ensure)
-;; (add-hook 'lua-mode-hook 'eglot-ensure)
+;;(use-package eglot
+;;  :ensure nil ;; Don't install eglot because It's now build in
+;;  :hook (('c-mode . 'eglot-ensure) ;; Autostart lsp servers
+;;         ('c++-mode . 'eglot-ensure)
+;;         ('lua-mode . 'eglot-ensure)) ;; Lua-mode needs to be installed
+;;  :config
+;;  (add-to-list 'eglot-server-programs
+;;               `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
+;;  )
 
 (use-package yasnippet-snippets
   :hook (prog-mode . yas-minor-mode))

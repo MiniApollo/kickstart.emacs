@@ -266,22 +266,30 @@ Projectile is a project interaction library for Emacs.
 * Language support + Lsp
 ** Eglot
 Language Server Protocol Support for Emacs. The build in is now Eglot (with emacs 29).
+
 Eglot is fast and minimal, but requires manual setup for LSP servers (downloading).
 For more [[https://www.gnu.org/software/emacs/manual/html_mono/eglot.html][information how to use.]] One altertative to Eglot is Lsp-mode, check out the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] page for more information.
 
 Eglot is easy to set up, but the only difficult part is downloading and setting up the lsp servers.
-After that just add-hook with eglot-ensure to automatically start eglot for a given file type. And you are done.
+After that just add a hook with eglot-ensure to automatically start eglot for a given file type. And you are done.
 
 As an example to use C, C++ you need to install clangd(or ccls) and uncomment the following lines. Now the language server will start automatically when opening any c,c++ file.
-Another harder example is Lua. Download lua-language-server from their git repository, add it to your PATH (lua-language-server/bin, make it executable lua-language-server)
-and add a hook (or use a package manager).
 
-If you can use a package manager just install it and add a hook
+A harder example is Lua. Download the lua-language-server from their git repository, make the lua-language-server file executable at lua-language-server/bin.
+Uncomment the following lines and change the path to the language server executable. Now the language server will work.
+
+If you can use a package manager just install the lsp server and add a hook.
 #+begin_src emacs-lisp
     ;; Automatically start eglot for a given file type.
-    ;; (add-hook 'c-mode-hook 'eglot-ensure)
-    ;; (add-hook 'c++-mode-hook 'eglot-ensure)
-    ;; (add-hook 'lua-mode-hook 'eglot-ensure)
+    ;;(use-package eglot
+    ;;  :ensure nil ;; Don't install eglot because It's now build in
+    ;;  :hook (('c-mode . 'eglot-ensure) ;; Autostart lsp servers
+    ;;         ('c++-mode . 'eglot-ensure)
+    ;;         ('lua-mode . 'eglot-ensure)) ;; Lua-mode needs to be installed
+    ;;  :config
+    ;;  (add-to-list 'eglot-server-programs
+    ;;               `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
+    ;;  )
 #+end_src
 
 ** Yasnippet
