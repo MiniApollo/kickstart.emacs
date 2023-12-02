@@ -28,6 +28,7 @@ This config is:
 - Documented describing its purpuse
 
 Inspired by [[https://github.com/nvim-lua/kickstart.nvim][kickstart.nvim]]
+
 Special thanks to:
 - [[https://www.youtube.com/watch?v=d1fgypEiQkE&list=PL5--8gKSku15e8lXf7aLICFmAHQVo0KXX][DistroTube]]
 - [[https://www.youtube.com/watch?v=74zOY-vgkyw&list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][System Crafters]]
