@@ -9,6 +9,7 @@
 * Table Of Contents :toc:
 - [[#introduction][Introduction]]
   - [[#packages][Packages]]
+  - [[#helpful-resources][Helpful resources]]
 - [[#installation][Installation]]
   - [[#1-requirements][1. Requirements]]
   - [[#2-backup-your-previous-configuration][2. Backup your previous configuration]]
@@ -27,10 +28,10 @@ This config is:
 - Documented describing its purpuse
 
 Inspired by [[https://github.com/nvim-lua/kickstart.nvim][kickstart.nvim]]
-For more helpful information check out:
+Special thanks to:
 - [[https://www.youtube.com/watch?v=d1fgypEiQkE&list=PL5--8gKSku15e8lXf7aLICFmAHQVo0KXX][DistroTube]]
 - [[https://www.youtube.com/watch?v=74zOY-vgkyw&list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][System Crafters]]
-Their content helped me to create this configuration
+Their content helped me to create this configuration.
 ** Packages
 *** Included Package list
 - Package Manager: Package.el with Use-package (built in)
@@ -60,6 +61,14 @@ If you want to see how to configure these, look up their git repositories or che
 - Sudo-edit :: Utilities for opening files with root privileges (also works with doas).
 - Treesitter :: Not really a package, but a separate dependency for better syntax highlighting.
 - Ws-butler :: Removes whitespace from the ends of lines.
+** Helpful resources
+Videos and configurations to get started.
+- [[https://www.youtube.com/watch?v=74zOY-vgkyw&list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][Emacs From Scratch by System Crafters]] :: Very detailed video series about building Gnu Emacs from the ground up.
+- [[https://www.youtube.com/watch?v=d1fgypEiQkE&list=PL5--8gKSku15e8lXf7aLICFmAHQVo0KXX][Configuring Emacs by DistroTube]] :: Shorter but also very detailed video series about configuring emacs from scratch.
+- [[https://github.com/purcell/emacs.d][Purcell's emacs configuration]] :: Emacs configuration bundle with batteries included.
+- [[https://www.spacemacs.org/][Spacemacs]] and [[https://github.com/doomemacs/doomemacs][Doom Emacs]] :: For an out of box experience and their wiki pages are really helpful.
+- [[https://www.emacswiki.org/emacs/StarterKits ][More starter kits]] :: List of starter kits for Emacs.
+
 * Installation
 ** 1. Requirements
     - Gnu Emacs 29.1 (Latest stable release)
