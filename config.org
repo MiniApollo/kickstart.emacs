@@ -67,10 +67,10 @@ automatically exports the configuration here to the associated output files.
 
 ** Use Package
 I used the default package manager package.el with use-package. Alternative package managers (straight.el, elpaca, etc..) are useful if you want to
-install packages from github, if you want a specific, not very popular package that is not available on elpa or melpa.
+install packages from git repositories, if you want a specific, not very popular package that is not available on elpa or melpa.
 or you want UI (elpaca) and other things.
 
-If you are interested in these other package managers, check out their github repositories or search for more package managers.
+If you are interested in these other package managers, check out their git repositories or search for more package managers.
 In my experience Package.el is not slow and gets the job done.
 
 To update/upgrade packages, use the package-upgrade-all command.
