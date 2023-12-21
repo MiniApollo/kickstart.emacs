@@ -277,6 +277,7 @@ As an example to use C, C++ you need to install clangd(or ccls) and uncomment th
 
 A harder example is Lua. Download the lua-language-server from their git repository, make the lua-language-server file executable at lua-language-server/bin.
 Uncomment the following lines and change the path to the language server executable. Now the language server will work.
+Or add the lua-language-server executable to your path.
 
 If you can use a package manager just install the lsp server and add a hook.
 #+begin_src emacs-lisp
@@ -494,7 +495,8 @@ Which-key is a helper utility for keychords (which key to press)
 #+end_src
 
 * Runtime Performance
-Dial the GC threshold back down so that garbage collection happens more frequently but in less time. We also increase Read Process Output Max so emacs can read more data.
+Dial the GC threshold back down so that garbage collection happens more frequently but in less time.
+We also increase Read Process Output Max so emacs can read more data.
 #+begin_src emacs-lisp
     ;; Make gc pauses faster by decreasing the threshold.
     (setq gc-cons-threshold (* 2 1000 1000))
