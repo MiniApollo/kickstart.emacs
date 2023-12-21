@@ -49,6 +49,7 @@ Their content helped me to create this configuration.
 - [[https://github.com/magit/magit][Magit]]: Complete text-based user interface to Git
 - [[https://github.com/dgutov/diff-hl][Diff-hl]]: Highlights uncommitted changes
 - [[https://github.com/minad/corfu][Corfu]]: Enhances in-buffer completion
+- [[https://github.com/minad/cape][Cape]]: Provides Completion At Point Extensions
 - [[https://github.com/abo-abo/swiper][Ivy]]: Generic completion mechanism
 - [[https://github.com/myrjola/diminish.el][Diminish]]: Hiding or abbreviation of the modeline displays
 - [[https://github.com/justbur/emacs-which-key][Which key]]: Helper utility for keychords
