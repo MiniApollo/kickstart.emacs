@@ -54,14 +54,14 @@ Their content helped me to create this configuration.
 - Which key: Helper utility for keychords
 *** Recommended Packages
 If you want to see how to configure these, look up their git repositories or check out my [[https://github.com/MiniApollo/config/blob/main/emacs/config.org][config]].
-- DashBoard :: Extensible startup screen.
-- Drag Stuff :: Makes it possible to move selected text, regions and lines.
-- Rainbow Delimiters :: Add colors to brackets.
-- Rainbow Mode :: Display the actual color as a background for any hex color value (ex. #ffffff).
-- Vundo with undo-fu-session :: Visualizes the undo history with more emacs native features (alternative undotree).
-- Sudo-edit :: Utilities for opening files with root privileges (also works with doas).
-- Treesitter :: Not really a package, but a separate dependency for better syntax highlighting.
-- Ws-butler :: Removes whitespace from the ends of lines.
+- [[https://github.com/emacs-dashboard/emacs-dashboard][DashBoard]] :: Extensible startup screen.
+- [[https://github.com/rejeep/drag-stuff.el][Drag Stuff]] :: Makes it possible to move selected text, regions and lines.
+- [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]] :: Add colors to brackets.
+- [[https://github.com/emacsmirror/rainbow-mode][Rainbow Mode]] :: Display the actual color as a background for any hex color value (ex. #ffffff).
+- [[https://github.com/casouri/vundo][Vundo]] with [[https://github.com/emacsmirror/undo-fu-session][undo-fu-session]] :: Visualizes the undo history with more emacs native features (alternative undotree).
+- [[https://github.com/nflath/sudo-edit][Sudo-edit]] :: Utilities for opening files with root privileges (also works with doas).
+- [[https://github.com/renzmann/treesit-auto][Treesit-auto]] :: Automatically install and use tree-sitter major modes in Emacs 29+.
+- [[https://github.com/lewang/ws-butler][Ws-butler]] :: Removes whitespace from the ends of lines.
 ** Helpful resources
 Videos and configurations to get started.
 - [[https://www.youtube.com/watch?v=74zOY-vgkyw&list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][Emacs From Scratch by System Crafters]] :: Very detailed video series about building Gnu Emacs from the ground up.
