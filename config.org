@@ -96,7 +96,9 @@ You can toggle evil mode with C-z (emacs-mode)
       (setq evil-want-C-i-jump nil) ;; Disables C-i jump
       (setq evil-undo-system 'undo-redo) ;; C-r to redo
       (setq org-return-follows-link  t) ;; Sets RETURN key in org-mode to follow links
-      (evil-mode))
+      (evil-mode)
+      :config
+      (evil-set-initial-state 'eat-mode 'insert)) ;; Set Initial state in eat termianal to insert mode
     (use-package evil-collection
       :after evil
       :config
