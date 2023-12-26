@@ -40,7 +40,7 @@
 ** Startup Performance
 Make startup faster by reducing the frequency of garbage collection. This will be set back when startup finishes.
 #+begin_src emacs-lisp
-    ;; The default is 800 kilobytes.  Measured in bytes.
+    ;; The default is 800 kilobytes. Measured in bytes.
     (setq gc-cons-threshold (* 50 1000 1000))
 #+end_src
 
@@ -48,8 +48,8 @@ Make startup faster by reducing the frequency of garbage collection. This will b
 Auto-Tangle Org configuration file for better startup times.
 If you want to use this don't forget to add this to the top of the org document (#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes)
 
-*Remember*, if this code can't be loaded (errors before this code). The init.el file won't update on change!
-To fix this you need to find this file (C-x C-f), fix the error and press C-c C-v t to tangle it manually.
+*Remember*, if this code can't be loaded (errors before this code), the init.el file won't update on change!
+To fix this, you need to find this file (C-x C-f), fix the error and press C-c C-v t to tangle it manually.
 
 This snippet adds a hook to org-mode buffers so that efs/org-babel-tangle-config gets executed each time such a buffer gets saved.
 This function checks to see if the file being saved is the Emacs.org file you’re looking at right now, and if so,
@@ -67,18 +67,18 @@ automatically exports the configuration here to the associated output files.
 #+end_src
 
 ** Use Package
-I used the default package manager package.el with use-package. Alternative package managers (straight.el, elpaca, etc..) are useful if you want to
-install packages from git repositories, if you want a specific, not very popular package that is not available on elpa or melpa.
+I used the default package manager package.el with use-package. Alternative package managers (straight.el, elpaca, etc.) are useful if you want to
+install packages from git repositories, if you want a specific, not very popular package that is not available on elpa or melpa,
 or you want UI (elpaca) and other things.
 
 If you are interested in these other package managers, check out their git repositories or search for more package managers.
 In my experience Package.el is not slow and gets the job done.
 
 To update/upgrade packages, use the package-upgrade-all command.
-With Emacs 29 use-package is now build in.
+With Emacs 29 use-package is now built-in.
 #+begin_src emacs-lisp
     (require 'use-package-ensure) ;; This line is currenly needed, there is a bug with always-ensure, it doesn't get loaded if we just setq t
-    (setq use-package-always-ensure t) ;; always ensures that a package is installed
+    (setq use-package-always-ensure t) ;; Always ensures that a package is installed
     (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
                              ("org" . "https://orgmode.org/elpa/")
                              ("elpa" . "https://elpa.gnu.org/packages/")
@@ -87,11 +87,12 @@ With Emacs 29 use-package is now build in.
 
 ** Load Evil Mode
 Evil is an extensible vi/vim layer for Emacs.  Because…let’s face it.  The Vim keybindings are just plain better.
+
 Note: To paste without copy (yank) selected text use P (shift P evil-paste-before), because default is evil-paste-after.
 You can toggle evil mode with C-z (emacs-mode)
 #+begin_src emacs-lisp
     (use-package evil
-      :init ;; tweak evil's configuration before loading it
+      :init ;; Tweak evil's configuration before loading it
       (setq evil-want-keybinding nil) ;; Disable evil bindings in other modes (It's not consistent and not good)
       (setq evil-want-C-u-scroll t) ;; Set  C-u to scrool up
       (setq evil-want-C-i-jump nil) ;; Disables C-i jump
@@ -99,7 +100,7 @@ You can toggle evil mode with C-z (emacs-mode)
       (setq org-return-follows-link  t) ;; Sets RETURN key in org-mode to follow links
       (evil-mode)
       :config
-      (evil-set-initial-state 'eat-mode 'insert)) ;; Set Initial state in eat termianal to insert mode
+      (evil-set-initial-state 'eat-mode 'insert)) ;; Set initial state in eat terminal to insert mode
     (use-package evil-collection
       :after evil
       :config
@@ -125,8 +126,8 @@ To search and replace start use query-replace-regexp one by one C-M-% (SPACE to 
       (general-create-definer start/leader-keys
         :states '(normal insert visual emacs)
         :keymaps 'override
-        :prefix "SPC" ;; set leader
-        :global-prefix "C-SPC") ;; access leader in insert mode
+        :prefix "SPC" ;; Set leader
+        :global-prefix "C-SPC") ;; Access leader in insert mode
 
       (start/leader-keys
         "." '(find-file :wk "Find file")
@@ -243,15 +244,15 @@ You can use the bindings C-+ C-- for zooming in/out. You can also use CTRL plus 
 #+end_src
 
 * Modeline
-Replace the default modeline with a pretier more useful.
+Replace the default modeline with a prettier more useful.
 #+begin_src emacs-lisp
     (use-package doom-modeline
       :init (doom-modeline-mode 1)
       :config
-      (setq doom-modeline-height 25      ;; sets modeline height
-            doom-modeline-bar-width 5    ;; sets right bar width
-            doom-modeline-persp-name t   ;; adds perspective name to modeline
-            doom-modeline-persp-icon t)) ;; adds folder icon next to persp name
+      (setq doom-modeline-height 25      ;; Sets modeline height
+            doom-modeline-bar-width 5    ;; Sets right bar width
+            doom-modeline-persp-name t   ;; Adds perspective name to modeline
+            doom-modeline-persp-icon t)) ;; Adds folder icon next to persp name
 #+end_src
 
 * Projectile
@@ -262,16 +263,16 @@ Projectile is a project interaction library for Emacs.
       (projectile-mode 1)
       :init
       (setq projectile-switch-project-action #'projectile-dired)
-      (setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search first subdirectory level for projects
+      (setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search the first subdirectory level for projects
     ;; Use Bookmarks for non git projects
 #+end_src
 
 * Language support + Lsp
 ** Eglot
-Language Server Protocol Support for Emacs. The build in is now Eglot (with emacs 29).
+Language Server Protocol Support for Emacs. The built-in is now Eglot (with emacs 29).
 
 Eglot is fast and minimal, but requires manual setup for LSP servers (downloading).
-For more [[https://www.gnu.org/software/emacs/manual/html_mono/eglot.html][information how to use.]] One altertative to Eglot is Lsp-mode, check out the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] page for more information.
+For more [[https://www.gnu.org/software/emacs/manual/html_mono/eglot.html][information how to use.]] One alternative to Eglot is Lsp-mode, check out the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] page for more information.
 
 Eglot is easy to set up, but the only difficult part is downloading and setting up the lsp servers.
 After that just add a hook with eglot-ensure to automatically start eglot for a given file type. And you are done.
@@ -286,7 +287,7 @@ If you can use a package manager just install the lsp server and add a hook.
 #+begin_src emacs-lisp
     ;; Automatically start eglot for a given file type.
     ;;(use-package eglot
-    ;;  :ensure nil ;; Don't install eglot because It's now build in
+    ;;  :ensure nil ;; Don't install eglot because it's now built-in
     ;;  :hook (('c-mode . 'eglot-ensure) ;; Autostart lsp servers
     ;;         ('c++-mode . 'eglot-ensure)
     ;;         ('lua-mode . 'eglot-ensure)) ;; Lua-mode needs to be installed
@@ -305,11 +306,11 @@ To use it write out the full keyword (or use autocompletion) and press Tab
 #+end_src
 
 ** Language modes
-Its not required for every language like C,C++,C#,Java,Javascript etc.. to download language mode packages, but for more specific languages it is necessary for syntax highlighting.
-If you want to use TreeSitter. Check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]].
-Currently its tedious to use Treesitter because emacs has not yet fully migrated to it.
+It's not required for every language like C,C++,C#,Java,Javascript etc. to download language mode packages, but for more specific languages it is necessary for syntax highlighting.
+If you want to use TreeSitter, check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]].
+Currently it's tedious to use Treesitter, because emacs has not yet fully migrated to it.
 *** Lua mode
-Example how to setup a language mode (if you don't want it feel free to delete it)
+Example, how to setup a language mode (if you don't want it, feel free to delete it)
 # #+begin_src emacs-lisp
 #     (use-package lua-mode
 #       :mode "\\.lua\\'") ;; Only start in a lua file
@@ -351,8 +352,8 @@ Org-tempo allows for '<s' followed by TAB to expand to a begin_src tag.
 * Terminal
 ** Eat
 Eat(Emulate A Terminal) is a terminal emulator within Emacs.
-Its more portable and less overhead for users over like vterm or eshell.
-We setup eat with eshell if you want to use bash, zsh etc.. Check out their git [[https://codeberg.org/akib/emacs-eat][repository]] how to do it.
+It's more portable and less overhead for users over like vterm or eshell.
+We setup eat with eshell, if you want to use bash, zsh etc., check out their git [[https://codeberg.org/akib/emacs-eat][repository]] how to do it.
 #+begin_src emacs-lisp
     (use-package eat
       :hook ('eshell-load-hook #'eat-eshell-mode))
@@ -399,7 +400,7 @@ Highlights uncommitted changes on the left side of the window (area also known a
 ** Corfu
 Enhances in-buffer completion with a small completion popup.
 Corfu is a small package, which relies on the Emacs completion facilities and concentrates on providing a polished completion.
-For more configuration options check out their [[https://github.com/minad/corfu][git repository]]
+For more configuration options check out their [[https://github.com/minad/corfu][git repository]].
 #+begin_src emacs-lisp
     (use-package corfu
       ;; Optional customizations
@@ -414,7 +415,7 @@ For more configuration options check out their [[https://github.com/minad/corfu]
       ;; Enable indentation+completion using the TAB key.
       ;; `completion-at-point' is often bound to M-TAB.
       (setq tab-always-indent 'complete)
-      (setq corfu-preview-current nil) ;; Don't insert completion without conformation
+      (setq corfu-preview-current nil) ;; Don't insert completion without confirmation
 
       ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
       ;; be used globally (M-/).  See also the customization variable
@@ -483,7 +484,7 @@ Ivy-rich allows us to add descriptions alongside the commands in M-x.
 
     (use-package ivy-rich
       :after ivy
-      :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
+      :init (ivy-rich-mode 1) ;; This gets us descriptions in M-x.
       :custom
       (ivy-virtual-abbreviate 'full
                               ivy-rich-switch-buffer-align-virtual-buffer t

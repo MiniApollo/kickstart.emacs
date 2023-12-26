@@ -57,11 +57,11 @@ Their content helped me to create this configuration.
 If you want to see how to configure these, look up their git repositories or check out my [[https://github.com/MiniApollo/config/blob/main/emacs/config.org][config]].
 - [[https://github.com/emacs-dashboard/emacs-dashboard][DashBoard]] :: Extensible startup screen.
 - [[https://github.com/rejeep/drag-stuff.el][Drag Stuff]] :: Makes it possible to move selected text, regions and lines.
-- [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]] :: Add colors to brackets.
-- [[https://github.com/emacsmirror/rainbow-mode][Rainbow Mode]] :: Display the actual color as a background for any hex color value (ex. #ffffff).
+- [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]] :: Adds colors to brackets.
+- [[https://github.com/emacsmirror/rainbow-mode][Rainbow Mode]] :: Displays the actual color as a background for any hex color value (ex. #ffffff).
 - [[https://github.com/casouri/vundo][Vundo]] with [[https://github.com/emacsmirror/undo-fu-session][undo-fu-session]] :: Visualizes the undo history with more emacs native features (alternative undotree).
 - [[https://github.com/nflath/sudo-edit][Sudo-edit]] :: Utilities for opening files with root privileges (also works with doas).
-- [[https://github.com/renzmann/treesit-auto][Treesit-auto]] :: Automatically install and use tree-sitter major modes in Emacs 29+.
+- [[https://github.com/renzmann/treesit-auto][Treesit-auto]] :: Automatically installs and uses tree-sitter major modes in Emacs 29+.
 - [[https://github.com/lewang/ws-butler][Ws-butler]] :: Removes whitespace from the ends of lines.
 ** Helpful resources
 Videos and configurations to get started.
@@ -97,6 +97,7 @@ If any exists.
 #+end_src
 ** 5. Start Emacs
 Emacs will install all the requested packages (it can take a minute).
+
 Note: If you see erros when package installation is finished just restart Emacs
 
 * Post Installation
@@ -106,7 +107,8 @@ Run the following command with M-x (alt x) C-y to paste
 Change or install JetBrains Mono font
 *** Open the configuration file
 1. Hit Space f c to open the config file at $HOME/.config/emacs
-Note: if you are on Windows you need to change the path (hit ctrl x ctrl f, find the config file and in general region replace the path)
+
+Note: if you use Windows you need to change the path (hit ctrl x ctrl f, find the config file and in general region replace the path)
 2. Now you can Edit and add more configuration.
 
 * Uninstallation
