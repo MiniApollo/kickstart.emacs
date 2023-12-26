@@ -441,7 +441,6 @@ Provides Completion At Point Extensions which can be used in combination with Co
       (add-to-list 'completion-at-point-functions #'cape-elisp-block) ;; Complete elisp in Org or Markdown mode
       (add-to-list 'completion-at-point-functions #'cape-keyword) ;; Keyword/Snipet completion
       (add-to-list 'completion-at-point-functions #'cape-dict) ;; Dictionary completion
-      (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster) ;; Eglot refresh on every change
 
       ;;(add-to-list 'completion-at-point-functions #'cape-dabbrev)
       ;;(add-to-list 'completion-at-point-functions #'cape-history)
