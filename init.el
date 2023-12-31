@@ -99,6 +99,9 @@
     "t t" '(visual-line-mode :wk "Toggle truncated lines (wrap)")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")))
 
+(menu-bar-mode -1)           ;; Disable the menu bar
+(scroll-bar-mode -1)         ;; Disable the scroll bar
+(tool-bar-mode -1)           ;; Disable the tool bar
 
 (delete-selection-mode 1)    ;; You can select text and delete it by typing.
 (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
@@ -107,15 +110,15 @@
 (global-auto-revert-mode t)  ;; Automatically reload file and show changes if the file has changed
 (global-display-line-numbers-mode 1) ;; Display line numbers
 (global-visual-line-mode t)  ;; Enable truncated lines
-(menu-bar-mode -1)           ;; Disable the menu bar
-(scroll-bar-mode -1)         ;; Disable the scroll bar
-(tool-bar-mode -1)           ;; Disable the tool bar
 
 (setq mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling
 (setq scroll-conservatively 10) ;; Smooth scrolling when going down with scroll margin
 (setq scroll-margin 8)
 
-(setq make-backup-files nil) ; Stop creating ~ backup files
+(setq make-backup-files nil) ;; Stop creating ~ backup files
+(setq org-edit-src-content-indentation 4) ;; Set src block automatic indent to 4 instead of 2.
+(setq-default tab-width 4)
+
 ;; Move customization variables to a separate file and load it, avoid filling up init.el with unnecessary variables
 (setq custom-file (locate-user-emacs-file "custom-vars.el"))
 (load custom-file 'noerror 'nomessage)
@@ -124,14 +127,11 @@
 (blink-cursor-mode 0) ;; Don't blink cursor
 (add-hook 'prog-mode-hook (lambda () (hs-minor-mode t))) ;; Enable folding hide/show globally
 
-(setq org-edit-src-content-indentation 4) ;; Set src block automatic indent to 4 instead of 2.
-(setq-default tab-width 4)
-
 (use-package gruvbox-theme
   :init
   (load-theme 'gruvbox-dark-medium t)) ;; We need to add t to trust this package
 
-(add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
+(add-to-list 'default-frame-alist '(alpha-background . 90)) ;; For all new frames henceforth
 
 (set-face-attribute 'default nil
                     ;; :font "JetBrains Mono" ;; Set your favorite type of font or download JetBrains Mono
@@ -140,6 +140,7 @@
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
+
 ;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono")) ;; Set your favorite font
 (setq-default line-spacing 0.12)
 
