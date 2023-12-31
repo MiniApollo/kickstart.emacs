@@ -33,6 +33,7 @@
   - [[#cape][Cape]]
   - [[#ivy-counsel][Ivy (counsel)]]
   - [[#diminish][DIMINISH]]
+  - [[#rainbow-delimiters][Rainbow Delimiters]]
   - [[#which-key][WHICH-KEY]]
 - [[#runtime-performance][Runtime Performance]]
 
@@ -506,6 +507,13 @@ This package implements hiding or abbreviation of the modeline displays (lighter
 With this package installed, you can add ‘:diminish’ to any use-package block to hide that particular mode in the modeline.
 #+begin_src emacs-lisp
     (use-package diminish)
+#+end_src
+
+** Rainbow Delimiters
+Adds colors to brackets.
+#+begin_src emacs-lisp
+    (use-package rainbow-delimiters
+      :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
 ** WHICH-KEY

@@ -297,6 +297,9 @@
 
 (use-package diminish)
 
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 (use-package which-key
   :init
   (which-key-mode 1)
