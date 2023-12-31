@@ -338,11 +338,11 @@ much like the literate programming ideas that Donald Knuth made famous.
       :init (add-hook 'org-mode-hook 'toc-org-enable))
 #+end_src
 
-**** Enabling Org Bullets
-Org-bullets gives us attractive bullets rather than asterisks.
+**** Org Superstar
+Prettify headings and plain lists in Org mode. Modern version of org-bullets.
 #+begin_src emacs-lisp
-    (use-package org-bullets
-      :hook (org-mode . org-bullets-mode)
+    (use-package org-superstar
+      :hook (org-mode . org-superstar-mode)
       :after org)
 #+end_src
 

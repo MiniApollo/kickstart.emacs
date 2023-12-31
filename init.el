@@ -185,8 +185,8 @@
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
 
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode)
+(use-package org-superstar
+  :hook (org-mode . org-superstar-mode)
   :after org)
 
 (with-eval-after-load 'org
