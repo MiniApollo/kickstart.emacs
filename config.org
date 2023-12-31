@@ -10,7 +10,7 @@
   - [[#startup-performance][Startup Performance]]
   - [[#auto-tangle-configuration-file][Auto-tangle Configuration file]]
   - [[#use-package][Use Package]]
-  - [[#load-evil-mode][Load Evil Mode]]
+  - [[#evil-mode][Evil Mode]]
   - [[#general-keybindings][General Keybindings]]
 - [[#sane-defaults][SANE DEFAULTS]]
 - [[#set-theme][Set Theme]]
@@ -85,8 +85,8 @@ With Emacs 29 use-package is now built-in.
                              ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; For Eat Terminal
 #+end_src
 
-** Load Evil Mode
-Evil is an extensible vi/vim layer for Emacs.  Because…let’s face it.  The Vim keybindings are just plain better.
+** Evil Mode
+An extensible vi/vim layer for Emacs. Because…let’s face it. The Vim keybindings are just plain better.
 
 Note: To paste without copy (yank) selected text use P (shift P evil-paste-before), because default is evil-paste-after.
 You can toggle evil mode with C-z (emacs-mode)
@@ -115,7 +115,7 @@ You can toggle evil mode with C-z (emacs-mode)
 #+end_src
 
 ** General Keybindings
-General is a keybinding framework to set keybindings easily.
+A keybinding framework to set keybindings easily.
 The Leader key is what you will press when you want to access your keybindings (Space + . Find file).
 To search and replace start use query-replace-regexp one by one C-M-% (SPACE to replace n to skip) [[https://stackoverflow.com/questions/270930/using-emacs-to-recursively-find-and-replace-in-text-files-not-already-open][Source]]
 #+begin_src emacs-lisp
@@ -256,7 +256,7 @@ Replace the default modeline with a prettier more useful.
 #+end_src
 
 * Projectile
-Projectile is a project interaction library for Emacs.
+Project interaction library for Emacs.
 #+begin_src emacs-lisp
     (use-package projectile
       :config
@@ -298,7 +298,7 @@ If you can use a package manager just install the lsp server and add a hook.
 #+end_src
 
 ** Yasnippet
-YASnippet is a template system for Emacs. And yasnippet-snippets is a snippet collection package.
+A template system for Emacs. And yasnippet-snippets is a snippet collection package.
 To use it write out the full keyword (or use autocompletion) and press Tab
 #+begin_src emacs-lisp
     (use-package yasnippet-snippets
@@ -326,7 +326,7 @@ much like the literate programming ideas that Donald Knuth made famous.
     (add-hook 'org-mode-hook 'org-indent-mode) ;; Indent text
 #+end_src
 
-**** Enabling Table of Contents
+**** Table of Contents
 #+begin_src emacs-lisp
     (use-package toc-org
       :commands toc-org-enable
