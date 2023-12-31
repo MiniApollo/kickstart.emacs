@@ -68,7 +68,6 @@
     "b n" '(next-buffer :wk "Next buffer")
     "b p" '(previous-buffer :wk "Previous buffer")
     "b r" '(revert-buffer :wk "Reload buffer")
-    "b R" '(rename-buffer :wk "Rename buffer")
     "b j" '(bookmark-jump :wk "Bookmark jump"))
 
   (start/leader-keys
@@ -77,24 +76,29 @@
     "d j" '(dired-jump :wk "Dired jump to current"))
 
   (start/leader-keys
+    "e" '(:ignore t :wk "Eglot")
+    "e e" '(eglot-reconnect :wk "Eglot Reconnect")
+    "e f" '(eglot-format :wk "Eglot Format"))
+
+  (start/leader-keys
     "g" '(:ignore t :wk "Git")
     "g g" '(magit-status :wk "Magit status"))
 
   (start/leader-keys
-    "h" '(:ignore t :wk "Help")
-    "h c" '(company-manual-begin :wk "Company completion at point")
+    "h" '(:ignore t :wk "Help") ;; To get more help use C-h commands
     "h r" '((lambda () (interactive)
               (load-file "~/.config/emacs/init.el"))
             :wk "Reload emacs config"))
 
   (start/leader-keys
     "s" '(:ignore t :wk "Show")
-    "s e" '(eat :wk "Show Eat"))
+    "s e" '(eat :wk "Show Eat terminal"))
 
   (start/leader-keys
     "t" '(:ignore t :wk "Toggle")
-    "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
-    "t t" '(visual-line-mode :wk "Toggle truncated lines (wrap)")))
+    "t t" '(visual-line-mode :wk "Toggle truncated lines (wrap)")
+    "t l" '(display-line-numbers-mode :wk "Toggle line numbers")))
+
 
 (delete-selection-mode 1)    ;; You can select text and delete it by typing.
 (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
