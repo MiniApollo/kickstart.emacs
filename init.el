@@ -259,15 +259,9 @@
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
   )
 
-(use-package counsel
-  :after ivy
-  :diminish
-  :config (counsel-mode))
-
 (use-package ivy
   :bind
-  ;; ivy-resume resumes the last Ivy-based completion.
-  (("C-c C-r" . ivy-resume)
+  (("C-c C-r" . ivy-resume) ;; Resumes the last Ivy-based completion.
    ("C-x B" . ivy-switch-buffer-other-window))
   :diminish
   :custom
@@ -277,21 +271,16 @@
   :config
   (ivy-mode))
 
-(use-package nerd-icons-ivy-rich
-  :init
-  (nerd-icons-ivy-rich-mode 1)
-  (ivy-rich-mode 1))
+(use-package ivy-rich ;; This gets us descriptions in M-x.
+  :init (ivy-rich-mode 1))
 
-(use-package ivy-rich
-  :after ivy
-  :init (ivy-rich-mode 1) ;; This gets us descriptions in M-x.
-  :custom
-  (ivy-virtual-abbreviate 'full
-                          ivy-rich-switch-buffer-align-virtual-buffer t
-                          ivy-rich-path-style 'abbrev)
-  :config
-  (ivy-set-display-transformer 'ivy-switch-buffer
-                               'ivy-rich-switch-buffer-transformer))
+(use-package nerd-icons-ivy-rich ;; Adds icons to M-x.
+  :init (nerd-icons-ivy-rich-mode 1))
+
+(use-package counsel
+  :diminish
+  :config (counsel-mode))
+
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 

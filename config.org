@@ -31,7 +31,7 @@
   - [[#git][Git]]
   - [[#corfu][Corfu]]
   - [[#cape][Cape]]
-  - [[#ivy-counsel][Ivy (counsel)]]
+  - [[#ivy-counsel][Ivy (Counsel)]]
   - [[#diminish][DIMINISH]]
   - [[#rainbow-delimiters][Rainbow Delimiters]]
   - [[#which-key][WHICH-KEY]]
@@ -460,20 +460,16 @@ Provides Completion At Point Extensions which can be used in combination with Co
       )
 #+end_src
 
-** Ivy (counsel)
+** Ivy (Counsel)
 Ivy, a generic completion mechanism for Emacs.
-Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
 Ivy-rich allows us to add descriptions alongside the commands in M-x.
-#+begin_src emacs-lisp
-    (use-package counsel
-      :after ivy
-      :diminish
-      :config (counsel-mode))
 
+Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
+Counsel-projectile provides further ivy integration into projectile.
+#+begin_src emacs-lisp
     (use-package ivy
       :bind
-      ;; ivy-resume resumes the last Ivy-based completion.
-      (("C-c C-r" . ivy-resume)
+      (("C-c C-r" . ivy-resume) ;; Resumes the last Ivy-based completion.
        ("C-x B" . ivy-switch-buffer-other-window))
       :diminish
       :custom
@@ -483,21 +479,16 @@ Ivy-rich allows us to add descriptions alongside the commands in M-x.
       :config
       (ivy-mode))
 
-    (use-package nerd-icons-ivy-rich
-      :init
-      (nerd-icons-ivy-rich-mode 1)
-      (ivy-rich-mode 1))
+    (use-package ivy-rich ;; This gets us descriptions in M-x.
+      :init (ivy-rich-mode 1))
 
-    (use-package ivy-rich
-      :after ivy
-      :init (ivy-rich-mode 1) ;; This gets us descriptions in M-x.
-      :custom
-      (ivy-virtual-abbreviate 'full
-                              ivy-rich-switch-buffer-align-virtual-buffer t
-                              ivy-rich-path-style 'abbrev)
-      :config
-      (ivy-set-display-transformer 'ivy-switch-buffer
-                                   'ivy-rich-switch-buffer-transformer))
+    (use-package nerd-icons-ivy-rich ;; Adds icons to M-x.
+      :init (nerd-icons-ivy-rich-mode 1))
+
+    (use-package counsel
+      :diminish
+      :config (counsel-mode))
+
     (use-package counsel-projectile
       :config (counsel-projectile-mode))
 #+end_src
