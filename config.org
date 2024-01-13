@@ -26,6 +26,10 @@
   - [[#language-modes][Language modes]]
 - [[#terminal][Terminal]]
   - [[#eat][Eat]]
+- [[#multi-file-example][Multi File Example]]
+  - [[#adding-the-lisp-directory-to-load-path][Adding the lisp directory to load-path]]
+  - [[#sourcing-the-files][Sourcing the files]]
+  - [[#using-the-file][Using the file]]
 - [[#other-packages][Other Packages]]
   - [[#nerd-icons][Nerd Icons]]
   - [[#git][Git]]
@@ -363,6 +367,30 @@ We setup eat with eshell, if you want to use bash, zsh etc., check out their git
 #+begin_src emacs-lisp
     (use-package eat
       :hook ('eshell-load-hook #'eat-eshell-mode))
+#+end_src
+
+* Multi File Example
+** Adding the lisp directory to load-path
+Adds the lisp directory to emacs's load path to search for elisp files.
+This is necessary, because emacs does not search the entire user-emacs-directory.
+The directory name can be anything, just add it to the load-path.
+#+begin_src emacs-lisp
+    ;; (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+#+end_src
+
+** Sourcing the files
+To use the elisp files we need to load it.
+Notes:
+- Don't forget the file and the provide name needs to be the same.
+- When naming elisp files, functions, it is recommended to use a group name (e.g init-, start- or any custom name), so it does not get mixed up with other names, functions.
+#+begin_src emacs-lisp
+    ;; (require 'start-multiFileExample)
+#+end_src
+
+** Using the file
+And now we can use everything from that file.
+#+begin_src emacs-lisp
+    ;; (start/hello)
 #+end_src
 
 * Other Packages

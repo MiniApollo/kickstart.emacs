@@ -195,6 +195,12 @@
 (use-package eat
   :hook ('eshell-load-hook #'eat-eshell-mode))
 
+;; (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
+;; (require 'start-multiFileExample)
+
+;; (start/hello)
+
 (use-package nerd-icons
   :if (display-graphic-p))
 

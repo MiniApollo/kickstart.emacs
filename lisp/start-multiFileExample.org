@@ -1,0 +1,31 @@
+#+Title: Multi file example
+#+Author: MiniApollo
+#+Description: Example how to make multiple file configuration.
+#+PROPERTY: header-args:emacs-lisp :tangle ./start-multiFileExample.el :mkdirp yes
+#+Startup: showeverything
+#+Options: toc:2
+
+* Table Of Contents :toc:
+- [[#general-tips][General tips]]
+- [[#naming-in-other-files][Naming in other files]]
+- [[#the-provide-keyword][The Provide keyword]]
+
+* General tips
+- You can put anything in this file like packages, functions, etc.
+- It's not necessary to use an org document for multiple file configuration, this is here as an example.
+- If you want to use an org document for editing external elisp files *Don't forget* to tangle it manually with C-c C-v t.
+
+* Naming in other files
+It's recommended to use a group name (e.g init-, start- or any custom name), so it does not get mixed up with other names, functions, etc.
+#+begin_src emacs-lisp
+    (defun start/hello()
+      "Say hello from another file"
+      (message "Hello from another file"))
+#+end_src
+
+* The Provide keyword
+This is needed at the end of elisp files, if you want to use it elsewhere.
+Note: It's recomended to put to the end so everything can be accessed.
+#+begin_src emacs-lisp
+    (provide 'start-multiFileExample)
+#+end_src
