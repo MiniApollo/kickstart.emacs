@@ -56,11 +56,11 @@ If you want to use this don't forget to add this to the top of the org document 
 *Remember*, if this code can't be loaded (errors before this code), the init.el file won't update on change!
 To fix this, you need to find this file (C-x C-f), fix the error and press C-c C-v t to tangle it manually.
 
-This snippet adds a hook to org-mode buffers so that efs/org-babel-tangle-config gets executed each time such a buffer gets saved.
+This snippet adds a hook to org-mode buffers so that start/org-babel-tangle-config gets executed each time such a buffer gets saved.
 This function checks to see if the file being saved is the Emacs.org file you’re looking at right now, and if so,
 automatically exports the configuration here to the associated output files.
 #+begin_src emacs-lisp
-    (defun efs/org-babel-tangle-config ()
+    (defun start/org-babel-tangle-config ()
       "Automatically tangle our Emacs.org config file when we save it. Credit to Emacs From Scratch for this one!"
       (when (string-equal (file-name-directory (buffer-file-name))
                           (expand-file-name user-emacs-directory))
@@ -68,7 +68,7 @@ automatically exports the configuration here to the associated output files.
         (let ((org-confirm-babel-evaluate nil))
           (org-babel-tangle))))
 
-    (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+    (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'start/org-babel-tangle-config)))
 #+end_src
 
 ** Use Package
