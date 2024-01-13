@@ -92,9 +92,9 @@ With Emacs 29 use-package is now built-in.
 
 ** Evil Mode
 An extensible vi/vim layer for Emacs. Because…let’s face it. The Vim keybindings are just plain better.
-
-Note: To paste without copy (yank) selected text use P (shift P evil-paste-before), because default is evil-paste-after.
-You can toggle evil mode with C-z (emacs-mode)
+Notes: 
+- You can toggle evil mode with C-z.
+- To paste without copy (yank) select the text and use P (shift-p).
 #+begin_src emacs-lisp
     (use-package evil
       :init ;; Tweak evil's configuration before loading it
@@ -121,8 +121,8 @@ You can toggle evil mode with C-z (emacs-mode)
 
 ** General Keybindings
 A keybinding framework to set keybindings easily.
-The Leader key is what you will press when you want to access your keybindings (Space + . Find file).
-To search and replace start use query-replace-regexp one by one C-M-% (SPACE to replace n to skip) [[https://stackoverflow.com/questions/270930/using-emacs-to-recursively-find-and-replace-in-text-files-not-already-open][Source]]
+The Leader key is what you will press when you want to access your keybindings (SPC + . Find file).
+To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC to replace n to skip).
 #+begin_src emacs-lisp
     (use-package general
       :config
@@ -216,7 +216,7 @@ To search and replace start use query-replace-regexp one by one C-M-% (SPACE to 
 #+end_src
 
 * Set Theme
-Set gruvbox theme if you want some themes to try out doom-themes
+Set gruvbox theme, if you want some themes try out doom-themes.
 #+begin_src emacs-lisp
     (use-package gruvbox-theme
       :init
@@ -294,6 +294,7 @@ Uncomment the following lines and change the path to the language server executa
 Or add the lua-language-server executable to your path.
 
 If you can use a package manager just install the lsp server and add a hook.
+Use visual block to uncomment easily in Org documents (C-v).
 #+begin_src emacs-lisp
     ;; Automatically start eglot for a given file type.
     ;;(use-package eglot
@@ -316,11 +317,11 @@ To use it write out the full keyword (or use autocompletion) and press Tab
 #+end_src
 
 ** Language modes
-It's not required for every language like C,C++,C#,Java,Javascript etc. to download language mode packages, but for more specific languages it is necessary for syntax highlighting.
-If you want to use TreeSitter, check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]].
+It's not required for every language like C,C++,C#,Java,Javascript etc. to install language mode packages, but for more specific languages it is necessary for syntax highlighting. If you want to use TreeSitter, check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]] or try out [[https://github.com/renzmann/treesit-auto][Treesit-auto]].
 Currently it's tedious to use Treesitter, because emacs has not yet fully migrated to it.
 *** Lua mode
 Example, how to setup a language mode (if you don't want it, feel free to delete it)
+Use SPC-tab to uncomment the lines.
 # #+begin_src emacs-lisp
 #     (use-package lua-mode
 #       :mode "\\.lua\\'") ;; Only start in a lua file
