@@ -85,7 +85,7 @@
     "g g" '(magit-status :wk "Magit status"))
 
   (start/leader-keys
-    "h" '(:ignore t :wk "Help") ;; To get more help use C-h commands
+    "h" '(:ignore t :wk "Help") ;; To get more help use C-h commands (describe variable, function, etc.)
     "h r" '((lambda () (interactive)
               (load-file "~/.config/emacs/init.el"))
             :wk "Reload emacs config"))
@@ -141,7 +141,7 @@
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
 
-;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono")) ;; Set your favorite font
+;;(add-to-list 'default-frame-alist '(font . "JetBrains Mono")) ;; Set your favorite font
 (setq-default line-spacing 0.12)
 
 (global-set-key (kbd "C-+") 'text-scale-increase)
