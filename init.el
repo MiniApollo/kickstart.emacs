@@ -21,7 +21,7 @@
 (use-package evil
   :init ;; Tweak evil's configuration before loading it
   (setq evil-want-keybinding nil) ;; Disable evil bindings in other modes (It's not consistent and not good)
-  (setq evil-want-C-u-scroll t) ;; Set  C-u to scrool up
+  (setq evil-want-C-u-scroll t) ;; Set  C-u to scroll up
   (setq evil-want-C-i-jump nil) ;; Disables C-i jump
   (setq evil-undo-system 'undo-redo) ;; C-r to redo
   (setq org-return-follows-link  t) ;; Sets RETURN key in org-mode to follow links
