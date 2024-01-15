@@ -25,7 +25,9 @@ It's recommended to use a group name (e.g init-, start- or any custom name), so 
 
 * The Provide keyword
 This is needed at the end of elisp files, if you want to use it elsewhere.
-Note: It's recomended to put to the end so everything can be accessed.
+Note: 
+- It's recomended to put to the end so everything can be accessed.
+- *Don't forget* the file and the provide name needs to be the same.
 #+begin_src emacs-lisp
     (provide 'start-multiFileExample)
 #+end_src
