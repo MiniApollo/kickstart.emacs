@@ -17,9 +17,9 @@
   - [[#4-clone-the-repository-to-the-configuration-location][4. Clone the repository to the configuration location]]
   - [[#5-start-emacs][5. Start Emacs]]
 - [[#post-installation][Post Installation]]
-  - [[#install-fonts][Install fonts]]
-  - [[#open-the-configuration-file][Open the configuration file]]
-  - [[#fork-the-repository][Fork the repository]]
+  - [[#1-install-fonts][1. Install fonts]]
+  - [[#2-open-the-configuration-file][2. Open the configuration file]]
+  - [[#3-fork-the-repository][3. Fork the repository]]
 - [[#uninstallation][Uninstallation]]
 - [[#gallery][Gallery]]
 
@@ -73,6 +73,7 @@ Videos and configurations to get started.
 - [[https://github.com/purcell/emacs.d][Purcell's emacs configuration]] :: Emacs configuration bundle with batteries included.
 - [[https://www.spacemacs.org/][Spacemacs]] and [[https://github.com/doomemacs/doomemacs][Doom Emacs]] :: For an out of box experience and their wiki pages are really helpful.
 - [[https://www.emacswiki.org/emacs/StarterKits ][More starter kits]] :: List of starter kits for Emacs.
+- [[https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html][Emacs manual]] :: For learning the fundamentals of Emacs.
 
 * Installation
 ** 1. Requirements
@@ -104,16 +105,16 @@ Emacs will install all the requested packages (it can take a minute).
 Note: If you see erros when package installation is finished just restart Emacs
 
 * Post Installation
-** Install fonts
+** 1. Install fonts
 Run the following command with M-x (alt x) C-y to paste
 - nerd-icons-install-fonts
 Change or install JetBrains Mono font
-** Open the configuration file
+** 2. Open the configuration file
 1. Hit Space f c to open the config file at $HOME/.config/emacs
 
 Note: if you use Windows you need to change the path (hit ctrl x ctrl f, find the config file and in general region replace the path)
 2. Now you can Edit and add more configuration.
-** Fork the repository
+** 3. Fork the repository
 So you have your own copy to modify.
 * Uninstallation
 To uninstall kickstart.emacs, you need to remove the following directory:
