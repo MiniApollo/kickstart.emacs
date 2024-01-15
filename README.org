@@ -4,7 +4,7 @@
 #+Startup: showeverything
 #+Options: toc:2
 
-[[./Emacs_KickStarter.png]]
+[[./images/Emacs_KickStarter.png]]
 
 * Table Of Contents :toc:
 - [[#introduction][Introduction]]
@@ -121,4 +121,4 @@ To uninstall kickstart.emacs, you need to remove the following directory:
 - Delete the emacs folder/directory for your OS (E.g. $HOME/.config/emacs/)
 
 * Gallery
-[[./Kickstart_coding.png]]
+[[./images/Kickstart_coding.png]]
