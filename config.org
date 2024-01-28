@@ -504,7 +504,6 @@ Ivy, a generic completion mechanism for Emacs.
 Ivy-rich allows us to add descriptions alongside the commands in M-x.
 
 Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
-Counsel-projectile provides further ivy integration into projectile.
 #+begin_src emacs-lisp
     (use-package ivy
       :bind
@@ -527,9 +526,6 @@ Counsel-projectile provides further ivy integration into projectile.
     (use-package counsel
       :diminish
       :config (counsel-mode))
-
-    (use-package counsel-projectile
-      :config (counsel-projectile-mode))
 #+end_src
 
 ** Diminish

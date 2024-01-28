@@ -291,9 +291,6 @@
   :diminish
   :config (counsel-mode))
 
-(use-package counsel-projectile
-  :config (counsel-projectile-mode))
-
 (use-package diminish)
 
 (use-package rainbow-delimiters
