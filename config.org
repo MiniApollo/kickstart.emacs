@@ -108,7 +108,7 @@ Notes:
       :after evil
       :config
       ;; Setting where to use evil-collection
-      (setq evil-collection-mode-list '(dired ibuffer magit corfu))
+      (setq evil-collection-mode-list '(dired ibuffer magit corfu ivy))
       (evil-collection-init))
     ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
     (with-eval-after-load 'evil-maps
@@ -187,6 +187,7 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
     (menu-bar-mode -1)           ;; Disable the menu bar
     (scroll-bar-mode -1)         ;; Disable the scroll bar
     (tool-bar-mode -1)           ;; Disable the tool bar
+    ;; (setq inhibit-startup-screen t) ;; Disable welcome screen
 
     (delete-selection-mode 1)    ;; You can select text and delete it by typing.
     (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
@@ -270,8 +271,9 @@ Project interaction library for Emacs.
 #+begin_src emacs-lisp
     (use-package projectile
       :config
-      (projectile-mode 1)
+      (projectile-mode)
       :init
+      (setq projectile-run-use-comint-mode t) ;; Interactive run dialog when running projects inside emacs (like giving input)
       (setq projectile-switch-project-action #'projectile-dired)
       (setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search the first subdirectory level for projects
     ;; Use Bookmarks for non git projects
