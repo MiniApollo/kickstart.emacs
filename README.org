@@ -52,7 +52,7 @@ Their content helped me to create this configuration.
 - [[https://github.com/dgutov/diff-hl][Diff-hl]]: Highlights uncommitted changes
 - [[https://github.com/minad/corfu][Corfu]]: Enhances in-buffer completion
 - [[https://github.com/minad/cape][Cape]]: Provides Completion At Point Extensions
-- [[https://github.com/abo-abo/swiper][Ivy (Counsel)]]: Generic completion mechanism
+- [[https://github.com/abo-abo/swiper][Ivy and Counsel]]: Generic completion mechanism
 - [[https://github.com/myrjola/diminish.el][Diminish]]: Hiding or abbreviation of the modeline displays
 - [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]: Adds colors to brackets.
 - [[https://github.com/justbur/emacs-which-key][Which key]]: Helper utility for keychords
@@ -76,28 +76,32 @@ Videos and configurations to get started.
 
 * Installation
 ** 1. Requirements
-    - Gnu Emacs 29.1 (Latest stable release)
-    - Git (To clone/download this repository)
+- Gnu Emacs 29.1 (Latest stable release)
+- Git (To clone/download this repository)
+*** Optional:
+- ripgrep
+- fd (improves file indexing performance for some commands)
+- Gnu Emacs with [[https://www.emacswiki.org/emacs/GccEmacs][native-compilation]] (provides noticeable performance improvements)
 ** 2. Backup your previous configuration
 If any exists.
 ** 3. Clone the repository to the configuration location
 *** Linux and Mac
 #+begin_src bash
-  git clone https://github.com/MiniApollo/kickstart.emacs.git "${XDG_CONFIG_HOME:-$HOME/.config}"/emacs
+    git clone https://github.com/MiniApollo/kickstart.emacs.git "${XDG_CONFIG_HOME:-$HOME/.config}"/emacs
 #+end_src
 *** Windows
 - CMD ::
 #+begin_src bash
-  git clone https://github.com/MiniApollo/kickstart.emacs.git %userprofile%\AppData\Local\emacs\
+    git clone https://github.com/MiniApollo/kickstart.emacs.git %userprofile%\AppData\Local\emacs\
 #+end_src
 - Powershell ::
 #+begin_src bash
-  git clone https://github.com/MiniApollo/kickstart.emacs.git $env:USERPROFILE\AppData\Local\emacs\
+    git clone https://github.com/MiniApollo/kickstart.emacs.git $env:USERPROFILE\AppData\Local\emacs\
 #+end_src
 ** 4. Start Emacs
 Emacs will install all the requested packages (it can take a minute).
 
-Note: If you see erros when package installation is finished just restart Emacs
+*Note:* If you see errors, warnings when package installation is finished just restart Emacs.
 
 * Post Installation
 ** 1. Install fonts
@@ -107,13 +111,14 @@ Change or install JetBrains Mono font
 ** 2. Open the configuration file
 1. Hit Space f c to open the config file at $HOME/.config/emacs
 
-Note: if you use Windows you need to change the path (hit ctrl x ctrl f, find the config file and in general region replace the path)
+*Note:* if you use Windows you need to change the path (hit ctrl x ctrl f, find the config file and in general region replace the path)
 2. Now you can Edit and add more configuration.
 ** 3. Fork the repository
-So you have your own copy to modify.
+Recommended so that you have your own copy to modify.
+
 * Uninstallation
 To uninstall kickstart.emacs, you need to remove the following directory:
-- Delete the emacs folder/directory for your OS (E.g. $HOME/.config/emacs/)
+- Delete the emacs folder/directory for your OS (E.g. $HOME/.config/emacs/).
 
 * Gallery
 [[./images/Kickstart_coding.png]]
