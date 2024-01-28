@@ -61,7 +61,7 @@ If you want to see how to configure these, look up their git repositories or che
 - [[https://github.com/emacs-dashboard/emacs-dashboard][DashBoard]] :: Extensible startup screen.
 - [[https://github.com/rejeep/drag-stuff.el][Drag Stuff]] :: Makes it possible to move selected text, regions and lines.
 - [[https://github.com/emacsmirror/rainbow-mode][Rainbow Mode]] :: Displays the actual color as a background for any hex color value (ex. #ffffff).
-- [[https://www.emacswiki.org/emacs/UndoTree][UndoTree]] :: Visualizes the undo history with more emacs native features (alternative [[https://github.com/casouri/vundo][Vundo]] with [[https://github.com/emacsmirror/undo-fu-session][undo-fu-session]]).
+- [[https://www.emacswiki.org/emacs/UndoTree][UndoTree]] :: Visualizes the undo history (alternative: [[https://github.com/casouri/vundo][Vundo]] with [[https://github.com/emacsmirror/undo-fu-session][undo-fu-session]]).
 - [[https://github.com/nflath/sudo-edit][Sudo-edit]] :: Utilities for opening files with root privileges (also works with doas).
 - [[https://github.com/renzmann/treesit-auto][Treesit-auto]] :: Automatically installs and uses tree-sitter major modes in Emacs 29+.
 - [[https://github.com/lewang/ws-butler][Ws-butler]] :: Removes whitespace from the ends of lines.
