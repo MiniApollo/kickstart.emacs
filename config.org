@@ -80,7 +80,7 @@ In my experience Package.el is not slow and gets the job done.
 To update/upgrade packages, use the package-upgrade-all command.
 With Emacs 29 use-package is now built-in.
 #+begin_src emacs-lisp
-    (require 'use-package-ensure) ;; This line is currenly needed, there is a bug with always-ensure, it doesn't get loaded if we just setq t
+    (require 'use-package-ensure) ;; Load use-package-always-ensure
     (setq use-package-always-ensure t) ;; Always ensures that a package is installed
     (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
                              ("org" . "https://orgmode.org/elpa/")
@@ -90,7 +90,7 @@ With Emacs 29 use-package is now built-in.
 
 ** Evil Mode
 An extensible vi/vim layer for Emacs. Because…let’s face it. The Vim keybindings are just plain better.
-Notes: 
+Notes:
 - You can toggle evil mode with C-z.
 - To paste without copy (yank) select the text and use P (shift-p).
 #+begin_src emacs-lisp
@@ -468,7 +468,7 @@ For more configuration options check out their [[https://github.com/minad/corfu]
 
 ** Cape
 Provides Completion At Point Extensions which can be used in combination with Corfu, Company or the default completion UI.
-Notes: 
+Notes:
 - The functions that are added later will be the first in the completion list.
 - Take care when adding Capfs (Completion-at-point-functions) to the list since each of the Capfs adds a small runtime cost.
 Read the [[https://github.com/minad/cape#configuration][configuration section]] in Cape's readme for more information.
