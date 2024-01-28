@@ -6,26 +6,24 @@
 #+Options: toc:2
 
 * Table Of Contents :toc:
-- [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
+- [[#important-to-load-first][Important to load first]]
   - [[#startup-performance][Startup Performance]]
   - [[#auto-tangle-configuration-file][Auto-tangle Configuration file]]
   - [[#use-package][Use Package]]
   - [[#evil-mode][Evil Mode]]
   - [[#general-keybindings][General Keybindings]]
-- [[#sane-defaults][SANE DEFAULTS]]
-- [[#set-theme][Set Theme]]
-- [[#transparency][Transparency]]
-- [[#fonts][Fonts]]
-  - [[#setting-fonts][Setting fonts]]
-  - [[#zooming-inout][Zooming In/Out]]
-- [[#modeline][Modeline]]
-- [[#projectile][Projectile]]
-- [[#language-support--lsp][Language support + Lsp]]
+  - [[#good-defaults][Good Defaults]]
+- [[#appearance][Appearance]]
+  - [[#set-theme][Set Theme]]
+  - [[#transparency][Transparency]]
+  - [[#fonts][Fonts]]
+  - [[#modeline][Modeline]]
+- [[#development][Development]]
+  - [[#projectile][Projectile]]
   - [[#eglot][Eglot]]
   - [[#yasnippet][Yasnippet]]
   - [[#language-modes][Language modes]]
-- [[#terminal][Terminal]]
-  - [[#eat][Eat]]
+  - [[#terminal][Terminal]]
 - [[#multi-file-example][Multi File Example]]
   - [[#adding-the-lisp-directory-to-load-path][Adding the lisp directory to load-path]]
   - [[#sourcing-the-files][Sourcing the files]]
@@ -35,13 +33,13 @@
   - [[#git][Git]]
   - [[#corfu][Corfu]]
   - [[#cape][Cape]]
-  - [[#ivy-counsel][Ivy (Counsel)]]
-  - [[#diminish][DIMINISH]]
+  - [[#ivy-and-counsel][Ivy and Counsel]]
+  - [[#diminish][Diminish]]
   - [[#rainbow-delimiters][Rainbow Delimiters]]
-  - [[#which-key][WHICH-KEY]]
+  - [[#which-key][Which-Key]]
 - [[#runtime-performance][Runtime Performance]]
 
-* IMPORTANT PROGRAMS TO LOAD FIRST
+* Important to load first
 ** Startup Performance
 Make startup faster by reducing the frequency of garbage collection. This will be set back when startup finishes.
 #+begin_src emacs-lisp
@@ -184,7 +182,7 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
         "t l" '(display-line-numbers-mode :wk "Toggle line numbers")))
 #+end_src
 
-* SANE DEFAULTS
+** Good Defaults
 #+begin_src emacs-lisp
     (menu-bar-mode -1)           ;; Disable the menu bar
     (scroll-bar-mode -1)         ;; Disable the scroll bar
@@ -215,7 +213,8 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
     (add-hook 'prog-mode-hook (lambda () (hs-minor-mode t))) ;; Enable folding hide/show globally
 #+end_src
 
-* Set Theme
+* Appearance
+** Set Theme
 Set gruvbox theme, if you want some themes try out doom-themes.
 #+begin_src emacs-lisp
     (use-package gruvbox-theme
@@ -223,14 +222,14 @@ Set gruvbox theme, if you want some themes try out doom-themes.
       (load-theme 'gruvbox-dark-medium t)) ;; We need to add t to trust this package
 #+end_src
 
-* Transparency
+** Transparency
 With Emacs version 29, true transparency has been added.
 #+begin_src emacs-lisp
     (add-to-list 'default-frame-alist '(alpha-background . 90)) ;; For all new frames henceforth
 #+end_src
 
-* Fonts
-** Setting fonts
+** Fonts
+*** Setting fonts
 #+begin_src emacs-lisp
     (set-face-attribute 'default nil
                         ;; :font "JetBrains Mono" ;; Set your favorite type of font or download JetBrains Mono
@@ -244,7 +243,7 @@ With Emacs version 29, true transparency has been added.
     (setq-default line-spacing 0.12)
 #+end_src
 
-** Zooming In/Out
+*** Zooming In/Out
 You can use the bindings C-+ C-- for zooming in/out. You can also use CTRL plus the mouse wheel for zooming in/out.
 #+begin_src emacs-lisp
     (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -253,7 +252,7 @@ You can use the bindings C-+ C-- for zooming in/out. You can also use CTRL plus 
     (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 #+end_src
 
-* Modeline
+** Modeline
 Replace the default modeline with a prettier more useful.
 #+begin_src emacs-lisp
     (use-package doom-modeline
@@ -265,7 +264,8 @@ Replace the default modeline with a prettier more useful.
             doom-modeline-persp-icon t)) ;; Adds folder icon next to persp name
 #+end_src
 
-* Projectile
+* Development
+** Projectile
 Project interaction library for Emacs.
 #+begin_src emacs-lisp
     (use-package projectile
@@ -277,7 +277,6 @@ Project interaction library for Emacs.
     ;; Use Bookmarks for non git projects
 #+end_src
 
-* Language support + Lsp
 ** Eglot
 Language Server Protocol Support for Emacs. The built-in is now Eglot (with emacs 29).
 
@@ -317,7 +316,9 @@ To use it write out the full keyword (or use autocompletion) and press Tab
 #+end_src
 
 ** Language modes
-It's not required for every language like C,C++,C#,Java,Javascript etc. to install language mode packages, but for more specific languages it is necessary for syntax highlighting. If you want to use TreeSitter, check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]] or try out [[https://github.com/renzmann/treesit-auto][Treesit-auto]].
+It's not required for every language like C,C++,C#,Java,Javascript etc. to install language mode packages,
+but for more specific languages it is necessary for syntax highlighting.
+If you want to use TreeSitter, check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]] or try out [[https://github.com/renzmann/treesit-auto][Treesit-auto]].
 Currently it's tedious to use Treesitter, because emacs has not yet fully migrated to it.
 *** Lua mode
 Example, how to setup a language mode (if you don't want it, feel free to delete it)
@@ -327,7 +328,7 @@ Use SPC-tab to uncomment the lines.
 #       :mode "\\.lua\\'") ;; Only start in a lua file
 # #+end_src
 
-*** ORG MODE
+*** Org Mode
 Org mode is one of the things that emacs is loved for.
 Once you've used it for a bit, you'll understand why people love it. Even reading about it can be inspiring!
 For example, this document is effectively the source code and descriptions bound into the one document,
@@ -360,8 +361,8 @@ Org-tempo allows for '<s' followed by TAB to expand to a begin_src tag.
       (require 'org-tempo))
 #+end_src
 
-* Terminal
-** Eat
+** Terminal
+*** Eat
 Eat(Emulate A Terminal) is a terminal emulator within Emacs.
 It's more portable and less overhead for users over like vterm or eshell.
 We setup eat with eshell, if you want to use bash, zsh etc., check out their git [[https://codeberg.org/akib/emacs-eat][repository]] how to do it.
@@ -496,7 +497,7 @@ Read the [[https://github.com/minad/cape#configuration][configuration section]] 
       )
 #+end_src
 
-** Ivy (Counsel)
+** Ivy and Counsel
 Ivy, a generic completion mechanism for Emacs.
 Ivy-rich allows us to add descriptions alongside the commands in M-x.
 
@@ -529,7 +530,7 @@ Counsel-projectile provides further ivy integration into projectile.
       :config (counsel-projectile-mode))
 #+end_src
 
-** DIMINISH
+** Diminish
 This package implements hiding or abbreviation of the modeline displays (lighters) of minor-modes.
 With this package installed, you can add ‘:diminish’ to any use-package block to hide that particular mode in the modeline.
 #+begin_src emacs-lisp
@@ -543,8 +544,8 @@ Adds colors to brackets.
       :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
-** WHICH-KEY
-Which-key is a helper utility for keychords (which key to press)
+** Which-Key
+Which-key is a helper utility for keychords (which key to press).
 #+begin_src emacs-lisp
     (use-package which-key
       :init
