@@ -167,13 +167,16 @@
   (setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search the first subdirectory level for projects
 ;; Use Bookmarks for smaller, not standard projects
 
-;; Automatically start eglot for a given file type.
 ;;(use-package eglot
 ;;  :ensure nil ;; Don't install eglot because it's now built-in
-;;  :hook (('c-mode . 'eglot-ensure) ;; Autostart lsp servers
+;;  :hook (('c-mode . 'eglot-ensure) ;; Autostart lsp servers for a given mode
 ;;         ('c++-mode . 'eglot-ensure)
 ;;         ('lua-mode . 'eglot-ensure)) ;; Lua-mode needs to be installed
 ;;  :config
+;;  ;; Good default
+;;  (setq eglot-events-buffer-size 0 ;; No event buffers (Lsp server logs)
+;;        eglot-autoshutdown t) ;; Shutdown unused servers.
+;;  ;; Manual lsp servers
 ;;  (add-to-list 'eglot-server-programs
 ;;               `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
 ;;  )
