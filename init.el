@@ -117,6 +117,8 @@
 (setq scroll-margin 8)
 
 (setq make-backup-files nil) ;; Stop creating ~ backup files
+(setq auto-save-default nil) ;; Stop creating # auto save files
+
 (setq org-edit-src-content-indentation 4) ;; Set src block automatic indent to 4 instead of 2.
 (setq-default tab-width 4)
 
