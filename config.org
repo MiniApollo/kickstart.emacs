@@ -276,7 +276,7 @@ Project interaction library for Emacs.
       (setq projectile-run-use-comint-mode t) ;; Interactive run dialog when running projects inside emacs (like giving input)
       (setq projectile-switch-project-action #'projectile-dired)
       (setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search the first subdirectory level for projects
-    ;; Use Bookmarks for non git projects
+    ;; Use Bookmarks for smaller, not standard projects
 #+end_src
 
 ** Eglot
