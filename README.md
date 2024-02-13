@@ -198,7 +198,5 @@ To uninstall kickstart.emacs, you need to remove the following directory:
 
 # Gallery
 
-![img](./assets/Emacs_KickStarter.png)
-
-![img](./assets/Kickstart_coding.png)
-
+![Emacs_KickStarter](https://github.com/MiniApollo/kickstart.emacs/assets/72389030/b82bb86b-ce49-4b0a-8fe7-2ca8b8c422fb)
+![Kickstart_coding](https://github.com/MiniApollo/kickstart.emacs/assets/72389030/8e560d2b-78f5-4306-8f6a-c70ad189f181)
