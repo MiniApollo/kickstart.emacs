@@ -169,7 +169,7 @@ Change or install JetBrains Mono font
 > **Note**
 > If you use Windows you need to change the path (hit ctrl x ctrl f, find the config file and in general region replace the path)
 
-1.  Now you can Edit and add more configuration.
+2.  Now you can Edit and add more configuration.
 
 <a id="org23b14b0"></a>
 
