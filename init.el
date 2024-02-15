@@ -1,3 +1,12 @@
+;; Kickstart.emacs is *not* a distribution.
+;; It's a template for your own configuration.
+
+;; It is recommeded to configure from the config.org file.
+;; The goal is that you read every line, top-to-bottom, understand
+;; what your configuration is doing, and modify it to suit your needs.
+
+;; You can delete this when you're done. It's your config now. :)
+
 ;; The default is 800 kilobytes. Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
 
