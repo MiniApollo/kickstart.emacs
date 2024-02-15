@@ -38,11 +38,9 @@ Special thanks to:
 
 Their content helped me to create this configuration.
 
-
 <a id="orgb05d649"></a>
 
 ## Packages
-
 
 ### Included Package list
 
@@ -68,7 +66,6 @@ Their content helped me to create this configuration.
 -   [Diminish](https://github.com/myrjola/diminish.el): Hiding or abbreviation of the modeline displays
 -   [Rainbow Delimiters](https://github.com/Fanael/rainbow-delimiters): Adds colors to brackets.
 -   [Which key](https://github.com/justbur/emacs-which-key): Helper utility for keychords
-
 
 ### Recommended Packages
 
@@ -124,19 +121,18 @@ Videos and configurations to get started.
 
 If any exists.
 
-
 <a id="org820a205"></a>
 
 ## 3. Clone the repository to the configuration location
 
-
 ### Linux and Mac
-
-    git clone https://github.com/MiniApollo/kickstart.emacs.git "${XDG_CONFIG_HOME:-$HOME/.config}"/emacs
-
+```sh
+git clone https://github.com/MiniApollo/kickstart.emacs.git "${XDG_CONFIG_HOME:-$HOME/.config}"/emacs
+```
 
 ### Windows
 
+<<<<<<< HEAD
 -   **CMD:**
 
     git clone https://github.com/MiniApollo/kickstart.emacs.git %userprofile%\AppData\Local\emacs\
@@ -145,6 +141,16 @@ If any exists.
 
     git clone https://github.com/MiniApollo/kickstart.emacs.git $env:USERPROFILE\AppData\Local\emacs\
 
+=======
+-   **CMD:** 
+```sh
+git clone https://github.com/MiniApollo/kickstart.emacs.git %userprofile%\AppData\Local\emacs\
+```
+-   **Powershell:** 
+```sh
+git clone https://github.com/MiniApollo/kickstart.emacs.git $env:USERPROFILE\AppData\Local\emacs\
+```
+>>>>>>> refs/remotes/origin/main
 
 <a id="orgd77a070"></a>
 
@@ -152,13 +158,12 @@ If any exists.
 
 Emacs will install all the requested packages (it can take a minute).
 
-**Note:** If you see errors, warnings when package installation is finished just restart Emacs.
-
+> **Note:**
+> If you see errors, warnings when package installation is finished just restart Emacs.
 
 <a id="org60302a9"></a>
 
 # Post Installation
-
 
 <a id="org87d8fc9"></a>
 
@@ -170,24 +175,22 @@ Run the following command with M-x (alt x) C-y to paste
 
 Change or install JetBrains Mono font
 
-
 <a id="org94fe140"></a>
 
 ## 2. Open the configuration file
 
 1.  Hit Space f c to open the config file at $HOME/.config/emacs
 
-**Note:** if you use Windows you need to change the path (hit ctrl x ctrl f, find the config file and in general region replace the path)
+> **Note**
+> If you use Windows you need to change the path (hit ctrl x ctrl f, find the config file and in general region replace the path)
 
-1.  Now you can Edit and add more configuration.
-
+2.  Now you can Edit and add more configuration.
 
 <a id="org23b14b0"></a>
 
 ## 3. Fork the repository
 
 Recommended so that you have your own copy to modify.
-
 
 <a id="org14852f4"></a>
 
@@ -197,11 +200,15 @@ To uninstall kickstart.emacs, you need to remove the following directory:
 
 -   Delete the emacs folder/directory for your OS (E.g. $HOME/.config/emacs/).
 
-
 <a id="orgc18728a"></a>
 
 # Gallery
 
+<<<<<<< HEAD
 ![img](./assets/Emacs_KickStarter.png)
 
 ![img](./assets/Kickstart_coding.png)
+=======
+![Emacs_KickStarter](https://github.com/MiniApollo/kickstart.emacs/assets/72389030/b82bb86b-ce49-4b0a-8fe7-2ca8b8c422fb)
+![Kickstart_coding](https://github.com/MiniApollo/kickstart.emacs/assets/72389030/8e560d2b-78f5-4306-8f6a-c70ad189f181)
+>>>>>>> refs/remotes/origin/main
