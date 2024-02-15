@@ -132,25 +132,14 @@ git clone https://github.com/MiniApollo/kickstart.emacs.git "${XDG_CONFIG_HOME:-
 
 ### Windows
 
-<<<<<<< HEAD
 -   **CMD:**
-
-    git clone https://github.com/MiniApollo/kickstart.emacs.git %userprofile%\AppData\Local\emacs\
-
--   **Powershell:**
-
-    git clone https://github.com/MiniApollo/kickstart.emacs.git $env:USERPROFILE\AppData\Local\emacs\
-
-=======
--   **CMD:** 
 ```sh
 git clone https://github.com/MiniApollo/kickstart.emacs.git %userprofile%\AppData\Local\emacs\
 ```
--   **Powershell:** 
+-   **Powershell:**
 ```sh
 git clone https://github.com/MiniApollo/kickstart.emacs.git $env:USERPROFILE\AppData\Local\emacs\
 ```
->>>>>>> refs/remotes/origin/main
 
 <a id="orgd77a070"></a>
 
@@ -204,11 +193,5 @@ To uninstall kickstart.emacs, you need to remove the following directory:
 
 # Gallery
 
-<<<<<<< HEAD
-![img](./assets/Emacs_KickStarter.png)
-
-![img](./assets/Kickstart_coding.png)
-=======
 ![Emacs_KickStarter](https://github.com/MiniApollo/kickstart.emacs/assets/72389030/b82bb86b-ce49-4b0a-8fe7-2ca8b8c422fb)
 ![Kickstart_coding](https://github.com/MiniApollo/kickstart.emacs/assets/72389030/8e560d2b-78f5-4306-8f6a-c70ad189f181)
->>>>>>> refs/remotes/origin/main
