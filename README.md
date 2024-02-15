@@ -20,10 +20,12 @@ https://github.com/MiniApollo/kickstart.emacs/assets/72389030/5c66130d-66b9-459b
 <a id="orgb229cbd"></a>
 
 # Introduction
-
 This repository gives you a starting point for Gnu Emacs with good defaults, vim keybindings and packages that most people may want to use.
-This config is:
 
+Kickstart.emacs is **not** a distribution. <br>
+It's a template for your own configuration.
+
+This config is:
 -   A single file org document (with examples of moving to multi-file)
 -   Modular and easily configurable
 -   Documented describing its purpuse
@@ -31,7 +33,6 @@ This config is:
 Inspired by [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)
 
 Special thanks to:
-
 -   [DistroTube](https://www.youtube.com/watch?v=d1fgypEiQkE&list=PL5--8gKSku15e8lXf7aLICFmAHQVo0KXX)
 -   [System Crafters](https://www.youtube.com/watch?v=74zOY-vgkyw&list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ)
 
