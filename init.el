@@ -58,17 +58,21 @@
   (start/leader-keys
     "f" '(:ignore t :wk "Find")
     "f c" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config")
-    "f r" '(counsel-recentf :wk "Recent files"))
+    "f r" '(recentf :wk "Recent files")
+    "f f" '(consult-fd :wk "Fd search for files")
+    "f g" '(consult-ripgrep :wk "Ripgrep search in files")
+    "f l" '(consult-line :wk "Find line")
+    "f i" '(consult-imenu :wk "Imenu buffer locations"))
 
   (start/leader-keys
     "b" '(:ignore t :wk "Buffer Bookmarks")
-    "b b" '(switch-to-buffer :wk "Switch buffer")
+    "b b" '(consult-buffer :wk "Switch buffer")
     "b k" '(kill-this-buffer :wk "Kill this buffer")
     "b i" '(ibuffer :wk "Ibuffer")
     "b n" '(next-buffer :wk "Next buffer")
     "b p" '(previous-buffer :wk "Previous buffer")
     "b r" '(revert-buffer :wk "Reload buffer")
-    "b j" '(bookmark-jump :wk "Bookmark jump"))
+    "b j" '(consult-bookmark :wk "Bookmark jump"))
 
   (start/leader-keys
     "d" '(:ignore t :wk "Dired")

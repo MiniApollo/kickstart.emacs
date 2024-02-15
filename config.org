@@ -142,17 +142,21 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
       (start/leader-keys
         "f" '(:ignore t :wk "Find")
         "f c" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config")
-        "f r" '(counsel-recentf :wk "Recent files"))
+        "f r" '(recentf :wk "Recent files")
+        "f f" '(consult-fd :wk "Fd search for files")
+        "f g" '(consult-ripgrep :wk "Ripgrep search in files")
+        "f l" '(consult-line :wk "Find line")
+        "f i" '(consult-imenu :wk "Imenu buffer locations"))
 
       (start/leader-keys
         "b" '(:ignore t :wk "Buffer Bookmarks")
-        "b b" '(switch-to-buffer :wk "Switch buffer")
+        "b b" '(consult-buffer :wk "Switch buffer")
         "b k" '(kill-this-buffer :wk "Kill this buffer")
         "b i" '(ibuffer :wk "Ibuffer")
         "b n" '(next-buffer :wk "Next buffer")
         "b p" '(previous-buffer :wk "Previous buffer")
         "b r" '(revert-buffer :wk "Reload buffer")
-        "b j" '(bookmark-jump :wk "Bookmark jump"))
+        "b j" '(consult-bookmark :wk "Bookmark jump"))
 
       (start/leader-keys
         "d" '(:ignore t :wk "Dired")
@@ -481,7 +485,6 @@ Notes:
 - The functions that are added later will be the first in the completion list.
 - Take care when adding Capfs (Completion-at-point-functions) to the list since each of the Capfs adds a small runtime cost.
 Read the [[https://github.com/minad/cape#configuration][configuration section]] in Cape's readme for more information.
-
 #+begin_src emacs-lisp
     (use-package cape
       :after corfu
