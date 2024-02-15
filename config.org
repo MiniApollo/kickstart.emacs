@@ -33,7 +33,9 @@
   - [[#git][Git]]
   - [[#corfu][Corfu]]
   - [[#cape][Cape]]
-  - [[#ivy-and-counsel][Ivy and Counsel]]
+  - [[#orderless][Orderless]]
+  - [[#vertico-and-marginalia][Vertico and Marginalia]]
+  - [[#consult][Consult]]
   - [[#diminish][Diminish]]
   - [[#rainbow-delimiters][Rainbow Delimiters]]
   - [[#which-key][Which-Key]]
@@ -108,7 +110,7 @@ Notes:
       :after evil
       :config
       ;; Setting where to use evil-collection
-      (setq evil-collection-mode-list '(dired ibuffer magit corfu ivy))
+      (setq evil-collection-mode-list '(dired ibuffer magit corfu vertico consult))
       (evil-collection-init))
     ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
     (with-eval-after-load 'evil-maps
@@ -444,6 +446,8 @@ Highlights uncommitted changes on the left side of the window (area also known a
 Enhances in-buffer completion with a small completion popup.
 Corfu is a small package, which relies on the Emacs completion facilities and concentrates on providing a polished completion.
 For more configuration options check out their [[https://github.com/minad/corfu][git repository]].
+Notes:
+- To enter Orderless field separator, use M-SPC.
 #+begin_src emacs-lisp
     (use-package corfu
       ;; Optional customizations
@@ -504,33 +508,98 @@ Read the [[https://github.com/minad/cape#configuration][configuration section]] 
       )
 #+end_src
 
-** Ivy and Counsel
-Ivy, a generic completion mechanism for Emacs.
-Ivy-rich allows us to add descriptions alongside the commands in M-x.
-
-Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
+** Orderless
+Completion style that divides the pattern into space-separated components, and matches candidates that match all of the components in any order.
+Recomended for packages like vertico, corfu.
 #+begin_src emacs-lisp
-    (use-package ivy
-      :bind
-      (("C-c C-r" . ivy-resume) ;; Resumes the last Ivy-based completion.
-       ("C-x B" . ivy-switch-buffer-other-window))
-      :diminish
+    (use-package orderless
       :custom
-      (setq ivy-use-virtual-buffers t)
-      (setq ivy-count-format "(%d/%d) ")
-      (setq enable-recursive-minibuffers t)
+      (completion-styles '(orderless basic))
+      (completion-category-overrides '((file (styles basic partial-completion)))))
+#+end_src
+
+** Vertico and Marginalia
+- Vertico: Provides a performant and minimalistic vertical completion UI based on the default completion system.
+- Savehist: Saves completion history.
+- Marginalia: Adds extra metadata for completions in the margins (like descriptions).
+- Nerd-icons-completion: Adds icons to completion candidates using the built in completion metadata functions.
+
+We use this packages, because they use emacs native functions. Unlike Ivy or Helm.
+One alternative is ivy and counsel, check out the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] for more inforomation.
+#+begin_src emacs-lisp
+    (use-package vertico
+      :init
+      (vertico-mode))
+
+    (savehist-mode) ;; Enables save history mode
+
+    (use-package marginalia
+      :after vertico
+      :init
+      (marginalia-mode))
+
+    (use-package nerd-icons-completion
+      :after marginalia
       :config
-      (ivy-mode))
+      (nerd-icons-completion-mode)
+      :hook
+      ('marginalia-mode-hook . 'nerd-icons-completion-marginalia-setup))
+#+end_src
 
-    (use-package ivy-rich ;; This gets us descriptions in M-x.
-      :init (ivy-rich-mode 1))
+** Consult
+Provides search and navigation commands based on the Emacs completion function.
+Check out their [[https://github.com/minad/consult][git repository]] for more awesome functions.
+#+begin_src emacs-lisp
+    (use-package consult
+      ;; Enable automatic preview at point in the *Completions* buffer. This is
+      ;; relevant when you use the default completion UI.
+      :hook (completion-list-mode . consult-preview-at-point-mode)
+      :init
+      ;; Optionally configure the register formatting. This improves the register
+      ;; preview for `consult-register', `consult-register-load',
+      ;; `consult-register-store' and the Emacs built-ins.
+      (setq register-preview-delay 0.5
+            register-preview-function #'consult-register-format)
 
-    (use-package nerd-icons-ivy-rich ;; Adds icons to M-x.
-      :init (nerd-icons-ivy-rich-mode 1))
+      ;; Optionally tweak the register preview window.
+      ;; This adds thin lines, sorting and hides the mode line of the window.
+      (advice-add #'register-preview :override #'consult-register-window)
 
-    (use-package counsel
-      :diminish
-      :config (counsel-mode))
+      ;; Use Consult to select xref locations with preview
+      (setq xref-show-xrefs-function #'consult-xref
+            xref-show-definitions-function #'consult-xref)
+      :config
+      ;; Optionally configure preview. The default value
+      ;; is 'any, such that any key triggers the preview.
+      ;; (setq consult-preview-key 'any)
+      ;; (setq consult-preview-key "M-.")
+      ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
+
+      ;; For some commands and buffer sources it is useful to configure the
+      ;; :preview-key on a per-command basis using the `consult-customize' macro.
+      ;; (consult-customize
+      ;; consult-theme :preview-key '(:debounce 0.2 any)
+      ;; consult-ripgrep consult-git-grep consult-grep
+      ;; consult-bookmark consult-recent-file consult-xref
+      ;; consult--source-bookmark consult--source-file-register
+      ;; consult--source-recent-file consult--source-project-recent-file
+      ;; :preview-key "M-."
+      ;; :preview-key '(:debounce 0.4 any))
+
+      ;; By default `consult-project-function' uses `project-root' from project.el.
+      ;; Optionally configure a different project root function.
+       ;;;; 1. project.el (the default)
+      ;; (setq consult-project-function #'consult--default-project--function)
+       ;;;; 2. vc.el (vc-root-dir)
+      ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
+       ;;;; 3. locate-dominating-file
+      ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
+       ;;;; 4. projectile.el (projectile-project-root)
+      (autoload 'projectile-project-root "projectile")
+      (setq consult-project-function (lambda (_) (projectile-project-root)))
+       ;;;; 5. No project support
+      ;; (setq consult-project-function nil)
+      )
 #+end_src
 
 ** Diminish
