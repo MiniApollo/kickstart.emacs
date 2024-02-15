@@ -61,7 +61,10 @@ Their content helped me to create this configuration.
 -   [Diff-hl](https://github.com/dgutov/diff-hl): Highlights uncommitted changes
 -   [Corfu](https://github.com/minad/corfu): Enhances in-buffer completion
 -   [Cape](https://github.com/minad/cape): Provides Completion At Point Extensions
--   [Ivy and Counsel](https://github.com/abo-abo/swiper): Generic completion mechanism
+-   [Orderless](https://github.com/oantolin/orderless): Completion style that matches candidates in any order
+-   [Vertico](https://github.com/minad/vertico): Provides a performant and minimalistic vertical completion UI.
+-   [Marginalia](https://github.com/minad/marginalia): Adds extra metadata for completions in the margins (like descriptions).
+-   [Consult](https://github.com/minad/consult): Provides search and navigation commands.
 -   [Diminish](https://github.com/myrjola/diminish.el): Hiding or abbreviation of the modeline displays
 -   [Rainbow Delimiters](https://github.com/Fanael/rainbow-delimiters): Adds colors to brackets.
 -   [Which key](https://github.com/justbur/emacs-which-key): Helper utility for keychords
@@ -134,11 +137,11 @@ If any exists.
 
 ### Windows
 
--   **CMD:** 
+-   **CMD:**
 
     git clone https://github.com/MiniApollo/kickstart.emacs.git %userprofile%\AppData\Local\emacs\
 
--   **Powershell:** 
+-   **Powershell:**
 
     git clone https://github.com/MiniApollo/kickstart.emacs.git $env:USERPROFILE\AppData\Local\emacs\
 
@@ -202,4 +205,3 @@ To uninstall kickstart.emacs, you need to remove the following directory:
 ![img](./assets/Emacs_KickStarter.png)
 
 ![img](./assets/Kickstart_coding.png)
-
