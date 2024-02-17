@@ -55,7 +55,7 @@
   (general-evil-setup)
   ;; Set up 'SPC' as the leader key
   (general-create-definer start/leader-keys
-    :states '(normal insert visual emacs)
+    :states '(normal insert visual motion emacs)
     :keymaps 'override
     :prefix "SPC"           ;; Set leader key
     :global-prefix "C-SPC") ;; Set global leader key
