@@ -28,15 +28,16 @@
                          ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; For Eat Terminal
 
 (use-package evil
-  :init ;; Tweak evil's configuration before loading it
-  (setq evil-want-keybinding nil) ;; Disable evil bindings in other modes (It's not consistent and not good)
-  (setq evil-want-C-u-scroll t) ;; Set  C-u to scroll up
-  (setq evil-want-C-i-jump nil) ;; Disables C-i jump
-  (setq evil-undo-system 'undo-redo) ;; C-r to redo
-  (setq org-return-follows-link  t) ;; Sets RETURN key in org-mode to follow links
+  :init ;; Execute code Before a package is loaded
   (evil-mode)
-  :config
-  (evil-set-initial-state 'eat-mode 'insert)) ;; Set initial state in eat terminal to insert mode
+  :config ;; Execute code after a package is loaded
+  (evil-set-initial-state 'eat-mode 'insert) ;; Set initial state in eat terminal to insert mode
+  :custom ;; Customization of package custom variables
+  (evil-want-keybinding nil)    ;; Disable evil bindings in other modes (It's not consistent and not good)
+  (evil-want-C-u-scroll t)      ;; Set C-u to scroll up
+  (evil-want-C-i-jump nil)      ;; Disables C-i jump
+  (evil-undo-system 'undo-redo) ;; C-r to redo
+  (org-return-follows-link  t)) ;; Sets RETURN key in org-mode to follow links
 (use-package evil-collection
   :after evil
   :config
@@ -145,7 +146,7 @@
 (add-hook 'prog-mode-hook (lambda () (hs-minor-mode t))) ;; Enable folding hide/show globally
 
 (use-package gruvbox-theme
-  :init
+  :config
   (load-theme 'gruvbox-dark-medium t)) ;; We need to add t to trust this package
 
 (add-to-list 'default-frame-alist '(alpha-background . 90)) ;; For all new frames henceforth
@@ -168,19 +169,19 @@
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-height 25      ;; Sets modeline height
-        doom-modeline-bar-width 5    ;; Sets right bar width
-        doom-modeline-persp-name t   ;; Adds perspective name to modeline
-        doom-modeline-persp-icon t)) ;; Adds folder icon next to persp name
+  :custom
+  (doom-modeline-height 25)      ;; Sets modeline height
+  (doom-modeline-bar-width 5)    ;; Sets right bar width
+  (doom-modeline-persp-name t)   ;; Adds perspective name to modeline
+  (doom-modeline-persp-icon t))  ;; Adds folder icon next to persp name
 
 (use-package projectile
-  :config
-  (projectile-mode)
   :init
-  (setq projectile-run-use-comint-mode t) ;; Interactive run dialog when running projects inside emacs (like giving input)
-  (setq projectile-switch-project-action #'projectile-dired)
-  (setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search the first subdirectory level for projects
+  (projectile-mode)
+  :custom
+  (projectile-run-use-comint-mode t) ;; Interactive run dialog when running projects inside emacs (like giving input)
+  (projectile-switch-project-action #'projectile-dired)
+  (projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search the first subdirectory level for projects
 ;; Use Bookmarks for smaller, not standard projects
 
 ;;(use-package eglot
@@ -204,11 +205,11 @@
 
 (use-package toc-org
   :commands toc-org-enable
-  :init (add-hook 'org-mode-hook 'toc-org-enable))
+  :hook ('org-mode-hook . 'toc-org-enable))
 
 (use-package org-superstar
-  :hook (org-mode . org-superstar-mode)
-  :after org)
+  :after org
+  :hook (org-mode . org-superstar-mode))
 
 (with-eval-after-load 'org
   (require 'org-tempo))
@@ -254,14 +255,11 @@
   ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-
-  :config
-  (setq completion-ignore-case  t)
+  (completion-ignore-case t)
   ;; Enable indentation+completion using the TAB key.
   ;; `completion-at-point' is often bound to M-TAB.
-  (setq tab-always-indent 'complete)
-  (setq corfu-preview-current nil) ;; Don't insert completion without confirmation
-
+  (tab-always-indent 'complete)
+  (corfu-preview-current nil) ;; Don't insert completion without confirmation
   ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
   ;; be used globally (M-/).  See also the customization variable
   ;; `global-corfu-modes' to exclude certain modes.
@@ -379,14 +377,14 @@
   :init
   (which-key-mode 1)
   :diminish
-  :config
-  (setq which-key-side-window-location 'bottom
-        which-key-sort-order #'which-key-key-order-alpha ;; Same as default, except single characters are sorted alphabetically
-        which-key-sort-uppercase-first nil
-        which-key-add-column-padding 1 ;; Number of spaces to add to the left of each column
-        which-key-min-display-lines 6  ;; Increase the minimum lines to display, because the default is only 1
-        which-key-idle-delay 0.8 ;; Set the time delay (in seconds) for the which-key popup to appear
-        which-key-max-description-length 25))
+  :custom
+  (which-key-side-window-location 'bottom)
+  (which-key-sort-order #'which-key-key-order-alpha) ;; Same as default, except single characters are sorted alphabetically
+  (which-key-sort-uppercase-first nil)
+  (which-key-add-column-padding 1) ;; Number of spaces to add to the left of each column
+  (which-key-min-display-lines 6)  ;; Increase the minimum lines to display, because the default is only 1
+  (which-key-idle-delay 0.8)       ;; Set the time delay (in seconds) for the which-key popup to appear
+  (which-key-max-description-length 25))
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
