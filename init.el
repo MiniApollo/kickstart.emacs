@@ -30,7 +30,7 @@
 (use-package evil
   :init ;; Execute code Before a package is loaded
   (evil-mode)
-  :config ;; Execute code after a package is loaded
+  :config ;; Execute code After a package is loaded
   (evil-set-initial-state 'eat-mode 'insert) ;; Set initial state in eat terminal to insert mode
   :custom ;; Customization of package custom variables
   (evil-want-keybinding nil)    ;; Disable evil bindings in other modes (It's not consistent and not good)
@@ -44,7 +44,7 @@
   ;; Setting where to use evil-collection
   (setq evil-collection-mode-list '(dired ibuffer magit corfu vertico consult))
   (evil-collection-init))
-;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
+;; Unmap keys in 'evil-maps. If not done, org-return-follows-link will not work
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "SPC") nil)
   (define-key evil-motion-state-map (kbd "RET") nil)
@@ -122,12 +122,12 @@
 (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
 (electric-pair-mode 1)       ;; Turns on automatic parens pairing
 
-(global-auto-revert-mode t)  ;; Automatically reload file and show changes if the file has changed
+(global-auto-revert-mode t)          ;; Automatically reload file and show changes if the file has changed
 (global-display-line-numbers-mode 1) ;; Display line numbers
-(global-visual-line-mode t)  ;; Enable truncated lines
+(global-visual-line-mode t)          ;; Enable truncated lines
 
 (setq mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling
-(setq scroll-conservatively 10) ;; Smooth scrolling when going down with scroll margin
+(setq scroll-conservatively 10)          ;; Smooth scrolling when going down with scroll margin
 (setq scroll-margin 8)
 
 (setq make-backup-files nil) ;; Stop creating ~ backup files
@@ -170,10 +170,10 @@
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom
-  (doom-modeline-height 25)      ;; Sets modeline height
-  (doom-modeline-bar-width 5)    ;; Sets right bar width
-  (doom-modeline-persp-name t)   ;; Adds perspective name to modeline
-  (doom-modeline-persp-icon t))  ;; Adds folder icon next to persp name
+  (doom-modeline-height 25)     ;; Sets modeline height
+  (doom-modeline-bar-width 5)   ;; Sets right bar width
+  (doom-modeline-persp-name t)  ;; Adds perspective name to modeline
+  (doom-modeline-persp-icon t)) ;; Adds folder icon next to persp name
 
 (use-package projectile
   :init

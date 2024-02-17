@@ -85,7 +85,7 @@ automatically exports the configuration here to the associated output files.
 #+end_src
 
 ** Use Package
-I used the default package manager package.el with use-package. Alternative package managers (straight.el, elpaca, etc.) are useful if you want to
+We use the default package manager package.el with use-package. Alternative package managers (straight.el, elpaca, etc.) are useful if you want to
 install packages from git repositories, if you want a specific, not very popular package that is not available on elpa or melpa,
 or you want UI (elpaca) and other things.
 
@@ -113,7 +113,7 @@ Notes:
     (use-package evil
       :init ;; Execute code Before a package is loaded
       (evil-mode)
-      :config ;; Execute code after a package is loaded
+      :config ;; Execute code After a package is loaded
       (evil-set-initial-state 'eat-mode 'insert) ;; Set initial state in eat terminal to insert mode
       :custom ;; Customization of package custom variables
       (evil-want-keybinding nil)    ;; Disable evil bindings in other modes (It's not consistent and not good)
@@ -127,7 +127,7 @@ Notes:
       ;; Setting where to use evil-collection
       (setq evil-collection-mode-list '(dired ibuffer magit corfu vertico consult))
       (evil-collection-init))
-    ;; Unmap keys in 'evil-maps. If not done, (setq org-return-follows-link t) will not work
+    ;; Unmap keys in 'evil-maps. If not done, org-return-follows-link will not work
     (with-eval-after-load 'evil-maps
       (define-key evil-motion-state-map (kbd "SPC") nil)
       (define-key evil-motion-state-map (kbd "RET") nil)
@@ -214,12 +214,12 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
     (electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
     (electric-pair-mode 1)       ;; Turns on automatic parens pairing
 
-    (global-auto-revert-mode t)  ;; Automatically reload file and show changes if the file has changed
+    (global-auto-revert-mode t)          ;; Automatically reload file and show changes if the file has changed
     (global-display-line-numbers-mode 1) ;; Display line numbers
-    (global-visual-line-mode t)  ;; Enable truncated lines
+    (global-visual-line-mode t)          ;; Enable truncated lines
 
     (setq mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling
-    (setq scroll-conservatively 10) ;; Smooth scrolling when going down with scroll margin
+    (setq scroll-conservatively 10)          ;; Smooth scrolling when going down with scroll margin
     (setq scroll-margin 8)
 
     (setq make-backup-files nil) ;; Stop creating ~ backup files
@@ -283,10 +283,10 @@ Replace the default modeline with a prettier more useful.
     (use-package doom-modeline
       :init (doom-modeline-mode 1)
       :custom
-      (doom-modeline-height 25)      ;; Sets modeline height
-      (doom-modeline-bar-width 5)    ;; Sets right bar width
-      (doom-modeline-persp-name t)   ;; Adds perspective name to modeline
-      (doom-modeline-persp-icon t))  ;; Adds folder icon next to persp name
+      (doom-modeline-height 25)     ;; Sets modeline height
+      (doom-modeline-bar-width 5)   ;; Sets right bar width
+      (doom-modeline-persp-name t)  ;; Adds perspective name to modeline
+      (doom-modeline-persp-icon t)) ;; Adds folder icon next to persp name
 #+end_src
 
 * Development
@@ -338,7 +338,7 @@ Use visual block to uncomment easily in Org documents (C-v).
 
 ** Yasnippet
 A template system for Emacs. And yasnippet-snippets is a snippet collection package.
-To use it write out the full keyword (or use autocompletion) and press Tab
+To use it write out the full keyword (or use autocompletion) and press Tab.
 #+begin_src emacs-lisp
     (use-package yasnippet-snippets
       :hook (prog-mode . yas-minor-mode))
@@ -350,7 +350,7 @@ but for more specific languages it is necessary for syntax highlighting.
 If you want to use TreeSitter, check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]] or try out [[https://github.com/renzmann/treesit-auto][Treesit-auto]].
 Currently it's tedious to use Treesitter, because emacs has not yet fully migrated to it.
 *** Lua mode
-Example, how to setup a language mode (if you don't want it, feel free to delete it)
+Example, how to setup a language mode (if you don't want it, feel free to delete it).
 Use SPC-tab to uncomment the lines.
 # #+begin_src emacs-lisp
 #     (use-package lua-mode
@@ -425,7 +425,7 @@ And now we can use everything from that file.
 #+end_src
 
 * Other Packages
-All the package setups that don't need much tweaking
+All the package setups that don't need much tweaking.
 ** Nerd Icons
 For icons and more helpful UI.
 This is an icon set that can be used with dired, ibuffer and other Emacs programs.
