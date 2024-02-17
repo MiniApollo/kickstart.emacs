@@ -47,7 +47,7 @@
     ;; Kickstart.emacs is *not* a distribution.
     ;; It's a template for your own configuration.
 
-    ;; It is recommeded to configure from the config.org file.
+    ;; It is recommeded to configure it from the config.org file.
     ;; The goal is that you read every line, top-to-bottom, understand
     ;; what your configuration is doing, and modify it to suit your needs.
 
@@ -93,6 +93,7 @@ If you are interested in these other package managers, check out their git repos
 In my experience Package.el is not slow and gets the job done.
 
 To update/upgrade packages, use the package-upgrade-all command.
+Check out the use-package [[https://www.gnu.org/software/emacs/manual/use-package.html][documentation]] to see how to use it.
 With Emacs 29 use-package is now built-in.
 #+begin_src emacs-lisp
     (require 'use-package-ensure) ;; Load use-package-always-ensure
@@ -141,12 +142,12 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
     (use-package general
       :config
       (general-evil-setup)
-      ;; set up 'SPC' as the global leader key
+      ;; Set up 'SPC' as the leader key
       (general-create-definer start/leader-keys
         :states '(normal insert visual emacs)
         :keymaps 'override
-        :prefix "SPC" ;; Set leader
-        :global-prefix "C-SPC") ;; Access leader in insert mode
+        :prefix "SPC"           ;; Set leader key
+        :global-prefix "C-SPC") ;; Set global leader key
 
       (start/leader-keys
         "." '(find-file :wk "Find file")
@@ -426,7 +427,7 @@ And now we can use everything from that file.
 * Other Packages
 All the package setups that don't need much tweaking
 ** Nerd Icons
-For icons and more helpful ui.
+For icons and more helpful UI.
 This is an icon set that can be used with dired, ibuffer and other Emacs programs.
 
 Don't forget to use nerd-icons-install-fonts.

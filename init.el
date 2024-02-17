@@ -1,7 +1,7 @@
 ;; Kickstart.emacs is *not* a distribution.
 ;; It's a template for your own configuration.
 
-;; It is recommeded to configure from the config.org file.
+;; It is recommeded to configure it from the config.org file.
 ;; The goal is that you read every line, top-to-bottom, understand
 ;; what your configuration is doing, and modify it to suit your needs.
 
@@ -53,12 +53,12 @@
 (use-package general
   :config
   (general-evil-setup)
-  ;; set up 'SPC' as the global leader key
+  ;; Set up 'SPC' as the leader key
   (general-create-definer start/leader-keys
     :states '(normal insert visual emacs)
     :keymaps 'override
-    :prefix "SPC" ;; Set leader
-    :global-prefix "C-SPC") ;; Access leader in insert mode
+    :prefix "SPC"           ;; Set leader key
+    :global-prefix "C-SPC") ;; Set global leader key
 
   (start/leader-keys
     "." '(find-file :wk "Find file")
