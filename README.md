@@ -26,7 +26,7 @@ Kickstart.emacs is **not** a distribution. <br>
 It's a template for your own configuration.
 
 This config is:
--   A single file org document (with examples of moving to multi-file)
+-   A single file **org document** (with examples of moving to multi-file)
 -   Modular and easily configurable
 -   Documented describing its purpuse
 

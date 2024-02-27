@@ -47,7 +47,7 @@
     ;; Kickstart.emacs is *not* a distribution.
     ;; It's a template for your own configuration.
 
-    ;; It is recommeded to configure it from the config.org file.
+    ;; It is *recommeded* to configure it from the **config.org** file.
     ;; The goal is that you read every line, top-to-bottom, understand
     ;; what your configuration is doing, and modify it to suit your needs.
 
@@ -252,6 +252,7 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
 * Appearance
 ** Set Theme
 Set gruvbox theme, if you want some themes try out doom-themes.
+Use consult-theme to easily try out themes (*Epilepsy* Warning).
 #+begin_src emacs-lisp
     (use-package gruvbox-theme
       :config
@@ -311,7 +312,7 @@ Project interaction library for Emacs.
       (projectile-mode)
       :custom
       (projectile-run-use-comint-mode t) ;; Interactive run dialog when running projects inside emacs (like giving input)
-      (projectile-switch-project-action #'projectile-dired)
+      (projectile-switch-project-action #'projectile-dired) ;; Open dired when switching to a project
       (projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search the first subdirectory level for projects
     ;; Use Bookmarks for smaller, not standard projects
 #+end_src
