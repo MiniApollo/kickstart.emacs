@@ -68,7 +68,7 @@
   (start/leader-keys
     "f" '(:ignore t :wk "Find")
     "f c" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config")
-    "f r" '(recentf :wk "Recent files")
+    "f r" '(consult-recent-file :wk "Recent files")
     "f f" '(consult-fd :wk "Fd search for files")
     "f g" '(consult-ripgrep :wk "Ripgrep search in files")
     "f l" '(consult-line :wk "Find line")
@@ -90,9 +90,12 @@
     "d j" '(dired-jump :wk "Dired jump to current"))
 
   (start/leader-keys
-    "e" '(:ignore t :wk "Eglot")
+    "e" '(:ignore t :wk "Eglot Evaluate")
     "e e" '(eglot-reconnect :wk "Eglot Reconnect")
-    "e f" '(eglot-format :wk "Eglot Format"))
+    "e f" '(eglot-format :wk "Eglot Format")
+    "e l" '(consult-flymake :wk "Consult Flymake")
+    "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
+    "e r" '(eval-region :wk "Evaluate elisp in region"))
 
   (start/leader-keys
     "g" '(:ignore t :wk "Git")
@@ -106,7 +109,7 @@
 
   (start/leader-keys
     "s" '(:ignore t :wk "Show")
-    "s e" '(eat :wk "Show Eat terminal"))
+    "s e" '(eat :wk "Eat terminal"))
 
   (start/leader-keys
     "t" '(:ignore t :wk "Toggle")
