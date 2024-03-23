@@ -103,9 +103,10 @@
 
   (start/leader-keys
     "h" '(:ignore t :wk "Help") ;; To get more help use C-h commands (describe variable, function, etc.)
+    "h q" '(save-buffers-kill-emacs :wk "Quit Emacs and Daemon")
     "h r" '((lambda () (interactive)
               (load-file "~/.config/emacs/init.el"))
-            :wk "Reload emacs config"))
+            :wk "Reload Emacs config"))
 
   (start/leader-keys
     "s" '(:ignore t :wk "Show")
