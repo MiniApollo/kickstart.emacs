@@ -414,7 +414,8 @@
   (which-key-add-column-padding 1) ;; Number of spaces to add to the left of each column
   (which-key-min-display-lines 6)  ;; Increase the minimum lines to display, because the default is only 1
   (which-key-idle-delay 0.8)       ;; Set the time delay (in seconds) for the which-key popup to appear
-  (which-key-max-description-length 25))
+  (which-key-max-description-length 25)
+  (which-key-allow-imprecise-window-fit nil)) ;; Fixes which-key window slipping out in Emacs Daemon
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
