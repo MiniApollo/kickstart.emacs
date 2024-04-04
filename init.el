@@ -1,7 +1,7 @@
 ;; Kickstart.emacs is *not* a distribution.
 ;; It's a template for your own configuration.
 
-;; It is *recommeded* to configure it from the **config.org** file.
+;; It is *recommeded* to configure it from the *config.org* file.
 ;; The goal is that you read every line, top-to-bottom, understand
 ;; what your configuration is doing, and modify it to suit your needs.
 

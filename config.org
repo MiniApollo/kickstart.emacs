@@ -47,7 +47,7 @@
     ;; Kickstart.emacs is *not* a distribution.
     ;; It's a template for your own configuration.
 
-    ;; It is *recommeded* to configure it from the **config.org** file.
+    ;; It is *recommeded* to configure it from the *config.org* file.
     ;; The goal is that you read every line, top-to-bottom, understand
     ;; what your configuration is doing, and modify it to suit your needs.
 
@@ -109,6 +109,10 @@ An extensible vi/vim layer for Emacs. Because…let’s face it. The Vim keybind
 Notes:
 - You can toggle evil mode with C-z.
 - To paste without copy (yank) select the text and use P (shift-p).
+
+If you don't want to use evil-mode don't forget to remove:
+- Messages buffer fix in Good default section (:ghook)
+- And also change general.el keybindings and setup (general-evil-setup, :states, etc.)
 #+begin_src emacs-lisp
     (use-package evil
       :init ;; Execute code Before a package is loaded
