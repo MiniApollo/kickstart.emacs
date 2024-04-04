@@ -155,6 +155,13 @@
   :bind (
          ([escape] . keyboard-escape-quit) ;; Makes Escape quit prompts (Minibuffer Escape)
          )
+  ;; Fix general.el leader key not working instantly in messages buffer with evil mode
+  :ghook ('after-init-hook
+          (lambda (&rest _)
+            (when-let ((messages-buffer (get-buffer "*Messages*")))
+              (with-current-buffer messages-buffer
+                (evil-normalize-keymaps))))
+          nil nil t)
   )
 
 (use-package gruvbox-theme
