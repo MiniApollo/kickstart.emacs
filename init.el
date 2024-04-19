@@ -207,9 +207,9 @@
 
 ;;(use-package eglot
 ;;  :ensure nil ;; Don't install eglot because it's now built-in
-;;  :hook ((c-mode . eglot-ensure) ;; Autostart lsp servers for a given mode
-;;         (c++-mode . eglot-ensure)
-;;         (lua-mode . eglot-ensure)) ;; Lua-mode needs to be installed
+;;  :hook ((c-mode c++-mode ;; Autostart lsp servers for a given mode
+;;                 lua-mode) ;; Lua-mode needs to be installed
+;;         . eglot-ensure)
 ;;  :custom
 ;;  ;; Good default
 ;;  (eglot-events-buffer-size 0) ;; No event buffers (Lsp server logs)
