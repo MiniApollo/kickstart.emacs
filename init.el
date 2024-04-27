@@ -119,7 +119,7 @@
 
 (use-package emacs
   :custom
-  (menu-bar-mode nil)         ;; Disable the menu bar
+ ;; (menu-bar-mode nil)         ;; Disable the menu bar
   (scroll-bar-mode nil)       ;; Disable the scroll bar
   (tool-bar-mode nil)         ;; Disable the tool bar
   ;;(inhibit-startup-screen t)  ;; Disable welcome screen
@@ -237,6 +237,8 @@
   ;;              (setq-local electric-pair-inhibit-predicate
   ;;                          `(lambda (c)
   ;;                             (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
+  :config
+  (setq org-confirm-babel-evaluate nil)
   )
 
 (use-package toc-org
@@ -245,7 +247,8 @@
 
 (use-package org-superstar
   :after org
-  :hook (org-mode . org-superstar-mode))
+  :hook (org-mode . org-superstar-mode)
+)
 
 (use-package org-tempo
   :ensure nil
