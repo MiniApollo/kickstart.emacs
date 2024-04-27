@@ -266,6 +266,13 @@
 
 (use-package ox-reveal)
 
+(use-package org-download
+  :ensure t
+  :config
+  (setq org-download-method 'directory)
+  (setq org-download-image-dir  "d:/Prasad/roam/images")
+  (org-download-enable))
+
 (use-package eat
   :hook ('eshell-load-hook #'eat-eshell-mode))
 
