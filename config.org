@@ -41,6 +41,8 @@
   - [[#rainbow-delimiters][Rainbow Delimiters]]
   - [[#which-key][Which-Key]]
 - [[#runtime-performance][Runtime Performance]]
+- [[#additional-kickstart-packages][Additional Kickstart packages]]
+  - [[#dashboard][Dashboard]]
 
 * Introduction
 #+begin_src emacs-lisp
@@ -708,4 +710,39 @@ We also increase Read Process Output Max so emacs can read more data.
     (setq gc-cons-threshold (* 2 1000 1000))
     ;; Increase the amount of data which Emacs reads from the process
     (setq read-process-output-max (* 1024 1024)) ;; 1mb
+#+end_src
+
+* Additional Kickstart packages
+** Dashboard 
+Similar to spacemacs startup screen dashboard can provide startup screen.
+#+begin_src emacs-lisp
+    (use-package dashboard
+          :ensure t
+          :config
+          (dashboard-setup-startup-hook)
+    ;; Set the title
+    (setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
+    ;; Set the banner
+    (setq dashboard-startup-banner 'official )
+    ;; Value can be:
+    ;;  - 'official which displays the official emacs logo.
+    ;;  - 'logo which displays an alternative emacs logo.
+    ;;  - an integer which displays one of the text banners
+    ;;    (see dashboard-banners-directory files).
+    ;;  - a string that specifies a path for a custom banner
+    ;;    currently supported types are gif/image/text/xbm.
+    ;;  - a cons of 2 strings which specifies the path of an image to use
+    ;;    and other path of a text file to use if image isn't supported.
+    ;;    ("path/to/image/file/image.png" . "path/to/text/file/text.txt").
+    ;;  - a list that can display an random banner,
+    ;;    supported values are: string (filepath), 'official, 'logo and integers.
+
+    ;; Content is not centered by default. To center, set
+    (setq dashboard-center-content t)
+    ;; vertically center content
+    (setq dashboard-vertically-center-content t)
+
+    (setq dashboard-display-icons-p t)
+    (setq dashboard-icon-type 'nerd-icons)
+    )
 #+end_src

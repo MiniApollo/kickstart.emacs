@@ -119,7 +119,7 @@
 
 (use-package emacs
   :custom
- ;; (menu-bar-mode nil)         ;; Disable the menu bar
+  (menu-bar-mode nil)         ;; Disable the menu bar
   (scroll-bar-mode nil)       ;; Disable the scroll bar
   (tool-bar-mode nil)         ;; Disable the tool bar
   ;;(inhibit-startup-screen t)  ;; Disable welcome screen
@@ -164,13 +164,9 @@
           nil nil t)
   )
 
-;; (use-package gruvbox-theme
-;;   :config
-;;   (load-theme 'gruvbox-dark-medium t)) ;; We need to add t to trust this package
-
 (use-package catppuccin-theme
-:config
-(load-theme 'catppuccin t))
+  :config
+  (load-theme 'catppuccin t)) ;; We need to add t to trust this package
 
 (add-to-list 'default-frame-alist '(alpha-background . 90)) ;; For all new frames henceforth
 
@@ -241,8 +237,6 @@
   ;;              (setq-local electric-pair-inhibit-predicate
   ;;                          `(lambda (c)
   ;;                             (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
-  :config
-  (setq org-confirm-babel-evaluate nil)
   )
 
 (use-package toc-org
@@ -251,34 +245,11 @@
 
 (use-package org-superstar
   :after org
-  :hook (org-mode . org-superstar-mode)
-)
+  :hook (org-mode . org-superstar-mode))
 
 (use-package org-tempo
   :ensure nil
   :after org)
-
-(use-package org-roam
-  :ensure t
-  :after org
-  :custom
-  (org-roam-directory "d:/Prasad/roam")
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert))
-  :config
-  (org-roam-setup))
-
-(use-package ox-pandoc)
-
-(use-package ox-reveal)
-
-(use-package org-download
-  :ensure t
-  :config
-  (setq org-download-method 'directory)
-  (setq org-download-image-dir  "d:/Prasad/roam/images")
-  (org-download-enable))
 
 (use-package eat
   :hook ('eshell-load-hook #'eat-eshell-mode))
@@ -459,8 +430,32 @@
 ;; Increase the amount of data which Emacs reads from the process
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 
-;; use-package with package.el:
 (use-package dashboard
-  :ensure t
-  :config
-  (dashboard-setup-startup-hook))
+      :ensure t
+      :config
+      (dashboard-setup-startup-hook)
+;; Set the title
+(setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
+;; Set the banner
+(setq dashboard-startup-banner 'official )
+;; Value can be:
+;;  - 'official which displays the official emacs logo.
+;;  - 'logo which displays an alternative emacs logo.
+;;  - an integer which displays one of the text banners
+;;    (see dashboard-banners-directory files).
+;;  - a string that specifies a path for a custom banner
+;;    currently supported types are gif/image/text/xbm.
+;;  - a cons of 2 strings which specifies the path of an image to use
+;;    and other path of a text file to use if image isn't supported.
+;;    ("path/to/image/file/image.png" . "path/to/text/file/text.txt").
+;;  - a list that can display an random banner,
+;;    supported values are: string (filepath), 'official, 'logo and integers.
+
+;; Content is not centered by default. To center, set
+(setq dashboard-center-content t)
+;; vertically center content
+(setq dashboard-vertically-center-content t)
+
+(setq dashboard-display-icons-p t)
+(setq dashboard-icon-type 'nerd-icons)
+)
