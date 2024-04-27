@@ -262,6 +262,8 @@
   :config
   (org-roam-setup))
 
+(use-package ox-pandoc)
+
 (use-package eat
   :hook ('eshell-load-hook #'eat-eshell-mode))
 
