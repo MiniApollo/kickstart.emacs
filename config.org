@@ -263,12 +263,12 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
 
 * Appearance
 ** Set Theme
-Set gruvbox theme, if you want some themes try out doom-themes.
+Set catppuccin theme, if you want some themes try out doom-themes.
 Use consult-theme to easily try out themes (*Epilepsy* Warning).
 #+begin_src emacs-lisp
-    (use-package gruvbox-theme
+    (use-package catppuccin-theme
       :config
-      (load-theme 'gruvbox-dark-medium t)) ;; We need to add t to trust this package
+      (load-theme 'catppuccin t)) ;; We need to add t to trust this package
 #+end_src
 
 ** Transparency
