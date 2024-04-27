@@ -164,9 +164,13 @@
           nil nil t)
   )
 
-(use-package gruvbox-theme
-  :config
-  (load-theme 'gruvbox-dark-medium t)) ;; We need to add t to trust this package
+;; (use-package gruvbox-theme
+;;   :config
+;;   (load-theme 'gruvbox-dark-medium t)) ;; We need to add t to trust this package
+
+(use-package catppuccin-theme
+:config
+(load-theme 'catppuccin t))
 
 (add-to-list 'default-frame-alist '(alpha-background . 90)) ;; For all new frames henceforth
 
