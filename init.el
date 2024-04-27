@@ -251,6 +251,17 @@
   :ensure nil
   :after org)
 
+(use-package org-roam
+  :ensure t
+  :after org
+  :custom
+  (org-roam-directory "d:/Prasad/roam")
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert))
+  :config
+  (org-roam-setup))
+
 (use-package eat
   :hook ('eshell-load-hook #'eat-eshell-mode))
 
