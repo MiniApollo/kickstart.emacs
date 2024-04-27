@@ -3,7 +3,7 @@
 #+Description: A starting point for Gnu Emacs with good defaults and packages that most people may want to use.
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 #+Startup: showeverything
-#+Options: toc:2
+#+Options: toc:3
 
 * Table Of Contents :toc:
 - [[#introduction][Introduction]]
@@ -437,16 +437,17 @@ Org-tempo allows for '<s' followed by TAB to expand to a begin_src tag.
 This need seperate section as this will be main reason using org for my publications
 and tracking house.
 #+begin_src emacs-lisp
-        (use-package org-roam
+    (use-package org-roam
     :ensure t
     :after org
     :custom
     (org-roam-directory "d:/Prasad/roam")
     :bind (("C-c n l" . org-roam-buffer-toggle)
              ("C-c n f" . org-roam-node-find)
-             ("C-c n i" . org-roam-node-insert)))
+             ("C-c n i" . org-roam-node-insert))
     :config
     (org-roam-setup)
+    )
 
 #+end_src
 ** Terminal
