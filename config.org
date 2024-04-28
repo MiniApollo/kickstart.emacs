@@ -450,6 +450,20 @@ and tracking house.
     )
 
 #+end_src
+
+*** Org hugo export
+Export org blogs to my hugo static site.
+#+begin_src emacs-lisp
+(use-package ox-hugo
+  :ensure t   ;Auto-install the package from Melpa
+  :pin melpa  ;`package-archives' should already have ("melpa" . "https://melpa.org/packages/")
+  :after ox)
+#+end_src
+*** Other org and org babel exporters
+#+begin_src emacs-lisp
+    (use-package ox-pandoc)
+    (use-package ox-reveal)
+#+end_src
 ** Terminal
 *** Eat
 Eat(Emulate A Terminal) is a terminal emulator within Emacs.
@@ -761,5 +775,8 @@ Similar to spacemacs startup screen dashboard can provide startup screen.
 
     (setq dashboard-display-icons-p t)
     (setq dashboard-icon-type 'nerd-icons)
+    ;; In addition to the above, configure initial-buffer-choice to show Dashboard in 
+    ;; frames created with emacsclient -c as follows:
+    (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
     )
 #+end_src

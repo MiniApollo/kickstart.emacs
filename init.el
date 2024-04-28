@@ -263,6 +263,14 @@
 (org-roam-setup)
 )
 
+(use-package ox-hugo
+  :ensure t   ;Auto-install the package from Melpa
+  :pin melpa  ;`package-archives' should already have ("melpa" . "https://melpa.org/packages/")
+  :after ox)
+
+(use-package ox-pandoc)
+(use-package ox-reveal)
+
 (use-package eat
   :hook ('eshell-load-hook #'eat-eshell-mode))
 
@@ -470,4 +478,7 @@
 
 (setq dashboard-display-icons-p t)
 (setq dashboard-icon-type 'nerd-icons)
+;; In addition to the above, configure initial-buffer-choice to show Dashboard in 
+;; frames created with emacsclient -c as follows:
+(setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
 )
