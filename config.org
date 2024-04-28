@@ -464,6 +464,16 @@ Export org blogs to my hugo static site.
     (use-package ox-pandoc)
     (use-package ox-reveal)
 #+end_src
+*** Org download
+Download images to org document using drag and drop from internet.
+#+begin_src emacs-lisp
+(use-package org-download
+  :ensure t
+  :config
+  (setq org-download-method 'directory)
+  (setq org-download-image-dir  "d:/Prasad/roam/images")
+  (org-download-enable))
+#+end_src
 ** Terminal
 *** Eat
 Eat(Emulate A Terminal) is a terminal emulator within Emacs.
