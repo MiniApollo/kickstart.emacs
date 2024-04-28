@@ -43,6 +43,7 @@
 - [[#runtime-performance][Runtime Performance]]
 - [[#additional-kickstart-packages][Additional Kickstart packages]]
   - [[#dashboard][Dashboard]]
+  - [[#undo-tree][Undo tree]]
 
 * Introduction
 #+begin_src emacs-lisp
@@ -790,3 +791,11 @@ Similar to spacemacs startup screen dashboard can provide startup screen.
     (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
     )
 #+end_src
+
+** Undo tree
+#+begin_src emacs-lisp
+(use-package undo-tree
+:config
+(global-undo-tree-mode))
+#+end_src
+

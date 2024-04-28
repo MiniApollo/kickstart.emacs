@@ -489,3 +489,7 @@
 ;; frames created with emacsclient -c as follows:
 (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
 )
+
+(use-package undo-tree
+:config
+(global-undo-tree-mode))
