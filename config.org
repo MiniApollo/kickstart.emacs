@@ -475,6 +475,15 @@ Download images to org document using drag and drop from internet.
   (setq org-download-image-dir  "d:/Prasad/roam/images")
   (org-download-enable))
 #+end_src
+
+*** Support for plantuml
+#+begin_src emacs-lisp
+    (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((plantuml . t )))
+
+(setq org-plantuml-jar-path (expand-file-name "c:/Users/Prasad Ghole/scoop/apps/plantuml/current/plantuml.jar"))
+#+end_src
 ** Terminal
 *** Eat
 Eat(Emulate A Terminal) is a terminal emulator within Emacs.

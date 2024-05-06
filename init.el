@@ -278,6 +278,12 @@
   (setq org-download-image-dir  "d:/Prasad/roam/images")
   (org-download-enable))
 
+(org-babel-do-load-languages
+    'org-babel-load-languages
+    '((plantuml . t )))
+
+(setq org-plantuml-jar-path (expand-file-name "c:/Users/Prasad Ghole/scoop/apps/plantuml/current/plantuml.jar"))
+
 (use-package eat
   :hook ('eshell-load-hook #'eat-eshell-mode))
 
