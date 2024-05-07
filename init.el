@@ -118,51 +118,51 @@
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")))
 
 (use-package emacs
-  :custom
-  (menu-bar-mode nil)         ;; Disable the menu bar
-  (scroll-bar-mode nil)       ;; Disable the scroll bar
-  (tool-bar-mode nil)         ;; Disable the tool bar
-  ;;(inhibit-startup-screen t)  ;; Disable welcome screen
+      :custom
+;;      (menu-bar-mode nil)         ;; Disable the menu bar
+      (scroll-bar-mode nil)       ;; Disable the scroll bar
+      (tool-bar-mode nil)         ;; Disable the tool bar
+      ;;(inhibit-startup-screen t)  ;; Disable welcome screen
 
-  (delete-selection-mode t)   ;; Select text and delete it by typing.
-  (electric-indent-mode nil)  ;; Turn off the weird indenting that Emacs does by default.
-  (electric-pair-mode t)      ;; Turns on automatic parens pairing
+      (delete-selection-mode t)   ;; Select text and delete it by typing.
+      (electric-indent-mode nil)  ;; Turn off the weird indenting that Emacs does by default.
+      (electric-pair-mode t)      ;; Turns on automatic parens pairing
 
-  (blink-cursor-mode nil)     ;; Don't blink cursor
-  (global-auto-revert-mode t) ;; Automatically reload file and show changes if the file has changed
+      (blink-cursor-mode nil)     ;; Don't blink cursor
+      (global-auto-revert-mode t) ;; Automatically reload file and show changes if the file has changed
 
-  ;;(dired-kill-when-opening-new-dired-buffer t) ;; Dired don't create new buffer
-  ;;(recentf-mode t) ;; Enable recent file mode
+      ;;(dired-kill-when-opening-new-dired-buffer t) ;; Dired don't create new buffer
+      ;;(recentf-mode t) ;; Enable recent file mode
 
-  ;;(global-visual-line-mode t)           ;; Enable truncated lines
-  ;;(display-line-numbers-type 'relative) ;; Relative line numbers
-  (global-display-line-numbers-mode t)  ;; Display line numbers
+      ;;(global-visual-line-mode t)           ;; Enable truncated lines
+      ;;(display-line-numbers-type 'relative) ;; Relative line numbers
+      (global-display-line-numbers-mode t)  ;; Display line numbers
 
-  (mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling
-  (scroll-conservatively 10) ;; Smooth scrolling
-  ;;(scroll-margin 8)
+      (mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling
+      (scroll-conservatively 10) ;; Smooth scrolling
+      ;;(scroll-margin 8)
 
-  (tab-width 4)
+      (tab-width 4)
 
-  (make-backup-files nil) ;; Stop creating ~ backup files
-  (auto-save-default nil) ;; Stop creating # auto save files
-  :hook
-  (prog-mode . (lambda () (hs-minor-mode t))) ;; Enable folding hide/show globally
-  :config
-  ;; Move customization variables to a separate file and load it, avoid filling up init.el with unnecessary variables
-  (setq custom-file (locate-user-emacs-file "custom-vars.el"))
-  (load custom-file 'noerror 'nomessage)
-  :bind (
-         ([escape] . keyboard-escape-quit) ;; Makes Escape quit prompts (Minibuffer Escape)
-         )
-  ;; Fix general.el leader key not working instantly in messages buffer with evil mode
-  :ghook ('after-init-hook
-          (lambda (&rest _)
-            (when-let ((messages-buffer (get-buffer "*Messages*")))
-              (with-current-buffer messages-buffer
-                (evil-normalize-keymaps))))
-          nil nil t)
-  )
+      (make-backup-files nil) ;; Stop creating ~ backup files
+      (auto-save-default nil) ;; Stop creating # auto save files
+      :hook
+      (prog-mode . (lambda () (hs-minor-mode t))) ;; Enable folding hide/show globally
+      :config
+      ;; Move customization variables to a separate file and load it, avoid filling up init.el with unnecessary variables
+      (setq custom-file (locate-user-emacs-file "custom-vars.el"))
+      (load custom-file 'noerror 'nomessage)
+      :bind (
+             ([escape] . keyboard-escape-quit) ;; Makes Escape quit prompts (Minibuffer Escape)
+             )
+      ;; Fix general.el leader key not working instantly in messages buffer with evil mode
+      :ghook ('after-init-hook
+              (lambda (&rest _)
+                (when-let ((messages-buffer (get-buffer "*Messages*")))
+                  (with-current-buffer messages-buffer
+                    (evil-normalize-keymaps))))
+              nil nil t)
+      )
 
 (use-package catppuccin-theme
   :config
@@ -220,6 +220,8 @@
 ;;  (add-to-list 'eglot-server-programs
 ;;               `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
 ;;  )
+
+(use-package yasnippet)
 
 (use-package yasnippet-snippets
   :hook (prog-mode . yas-minor-mode))

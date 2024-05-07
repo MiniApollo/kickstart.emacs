@@ -218,7 +218,7 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
 #+begin_src emacs-lisp
     (use-package emacs
       :custom
-      (menu-bar-mode nil)         ;; Disable the menu bar
+;;      (menu-bar-mode nil)         ;; Disable the menu bar
       (scroll-bar-mode nil)       ;; Disable the scroll bar
       (tool-bar-mode nil)         ;; Disable the tool bar
       ;;(inhibit-startup-screen t)  ;; Disable welcome screen
@@ -370,6 +370,15 @@ Use visual block to uncomment easily in Org documents (C-v).
 ** Yasnippet
 A template system for Emacs. And yasnippet-snippets is a snippet collection package.
 To use it write out the full keyword (or use autocompletion) and press Tab.
+Install yasnippet first
+
+#+begin_src emacs-lisp
+    (use-package yasnippet)
+#+end_src
+
+#+RESULTS:
+: t
+
 #+begin_src emacs-lisp
     (use-package yasnippet-snippets
       :hook (prog-mode . yas-minor-mode))
