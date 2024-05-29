@@ -120,7 +120,13 @@
   (start/leader-keys
     "r" '(:ignore t :wk "Org Roam")
     "r i" '(org-roam-node-insert :wk "Insert node")
-    "r f" '(org-roam-node-find :wk "Find node")))
+    "r f" '(org-roam-node-find :wk "Find node"))
+
+  (start/leader-keys
+        "c" '(:ignore t :wk "Org Clock")
+        "c i" '(org-clock-in :wk "Clock in")
+        "c o" '(org-clock-out :wk "Clock out")
+        "c g" '(org-clock-goto :wk "Clock goto")))
 
 (use-package emacs
       :custom
