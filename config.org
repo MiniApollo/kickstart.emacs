@@ -43,7 +43,6 @@
 - [[#runtime-performance][Runtime Performance]]
 - [[#additional-kickstart-packages][Additional Kickstart packages]]
   - [[#dashboard][Dashboard]]
-  - [[#undo-tree][Undo tree]]
 
 * Introduction
 #+begin_src emacs-lisp
@@ -211,7 +210,13 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
       (start/leader-keys
         "t" '(:ignore t :wk "Toggle")
         "t t" '(visual-line-mode :wk "Toggle truncated lines (wrap)")
-        "t l" '(display-line-numbers-mode :wk "Toggle line numbers")))
+        "t l" '(display-line-numbers-mode :wk "Toggle line numbers"))
+
+      (start/leader-keys
+        "r" '(:ignore t :wk "Org Roam")
+        "r i" '(org-roam-node-insert :wk "Insert node")
+        "r f" '(org-roam-node-find :wk "Find node")))
+
 #+end_src
 
 ** Good Defaults
@@ -489,7 +494,9 @@ Download images to org document using drag and drop from internet.
 #+begin_src emacs-lisp
     (org-babel-do-load-languages
     'org-babel-load-languages
-    '((plantuml . t )))
+    '((plantuml . t )
+(latex . t)
+(C . t)))
 
 (setq org-plantuml-jar-path (expand-file-name "c:/Users/Prasad Ghole/scoop/apps/plantuml/current/plantuml.jar"))
 #+end_src
@@ -808,12 +815,5 @@ Similar to spacemacs startup screen dashboard can provide startup screen.
     ;; frames created with emacsclient -c as follows:
     (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
     )
-#+end_src
-
-** Undo tree
-#+begin_src emacs-lisp
-(use-package undo-tree
-:config
-(global-undo-tree-mode))
 #+end_src
 

@@ -115,7 +115,12 @@
   (start/leader-keys
     "t" '(:ignore t :wk "Toggle")
     "t t" '(visual-line-mode :wk "Toggle truncated lines (wrap)")
-    "t l" '(display-line-numbers-mode :wk "Toggle line numbers")))
+    "t l" '(display-line-numbers-mode :wk "Toggle line numbers"))
+
+  (start/leader-keys
+    "r" '(:ignore t :wk "Org Roam")
+    "r i" '(org-roam-node-insert :wk "Insert node")
+    "r f" '(org-roam-node-find :wk "Find node")))
 
 (use-package emacs
       :custom
@@ -282,7 +287,9 @@
 
 (org-babel-do-load-languages
     'org-babel-load-languages
-    '((plantuml . t )))
+    '((plantuml . t )
+(latex . t)
+(C . t)))
 
 (setq org-plantuml-jar-path (expand-file-name "c:/Users/Prasad Ghole/scoop/apps/plantuml/current/plantuml.jar"))
 
@@ -497,7 +504,3 @@
 ;; frames created with emacsclient -c as follows:
 (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
 )
-
-(use-package undo-tree
-:config
-(global-undo-tree-mode))
