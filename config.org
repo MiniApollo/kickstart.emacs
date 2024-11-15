@@ -43,6 +43,7 @@
 - [[#runtime-performance][Runtime Performance]]
 - [[#additional-kickstart-packages][Additional Kickstart packages]]
   - [[#dashboard][Dashboard]]
+  - [[#markdown][Markdown]]
 
 * Introduction
 #+begin_src emacs-lisp
@@ -215,6 +216,9 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
       (start/leader-keys
         "r" '(:ignore t :wk "Org Roam")
         "r i" '(org-roam-node-insert :wk "Insert node")
+        "r t" '(org-roam-tag-add :wk "Insert tag")
+        "r d" '(org-roam-dailies-find-today :wk "dailies find today ")
+        "r D" '(org-roam-dailies-capture-today :wk "dailies caputure today ")
         "r f" '(org-roam-node-find :wk "Find node"))
 
       (start/leader-keys
@@ -487,13 +491,20 @@ Export org blogs to my hugo static site.
 *** Org download
 Download images to org document using drag and drop from internet.
 #+begin_src emacs-lisp
-(use-package org-download
-  :ensure t
-  :config
-  (setq org-download-method 'directory)
-  (setq org-download-image-dir  "d:/Prasad/roam/images")
-  (org-download-enable))
+      (use-package org-download
+        :ensure t
+        :config
+        (setq org-download-method 'directory)
+        (setq org-download-image-dir  "d:/Prasad/roam/images")
+        (setq org-download-screenshot-method "powershell.exe -command \"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Clipboard]::GetImage().Save('%s')\"")
+        (org-download-enable))
 #+end_src
+*** yank media
+(use-package yank-media
+:ensure t
+:config 
+(yank-media-register-handler 'org-mode)
+)
 
 *** Support for plantuml
 #+begin_src emacs-lisp
@@ -809,7 +820,7 @@ Similar to spacemacs startup screen dashboard can provide startup screen.
     ;;  - a list that can display an random banner,
     ;;    supported values are: string (filepath), 'official, 'logo and integers.
 
-    ;; Content is not centered by default. To center, set
+     ;; Content is not centered by default. To center, set
     (setq dashboard-center-content t)
     ;; vertically center content
     (setq dashboard-vertically-center-content t)
@@ -822,3 +833,12 @@ Similar to spacemacs startup screen dashboard can provide startup screen.
     )
 #+end_src
 
+** Markdown
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :mode ("\\.md\\'" . markdown-mode)
+  :init
+  (setq markdown-command "multimarkdown"))
+
+#+end_src
