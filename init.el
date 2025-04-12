@@ -90,12 +90,16 @@
     "d j" '(dired-jump :wk "Dired jump to current"))
 
   (start/leader-keys
-    "e" '(:ignore t :wk "Eglot Evaluate")
+    "e" '(:ignore t :wk "Languages Eglot")
     "e e" '(eglot-reconnect :wk "Eglot Reconnect")
+    "e d" '(eldoc-doc-buffer :wk "Eldoc Buffer")
     "e f" '(eglot-format :wk "Eglot Format")
     "e l" '(consult-flymake :wk "Consult Flymake")
-    "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
-    "e r" '(eval-region :wk "Evaluate elisp in region"))
+    "e r" '(eglot-rename :wk "Eglot Rename")
+    "e i" '(xref-find-definitions :wk "Find defintion")
+    "e v" '(:ignore t :wk "Elisp")
+    "e v b" '(eval-buffer :wk "Evaluate elisp in buffer")
+    "e v r" '(eval-region :wk "Evaluate elisp in region"))
 
   (start/leader-keys
     "g" '(:ignore t :wk "Git")
