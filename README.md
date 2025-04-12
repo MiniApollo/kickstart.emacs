@@ -104,7 +104,7 @@ Videos and configurations to get started.
 
 ## 1. Requirements
 
--   Gnu Emacs 29.1 (Latest stable release)
+-   Gnu Emacs 30.1 or later (Latest stable release)
 -   Git (To clone/download this repository)
 
 
