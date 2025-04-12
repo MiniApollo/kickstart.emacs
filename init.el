@@ -274,6 +274,7 @@
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 (use-package magit
+  ;; :custom (magit-diff-refine-hunk (quote all)) ;; Shows inline diff
   :commands magit-status)
 
 (use-package diff-hl

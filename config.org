@@ -495,6 +495,7 @@ While nerd-icons supports both GUI and TUI.
 Complete text-based user interface to Git.
 #+begin_src emacs-lisp
     (use-package magit
+      ;; :custom (magit-diff-refine-hunk (quote all)) ;; Shows inline diff
       :commands magit-status)
 #+end_src
 
