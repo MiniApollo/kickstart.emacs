@@ -44,6 +44,7 @@
 - [[#additional-kickstart-packages][Additional Kickstart packages]]
   - [[#dashboard][Dashboard]]
   - [[#markdown][Markdown]]
+  - [[#spell-check][Spell check]]
 
 * Introduction
 #+begin_src emacs-lisp
@@ -159,6 +160,7 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
       (start/leader-keys
         "." '(find-file :wk "Find file")
         "TAB" '(comment-line :wk "Comment lines")
+        "SPC" '(consult-buffer :wk "Switch buffer")
         "p" '(projectile-command-map :wk "Projectile command map"))
 
       (start/leader-keys
@@ -172,7 +174,6 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
 
       (start/leader-keys
         "b" '(:ignore t :wk "Buffer Bookmarks")
-        "b b" '(consult-buffer :wk "Switch buffer")
         "b k" '(kill-this-buffer :wk "Kill this buffer")
         "b i" '(ibuffer :wk "Ibuffer")
         "b n" '(next-buffer :wk "Next buffer")
@@ -283,9 +284,12 @@ To search and replace, use query-replace-regexp to replace one by one C-M-% (SPC
 Set catppuccin theme, if you want some themes try out doom-themes.
 Use consult-theme to easily try out themes (*Epilepsy* Warning).
 #+begin_src emacs-lisp
-    (use-package catppuccin-theme
-      :config
-      (load-theme 'catppuccin t)) ;; We need to add t to trust this package
+        (use-package catppuccin-theme
+          :config
+          (load-theme 'catppuccin t)
+    	  ;;:custom
+    	  ;;(setq catppuccin-flavor 'frappe)
+    ) ;; We need to add t to trust this package
 #+end_src
 
 ** Transparency
@@ -299,8 +303,9 @@ With Emacs version 29, true transparency has been added.
 #+begin_src emacs-lisp
     (set-face-attribute 'default nil
                         ;; :font "JetBrains Mono" ;; Set your favorite type of font or download JetBrains Mono
+    					:font "MesloLGL Nerd Font"
                         :height 120
-                        :weight 'medium)
+                        :weight 'bold)
     ;; This sets the default font on all graphical frames created after restarting Emacs.
     ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
     ;; are not right unless I also add this method of setting the default font.
@@ -841,4 +846,26 @@ Similar to spacemacs startup screen dashboard can provide startup screen.
   :init
   (setq markdown-command "multimarkdown"))
 
+#+end_src
+
+** Spell check
+#+begin_src emacs-lisp
+    (setq ispell-program-name "D:/softwares/hunspell-1.3.2-3-w32-bin/bin/hunspell.exe") ;; Path to Hunspell binary
+
+
+    (setq ispell-dictionary "en_US")  ;; Set default dictionary
+
+    ;; Set dictionary path
+
+    (setq ispell-hunspell-dictionary-alist
+          '(("en_US" "[\0-\127]" "[^-\127]" "['-]" nil ("-d" "en_US") nil utf-8)))
+    (setq ispell-dictionary "en_US")
+    (setq ispell-extra-args '("-a" "-i" "utf-8"))
+    (setq ispell-alternate-dictionary "d:/sofwares/hunspell-1.3.2-3-w32-bin/share/hunspell")
+    (setenv "DICPATH" "d:/sofwares/hunspell-1.3.2-3-w32-bin/share/hunspell")
+
+    ;; Enable spell-checking in text modes
+    (add-hook 'text-mode-hook 'flyspell-mode)   ;; Enable spell check in text modes
+    (add-hook 'prog-mode-hook 'flyspell-prog-mode) ;; Spell check comments in code
+     
 #+end_src
