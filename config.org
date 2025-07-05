@@ -7,6 +7,10 @@
 
 * Table Of Contents :toc:
 - [[#introduction][Introduction]]
+  - [[#what-is-kickstartemacs][What is Kickstart.emacs?]]
+  - [[#ctrl--meta][Ctrl & Meta]]
+  - [[#where-to-start][Where to start?]]
+  - [[#getting-help][Getting Help]]
 - [[#important-to-load-first][Important to load first]]
   - [[#startup-performance][Startup Performance]]
   - [[#auto-tangle-configuration-file][Auto-tangle Configuration file]]
@@ -43,16 +47,101 @@
 - [[#runtime-performance][Runtime Performance]]
 
 * Introduction
-#+begin_src emacs-lisp
-    ;; Kickstart.emacs is *not* a distribution.
-    ;; It's a template for your own configuration.
+=====================================================================
+==================== READ THIS BEFORE CONTINUING ====================
+=====================================================================
+========                                    .-----.          ========
+========         .----------------------.   | === |          ========
+========         |.-""""""""""""""""""-.|   |-----|          ========
+========         ||                    ||   | === |          ========
+========         ||   KICKSTART.EMACS  ||   |-----|          ========
+========         ||                    ||   | === |          ========
+========         || M-X:               ||   |-----|          ========
+========         || help-with-tutorial ||   |:::::|          ========
+========         |'-..................-'|   |____o|          ========
+========         `"")----------------(""`   ____________     ========
+========        /::::::::::|  |:::::p::::\  \ Only CTRL \    ========
+========       /:::=======f|  |========:::\  \ required  \   ========
+========      'CTRL""""""""'  'bn""""""""""'  '""""""""""'   ========
+========                                                     ========
+=====================================================================
+=====================================================================
 
-    ;; It is *recommeded* to configure it from the *config.org* file.
-    ;; The goal is that you read every line, top-to-bottom, understand
-    ;; what your configuration is doing, and modify it to suit your needs.
+** What is Kickstart.emacs?
+Kickstart.emacs is *not* a distribution.
+Inspired by kickstart.nvim.
 
-    ;; You can delete this when you're done. It's your config now. :)
-#+end_src
+It is *recommended* to configure it from the *config.org* file.
+
+Kickstart.emacs is a starting point for your own configuration.
+The goal is that you read every line, top-to-bottom, understand
+what your configuration is doing, and modify it to suit your needs.
+
+After you've done that, you can start making your own configuration out of this
+or taking the things you like and making something new from scratch.
+The choice is yours. You can do basically anything with emacs.
+So don't hesitate to try things out.
+
+You can delete this when you're done. It's your config now. :)
+I hope you have fun with your emacs journey.
+MiniApollo
+
+** Ctrl & Meta
+This is from the emacs tutorial, but I put this here for safety.
+
+Emacs commands generally involve the CONTROL key (often labeled CTRL)
+or the META key (usually labeled ALT). Rather than writing that
+in full each time, we'll use the following abbreviations:
+
+ C-<chr>  means hold the CONTROL key while typing the character <chr>.
+	  Thus, C-f would be: hold the CONTROL key and type f.
+ M-<chr>  means hold the META or ALT key down while typing <chr>.
+	  If there is no META or ALT key, instead press and release the
+	  ESC key and then type <chr>.  We write <ESC> for the ESC key.
+
+** Where to start?
+First I recommend starting with the Emacs tutorial with the following keybinding: C-h t
+Or running the command with M-x: help-with-tutorial
+Even if you plan on using Vim keybindings later on, it's a good idea to learn the standard Emacs keybindings.
+If you already know the standard Emacs keybindings, you can skip this step.
+
+After you completed that, you should start learning emacs lisp.
+It is not necessary to know elisp, but I recommend it. It will open up a whole new world, trust me.
+I used emacs and neovim without knowing much about the core language and just copy pasting packages or plugins.
+But after learning the fundamentals you can customize basically anything and I really mean ANYTHING.
+
+This will look daunting at first, but don't be scared. This is why I am here.
+Elisp is not harder than lua or any other language.
+
+If you don't know anything about elisp, I recommend taking some time to read through
+a guide. One possible example which will only take 10-15 minutes:
+https://learnxinyminutes.com/elisp/
+
+Or if you want to know everything about elisp:
+https://www.gnu.org/software/emacs/manual/html_node/eintr/
+
+** Getting Help
+If you get stuck or confused about something, you're in luck:
+Because emacs has a really good help functionality.
+Everything under C-h is used for help keybindings.
+
+Using the following keybind: C-h C-h
+Or running the following command M-x: help-for-help
+Will open up the emacs help for help menu (I know it's a really creative name :D).
+This is the central place where you can see all possible commands you can use when you are stuck.
+
+The most used commands for me are:
+- C-h v Describe variable
+- C-h f Describe function
+- C-h k Describe key
+
+Other also really useful ones:
+- C-h r Emacs manual
+- C-h i Show all installed manuals
+- C-h a Search for commands (see also M-x: Apropos)
+- C-h m Show help for current major and minor modes
+
+These commands should be the first thing you use when you're stuck or confused with something.
 
 * Important to load first
 ** Startup Performance
@@ -116,7 +205,7 @@ If you don't want to use evil-mode don't forget to remove:
 #+begin_src emacs-lisp
     (use-package evil
       :init ;; Execute code Before a package is loaded
-      (evil-mode)
+      ;; (evil-mode) <- This line
       :config ;; Execute code After a package is loaded
       (evil-set-initial-state 'eat-mode 'insert) ;; Set initial state in eat terminal to insert mode
       :custom ;; Customization of package custom variables
