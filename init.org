@@ -54,25 +54,27 @@
 - [[#runtime-performance][Runtime Performance]]
 
 * Introduction
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-========                                    .-----.          ========
-========         .----------------------.   | === |          ========
-========         |.-""""""""""""""""""-.|   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||   KICKSTART.EMACS  ||   |-----|          ========
-========         ||                    ||   | === |          ========
-========         || M-X:               ||   |-----|          ========
-========         || help-with-tutorial ||   |:::::|          ========
-========         |'-..................-'|   |____o|          ========
-========         `"")----------------(""`   ____________     ========
-========        /::::::::::|  |:::::p::::\  \ Only CTRL \    ========
-========       /:::=======f|  |========:::\  \ required  \   ========
-========      'CTRL""""""""'  'bn""""""""""'  '""""""""""'   ========
-========                                                     ========
-=====================================================================
-=====================================================================
+#+begin_src emacs-lisp :tangle no
+    ;====================================================================;
+    ;=================== READ THIS BEFORE CONTINUING ====================;
+    ;====================================================================;
+    ;=======                                    .-----.          ========;
+    ;=======         .----------------------.   | === |          ========;
+    ;=======         |.-""""""""""""""""""-.|   |-----|          ========;
+    ;=======         ||                    ||   | === |          ========;
+    ;=======         ||   KICKSTART.EMACS  ||   |-----|          ========;
+    ;=======         ||                    ||   | === |          ========;
+    ;=======         || M-X:               ||   |-----|          ========;
+    ;=======         || help-with-tutorial ||   |:::::|          ========;
+    ;=======         |'-..................-'|   |____o|          ========;
+    ;=======         `"")----------------(""`   ____________     ========;
+    ;=======        /::::::::::|  |:::::p::::\  \ Only CTRL \    ========;
+    ;=======       /:::=======f|  |========:::\  \ required  \   ========;
+    ;=======      'CTRL""""""""'  'bn""""""""""'  '""""""""""'   ========;
+    ;=======                                                     ========;
+    ;====================================================================;
+    ;====================================================================;
+#+end_src
 
 ** What is Kickstart.emacs?
 Kickstart.emacs is *not* a distribution.
@@ -605,9 +607,9 @@ Eglot does not automatically download LSP servers. It requires separate download
 The easiest way to install LSP servers is with a package manager.
 
 If you can't use a package manager you can do the following:
-  - Download the server (e.g. from github)
-  - Add the binary/executable to your path.
-  - Or customize the eglot-server-programs list.
+- Download the server (e.g. from github)
+- Add the binary/executable to your path.
+- Or customize the eglot-server-programs list.
 To control how a LSP server is started customize the eglot-server-programs list.
 
 There are many alternative LSP clients, one of them is LSP-mode.
