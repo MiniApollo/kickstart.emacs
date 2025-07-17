@@ -30,6 +30,7 @@
   - [[#projectile][Projectile]]
   - [[#eglot][Eglot]]
   - [[#yasnippet][Yasnippet]]
+  - [[#tree-sitter][Tree-Sitter]]
   - [[#language-modes][Language modes]]
   - [[#terminal][Terminal]]
 - [[#multi-file-example][Multi File Example]]
@@ -635,15 +636,82 @@ To use it write out the full keyword (or use autocompletion) and press Tab.
       :hook (prog-mode . yas-minor-mode))
 #+end_src
 
+** Tree-Sitter
+A parser generator tool and an incremental parsing library.
+Check out TJ's [[https://www.youtube.com/watch?v=09-9LltqWLY][video]] to learn why you should use it.
+
+With Emacs 29 Tree-Sitter is now built-in. You may need to compile Emacs from source to have it enabled.
+You also need to have a compiler installed so Emacs can compile the parsers into a shared library.
+For more info about how to use Tree-Sitter check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][masteringemacs]] article.
+
+Using Tree-Sitter is somewhat hacky, because it requires you to:
+- manually manage a source list of the parsers you want to use.
+- remap the major modes you want to use.
+You can also use treesit-auto, but it is updated quite slowly so we don't use it.
+
+*To use it, remove :tangle no from the beginning of the source code block.*
+#+begin_src emacs-lisp :tangle no
+    (setq treesit-language-source-alist
+          '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+            (cmake "https://github.com/uyha/tree-sitter-cmake")
+            (c "https://github.com/tree-sitter/tree-sitter-c")
+            (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+            (css "https://github.com/tree-sitter/tree-sitter-css")
+            (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+            (go "https://github.com/tree-sitter/tree-sitter-go")
+            (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+            (html "https://github.com/tree-sitter/tree-sitter-html")
+            (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+            (json "https://github.com/tree-sitter/tree-sitter-json")
+            (make "https://github.com/alemuller/tree-sitter-make")
+            (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+            (python "https://github.com/tree-sitter/tree-sitter-python")
+            (rust "https://github.com/tree-sitter/tree-sitter-rust")
+            (toml "https://github.com/tree-sitter/tree-sitter-toml")
+            (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+            (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+            (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+    (defun start/install-treesit-grammars ()
+      "Install missing treesitter grammars"
+      (interactive)
+      (dolist (grammar treesit-language-source-alist)
+        (let ((lang (car grammar)))
+          (unless (treesit-language-available-p lang)
+            (treesit-install-language-grammar lang)))))
+
+    ;; Call this function to install missing grammars
+    (start/install-treesit-grammars)
+
+    ;; Optionally, add any additional mode remappings not covered by defaults
+    (setq major-mode-remap-alist
+          '((yaml-mode . yaml-ts-mode)
+            (sh-mode . bash-ts-mode)
+            (c-mode . c-ts-mode)
+            (c++-mode . c++-ts-mode)
+            (css-mode . css-ts-mode)
+            (python-mode . python-ts-mode)
+            (mhtml-mode . html-ts-mode)
+            (javascript-mode . js-ts-mode)
+            (json-mode . json-ts-mode)
+            (typescript-mode . typescript-ts-mode)
+            (conf-toml-mode . toml-ts-mode)	
+            ))
+
+    ;; Or if there is no built in mode
+    (use-package rust-ts-mode :ensure nil :mode "\\.rs\\'")
+    (use-package go-ts-mode :ensure nil :mode "\\.go\\'")
+    (use-package go-mod-ts-mode :ensure nil :mode "\\.mod\\'")
+    (use-package tsx-ts-mode :ensure nil :mode "\\.tsx\\'")
+#+end_src
+
 ** Language modes
-It's not required for every language like C,C++,C#,Java,Javascript etc. to install language mode packages,
-but for more specific languages it is necessary for syntax highlighting.
-If you want to use TreeSitter, check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][website]] or try out [[https://github.com/renzmann/treesit-auto][Treesit-auto]].
-Currently it's tedious to use Treesitter, because emacs has not yet fully migrated to it.
+Emacs contains many “editing modes” that alter its basic behavior in
+useful ways. These are divided into “major modes” and “minor modes”.
+For more: C-h i: g: (emacs)Modes
 
-TODO
-Jobban leírni és treesit-auto ideraktni.
-
+Some programming languages require the installation of specific modes to fully integrate and function within Emacs.
+These packages are often necessary for features like syntax highlighting, code formatting, linting, and language-specific features.
 
 *** Lua mode
 Example, how to setup a language mode.
