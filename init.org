@@ -383,7 +383,9 @@ If you want to use vim keybindings I left the following comments in the general 
 Notes:
 - You can toggle evil mode with C-z.
 - To paste without yank select the text and use P. This line is especially for ThePrimeagen :)
-#+begin_src emacs-lisp
+
+*To use it, remove :tangle no from the beginning of the source code block.*
+#+begin_src emacs-lisp :tangle no
     (use-package evil
       :init
       (evil-mode)
