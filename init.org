@@ -313,8 +313,8 @@ We put it inside Auto-tangle hook so when save this file it runs it automaticall
 
 As I tested, it makes startup about 0.1 seconds faster.
 Avg:
-- Off: 0.53 sec
-- On:  0.45 sec
+- Off: 0.66 sec
+- On:  0.59 sec
 
 Package quickstart only works with package.el.
 If you plan to use a different package manager, remember to remove this section and the package-quickstart-refresh line in the Auto-tangle hook.
