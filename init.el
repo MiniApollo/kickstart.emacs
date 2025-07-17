@@ -110,7 +110,7 @@
     ;; :states '(normal insert visual motion emacs) ;; <- evil
     :keymaps 'override
     :prefix "C-SPC"
-    :global-prefix "C-SPC") ;; Set global leader key
+    :global-prefix "C-SPC") ;; Set global leader key so we can access our keybindings from any state
 
   (start/leader-keys
     "." '(find-file :wk "Find file")
@@ -146,7 +146,7 @@
     "e f" '(eglot-format :wk "Eglot Format")
     "e l" '(consult-flymake :wk "Consult Flymake")
     "e r" '(eglot-rename :wk "Eglot Rename")
-    "e i" '(xref-find-definitions :wk "Find defintion")
+    "e i" '(xref-find-definitions :wk "Find definition")
     "e v" '(:ignore t :wk "Elisp")
     "e v b" '(eval-buffer :wk "Evaluate elisp in buffer")
     "e v r" '(eval-region :wk "Evaluate elisp in region"))
@@ -219,21 +219,21 @@
   (projectile-switch-project-action #'projectile-dired) ;; Open dired when switching to a project
   (projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search the first subdirectory level for projects
 
-;;(use-package eglot
-;;  :ensure nil ;; Don't install eglot because it's now built-in
-;;  :hook ((c-mode c++-mode ;; Autostart lsp servers for a given mode
-;;                 lua-mode) ;; Lua-mode needs to be installed
-;;         . eglot-ensure)
-;;  :custom
-;;  ;; Good default
-;;  (eglot-events-buffer-size 0) ;; No event buffers (Lsp server logs)
-;;  (eglot-autoshutdown t);; Shutdown unused servers.
-;;  (eglot-report-progress nil) ;; Disable lsp server logs (Don't show lsp messages at the bottom, java)
-;;  ;; Manual lsp servers
-;;  :config
-;;  (add-to-list 'eglot-server-programs
-;;               `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
-;;  )
+(use-package eglot
+  :ensure nil ;; Don't install eglot because it's now built-in
+  :hook ((c-mode c++-mode ;; Autostart lsp servers for a given mode
+                 lua-mode) ;; Lua-mode needs to be installed
+         . eglot-ensure)
+  :custom
+  ;; Good default
+  (eglot-events-buffer-size 0) ;; No event buffers (LSP server logs)
+  (eglot-autoshutdown t);; Shutdown unused servers.
+  (eglot-report-progress nil) ;; Disable LSP server logs (Don't show lsp messages at the bottom, java)
+  ;; Manual lsp servers
+  ;;:config
+  ;;(add-to-list 'eglot-server-programs
+  ;;             `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
+  )
 
 (use-package yasnippet-snippets
   :hook (prog-mode . yas-minor-mode))
@@ -275,12 +275,13 @@
 ;; (start/hello)
 
 (use-package magit
-  ;; :custom (magit-diff-refine-hunk (quote all)) ;; Shows inline diff
-  :commands magit-status)
+  :defer
+  :custom (magit-diff-refine-hunk (quote all)) ;; Shows inline diff
+  :config (define-key transient-map (kbd "<escape>") 'transient-quit-one) ;; Make escape quit magit prompts
+  )
 
 (use-package diff-hl
   :hook ((dired-mode         . diff-hl-dired-mode-unless-remote)
-         (magit-pre-refresh  . diff-hl-magit-pre-refresh)
          (magit-post-refresh . diff-hl-magit-post-refresh))
   :init (global-diff-hl-mode))
 
@@ -291,7 +292,7 @@
   (corfu-auto t)                 ;; Enable auto completion
   (corfu-auto-prefix 2)          ;; Minimum length of prefix for auto completion.
   (corfu-popupinfo-mode t)       ;; Enable popup information
-  (corfu-popupinfo-delay 0.5)    ;; Lower popupinfo delay to 0.5 seconds from 2 seconds
+  (corfu-popupinfo-delay 0.5)    ;; Lower popup info delay to 0.5 seconds from 2 seconds
   (corfu-separator ?\s)          ;; Orderless field separator, Use M-SPC to enter separator
   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
