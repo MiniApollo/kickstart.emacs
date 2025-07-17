@@ -179,9 +179,9 @@ For evil users after setting up evil collection for info mode:
 To see all the evil [[https://github.com/emacs-evil/evil-collection/blob/master/modes/info/evil-collection-info.el][keybindings]] for info mode.
 
 Using goto-node:
-- Specify a Manual: If you want to search within a particular manual, place its name in parentheses, like (Emacs).
-- After that tell where you want to go in that manual. For example (Emacs)Top, (Emacs)specific section.
-- If you don't type a manual name, goto-node will search the current opened manual.
+- Specify a Manual: If you want to search within a particular manual, place its name in parentheses like (emacs).
+- After that tell where you want to go in that manual. For example (emacs)Top, (emacs)specific section.
+- If you don't type a manual name, goto-node will search the currently opened manual.
 
 * Core Setup & Performance
 These are essential settings and small tweaks that must load before any packages.
@@ -195,10 +195,10 @@ Make startup faster by reducing the frequency of garbage collection. This will b
 #+end_src
 
 ** Auto-tangle Configuration file
-Auto-Tangle Org configuration file for better startup times and refresh package-quickstart file.
+Auto-Tangle Org configuration file for better startup times, it refreshes the package-quickstart file.
 We'll cover package quickstart in the package manager section later.
 
-If you like to auto tangle an Org file don't forget to add the following line to the top of your Org document:
+If you like to auto tangle an Org file, don't forget to add the following line to the top of your Org document:
 (#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes)
 
 *Remember*, if this code can't be loaded (errors before this code), the init.el file won't update on change!
@@ -253,7 +253,7 @@ In my experience Package.el is not slow and gets the job done.
 To update/upgrade packages, use the package-upgrade-all command.
 *** Use-package
 A macro that allows you to isolate package configuration in your .emacs file in a way that is both performance-oriented and, well, tidy.
-We use it, because it makes package configuration really easy.
+We use it because it makes package configuration really easy.
 
 With Emacs 29 use-package is now built-in.
 
@@ -264,8 +264,8 @@ Instead, you'll only need to use :ensure nil when you want to explicitly prevent
     (setq use-package-always-ensure t) ;; Always ensures that a package is installed
 #+end_src
 
-**** Most used parts of use package
-Here is some notes on what each use package keyword does.
+**** Most used parts of use-package
+Here is some notes on what each use-package keyword does.
 For more check out the use-package documentation to see how powerful it is:
 C-h i: g for goto-node: Type (use-package)Top
 
@@ -309,7 +309,7 @@ The larger your configuration, the more it will be felt at startup.
 
 However, if you enable this, you'll need to manually run the package-quickstart-refresh
 command whenever your package activations change, such as when you modify the package-load-list value.
-We put it inside Auto-tangle hook so when save this file it runs it automatically.
+We put it inside Auto-tangle hook so when we save this file it runs it automatically.
 
 As I tested, it makes startup about 0.1 seconds faster.
 Avg:
@@ -378,9 +378,9 @@ An extensible vi/vim layer for Emacs.
 For users who find Emacs's native keybindings less intuitive.
 It integrates Vim's editing style into Emacs, giving you the best of both worlds.
 
-If you want to use vim keybindings I left the following comments in the general keybindings section to which lines to uncomment ;; <- evil
+If you want to use vim keybindings I left the following comments in the General Keybindings section to which lines to uncomment ;; <- evil
 
-If you don't want to interference with the original keybindings.
+If you don't want to interfere with the original keybindings.
 You can also try out [[https://github.com/meow-edit/meow][meow]] which is Yet another modal editing on Emacs.
 
 Notes:
@@ -416,7 +416,7 @@ Notes:
 ** General Keybindings
 A keybinding framework to set keybindings easily.
 
-We use general, because it gives:
+We use general because it gives:
 - a convenient method for binding keys.
 - easy leader key integration.
 - good evil-mode and which-key support.
@@ -504,7 +504,6 @@ Note: The Leader key is what you will press when you want to access your keybind
 
 *** Creating keybindings the built in way
 If you want to use the built in methods I recommend using these ones:
-To read more about using the built in methods, check out this awesome article from [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][masteringemacs]].
 
 This code block is not tangled, it is just an example.
 #+begin_src emacs-lisp :tangle no
@@ -512,6 +511,7 @@ This code block is not tangled, it is just an example.
     (global-set-key KEY COMMAND)
     (use-package :bind (  ))
 #+end_src
+To read more about using the built in methods, check out this awesome article from [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][masteringemacs]].
 
 * Appearance
 ** Set Theme
@@ -557,7 +557,7 @@ A fancy, fast and customizable mode-line.
 This is an icon set that can be used with dired, ibuffer and other Emacs packages.
 Don't forget nerd-icons-install-fonts to install the resource fonts.
 
-We use nerd-icons, because it supports both GUI and TUI unlike all-the-icons.
+We use nerd-icons because it supports both GUI and TUI unlike all-the-icons.
 Also Doom modeline requires nerd icons.
 #+begin_src emacs-lisp
     (use-package nerd-icons
@@ -575,9 +575,9 @@ Also Doom modeline requires nerd icons.
 Project interaction library for Emacs.
 
 Emacs has a built in project manager called project.el, but we don't use it.
-You can try it out with the keybinds under C-x p, because project.el does not require any special setup to use.
+You can try it out with the keybinds under C-x p because project.el does not require any special setup to use.
 
-We use projectile, because it:
+We use projectile because it:
 - supports more features and project types.
 - has better integration with projects.
 - has better documentation.
@@ -598,11 +598,11 @@ You can also make the [[https://github.com/karthink/consult-dir][consult-dir]] p
 
 ** Eglot
 Built in Emacs client for the Language Server Protocol.
-We use Eglot, because it is fast and minimal.
+We use Eglot because it is fast and minimal.
 For more: C-h i: g: (eglot)Top
 
 Eglot does not automatically download LSP servers. It requires separate download.
-The easist way to install LSP servers is with a package manager.
+The easiest way to install LSP servers is with a package manager.
 
 If you can't use a package manager you can do the following:
   - Download the server (e.g. from github)
@@ -610,11 +610,11 @@ If you can't use a package manager you can do the following:
   - Or customize the eglot-server-programs list.
 To control how a LSP server is started customize the eglot-server-programs list.
 
-There are many alternative LSP servers one of them is LSP-mode.
+There are many alternative LSP clients, one of them is LSP-mode.
 Which has more features and supports automatic language server installation.
 But it's bigger, so it has more moving parts.
 
-We don't use it, because Eglot is more than enough for most people.
+We don't use it because Eglot is more than enough for most people.
 If you want to use LSP mode check out their [[https://emacs-lsp.github.io/lsp-mode/][documentation]] or the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] page for more information.
 #+begin_src emacs-lisp
     (use-package eglot
@@ -650,7 +650,7 @@ With Emacs 29 Tree-Sitter is now built-in. You may need to compile Emacs from so
 You also need to have a compiler installed so Emacs can compile the parsers into a shared library.
 For more info about how to use Tree-Sitter check out this [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][masteringemacs]] article.
 
-Using Tree-Sitter is somewhat hacky, because it requires you to:
+Using Tree-Sitter is somewhat hacky because it requires you to:
 - manually manage a source list of the parsers you want to use.
 - remap the major modes you want to use.
 You can also use treesit-auto, but it is updated quite slowly so we don't use it.
@@ -701,7 +701,7 @@ You can also use treesit-auto, but it is updated quite slowly so we don't use it
             (javascript-mode . js-ts-mode)
             (json-mode . json-ts-mode)
             (typescript-mode . typescript-ts-mode)
-            (conf-toml-mode . toml-ts-mode)	
+            (conf-toml-mode . toml-ts-mode)
             ))
 
     ;; Or if there is no built in mode
@@ -793,7 +793,7 @@ If you want a faster and more responsive terminal emulator try out vterm.
 * Multi File Example
 ** Adding the lisp directory to load-path
 Adds the lisp directory to Emacs's load path to search for elisp files.
-This is necessary, because Emacs does not search the entire user-emacs-directory.
+This is necessary because Emacs does not search the entire user-emacs-directory.
 The directory name can be anything, just add it to the load-path.
 #+begin_src emacs-lisp
     ;; (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
@@ -879,7 +879,7 @@ Notes:
 Provides Completion At Point Extensions which can be used in combination with Corfu, Company or the default completion UI.
 Notes:
 - The functions that are added later will be the first in the completion list.
-- Take care when adding Capfs (Completion-at-point-functions) to the list since each of the Capfs adds a small runtime cost.
+- Be aware when adding Capfs (Completion-at-point-functions) to the list since each of the Capfs adds a small runtime cost.
 Read the [[https://github.com/minad/cape#configuration][configuration section]] in Cape's readme for more information.
 #+begin_src emacs-lisp
     (use-package cape
@@ -908,7 +908,7 @@ Read the [[https://github.com/minad/cape#configuration][configuration section]] 
 #+end_src
 
 ** Orderless
-Completion style that divides the pattern into space-separated components, and matches candidates that match all of the components in any order.
+Completion style that divides the pattern into space-separated components and matches candidates that match all of the components in any order.
 Recommended for packages like vertico, corfu.
 #+begin_src emacs-lisp
     (use-package orderless
@@ -923,7 +923,7 @@ Recommended for packages like vertico, corfu.
 - Marginalia: Adds extra metadata for completions in the margins (like descriptions).
 - Nerd-icons-completion: Adds icons to completion candidates using the built in completion metadata functions.
 
-We use this packages, because they use Emacs native functions. Unlike Ivy or Helm.
+We use these packages because they use Emacs native functions. Unlike Ivy or Helm.
 One alternative is ivy and counsel, check out the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] for more inforomation.
 #+begin_src emacs-lisp
     (use-package vertico
@@ -1002,6 +1002,7 @@ Check out their [[https://github.com/minad/consult][git repository]] for more aw
       ;; (setq consult-project-function nil)
       )
 #+end_src
+
 ** Helpful
 An alternative to the built-in Emacs help that provides much more contextual information.
 #+begin_src emacs-lisp
@@ -1044,7 +1045,7 @@ Which-key is a helper utility for keychords (which key to press).
       (which-key-sort-order #'which-key-key-order-alpha) ;; Same as default, except single characters are sorted alphabetically
       (which-key-sort-uppercase-first nil)
       (which-key-add-column-padding 1) ;; Number of spaces to add to the left of each column
-      (which-key-min-display-lines 6)  ;; Increase the minimum lines to display, because the default is only 1
+      (which-key-min-display-lines 6)  ;; Increase the minimum lines to display because the default is only 1
       (which-key-idle-delay 0.8)       ;; Set the time delay (in seconds) for the which-key popup to appear
       (which-key-max-description-length 25)
       (which-key-allow-imprecise-window-fit nil)) ;; Fixes which-key window slipping out in Emacs Daemon
