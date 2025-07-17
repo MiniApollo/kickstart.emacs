@@ -591,59 +591,43 @@ You can also make the [[https://github.com/karthink/consult-dir][consult-dir]] p
 
 ** Eglot
 Built in Emacs client for the Language Server Protocol.
+We use Eglot, because it is fast and minimal.
+For more: C-h i: g: (eglot)Top
 
-- requires manual download of lsp servers
-- One popular alternative is lsp-mode. which is much larger, it also support automatic lsp server install.
-- lsp servers need to be in emacs path. Easist way to isntall lsp servers is with a package manager.
-- To manually install the server:
-  - download the server
-  - Add it to your path
-- If you want to control how a lsp server is started customize the eglot-server-programs list
+Eglot does not automatically download LSP servers. It requires separate download.
+The easist way to install LSP servers is with a package manager.
 
+If you can't use a package manager you can do the following:
+  - Download the server (e.g. from github)
+  - Add the binary/executable to your path.
+  - Or customize the eglot-server-programs list.
+To control how a LSP server is started customize the eglot-server-programs list.
 
+There are many alternative LSP servers one of them is LSP-mode.
+Which has more features and supports automatic language server installation.
+But it's bigger, so it has more moving parts.
 
-
-
-
-
-
-
-Eglot is fast and minimal, but requires manual setup for LSP servers (downloading).
-For more [[https://www.gnu.org/software/emacs/manual/html_mono/eglot.html][information how to use.]] One alternative to Eglot is Lsp-mode, check out the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] page for more information.
-
-Eglot is easy to set up, but the only difficult part is downloading and setting up the lsp servers.
-After that just add a hook with eglot-ensure to automatically start eglot for a given file type. And you are done.
-
-As an example to use C, C++ you need to install clangd(or ccls) and uncomment the following lines. Now the language server will start automatically when opening any c,c++ file.
-
-A harder example is Lua. Download the lua-language-server from their git repository, make the lua-language-server file executable at lua-language-server/bin.
-Uncomment the following lines and change the path to the language server executable. Now the language server will work.
-Or add the lua-language-server executable to your path.
-
-If you can use a package manager just install the lsp server and add a hook.
-Use visual block to uncomment easily in Org documents (C-v).
+We don't use it, because Eglot is more than enough for most people.
+If you want to use LSP mode check out their [[https://emacs-lsp.github.io/lsp-mode/][documentation]] or the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] page for more information.
 #+begin_src emacs-lisp
-    ;;(use-package eglot
-    ;;  :ensure nil ;; Don't install eglot because it's now built-in
-    ;;  :hook ((c-mode c++-mode ;; Autostart lsp servers for a given mode
-    ;;                 lua-mode) ;; Lua-mode needs to be installed
-    ;;         . eglot-ensure)
-    ;;  :custom
-    ;;  ;; Good default
-    ;;  (eglot-events-buffer-size 0) ;; No event buffers (Lsp server logs)
-    ;;  (eglot-autoshutdown t);; Shutdown unused servers.
-    ;;  (eglot-report-progress nil) ;; Disable lsp server logs (Don't show lsp messages at the bottom, java)
-    ;;  ;; Manual lsp servers
-    ;;  :config
-    ;;  (add-to-list 'eglot-server-programs
-    ;;               `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
-    ;;  )
+    (use-package eglot
+      :ensure nil ;; Don't install eglot because it's now built-in
+      :hook ((c-mode c++-mode ;; Autostart lsp servers for a given mode
+                     lua-mode) ;; Lua-mode needs to be installed
+             . eglot-ensure)
+      :custom
+      ;; Good default
+      (eglot-events-buffer-size 0) ;; No event buffers (LSP server logs)
+      (eglot-autoshutdown t);; Shutdown unused servers.
+      (eglot-report-progress nil) ;; Disable LSP server logs (Don't show lsp messages at the bottom, java)
+      ;; Manual lsp servers
+      ;;:config
+      ;;(add-to-list 'eglot-server-programs
+      ;;             `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
+      )
 #+end_src
 
 ** Yasnippet
-TODO
-Repharse
-
 A template system for Emacs. And yasnippet-snippets is a snippet collection package.
 To use it write out the full keyword (or use autocompletion) and press Tab.
 #+begin_src emacs-lisp
