@@ -722,13 +722,15 @@ Use C-SPC tab to uncomment the lines.
 # #+end_src
 
 *** Org Mode
-TODO
-Why we use this
-
-Org mode is one of the things that emacs is loved for.
+One of the things that Emacs is loved for.
 Once you've used it for a bit, you'll understand why people love it. Even reading about it can be inspiring!
 For example, this document is effectively the source code and descriptions bound into the one document,
 much like the literate programming ideas that Donald Knuth made famous.
+
+We use an Org mode document for our Emacs configuration because it provides:
+- Better organization: It lets us structure with outlines, headings, and tags.
+- Literate Documentation: It's a document, not just source code.
+- Fast Navigation: Quickly jump to sections with something like Imenu.
 #+begin_src emacs-lisp
     (use-package org
       :ensure nil
