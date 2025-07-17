@@ -85,15 +85,15 @@ what your configuration is doing, and modify it to suit your needs.
 
 After you've done that, you can start making your own configuration out of this
 or taking the things you like and making something new from scratch.
-The choice is yours. You can do basically anything with emacs.
+The choice is yours. You can do basically anything with Emacs.
 So don't hesitate to try things out.
 
 You can delete this when you're done. It's your config now. :)
-I hope you have fun with your emacs journey.
+I hope you have fun with your Emacs journey.
 MiniApollo
 
 ** Ctrl & Meta
-This is from the emacs tutorial, but I put this here for safety.
+This is from the Emacs tutorial, but I put this here for safety.
 
 Emacs commands generally involve the CONTROL key (often labeled CTRL)
 or the META key (usually labeled ALT). Rather than writing that
@@ -111,9 +111,9 @@ Or running the command with M-x: help-with-tutorial
 Even if you plan on using Vim keybindings later on, it's a good idea to learn the standard Emacs keybindings.
 If you already know the standard Emacs keybindings, you can skip this step.
 
-After you completed that, you should start learning emacs lisp.
+After you completed that, you should start learning Emacs lisp.
 It is not necessary to know elisp, but I recommend it. It will open up a whole new world, trust me.
-I used emacs and neovim without knowing much about the core language and just copy pasting packages or plugins.
+I used Emacs and Neovim without knowing much about the core language and just copy pasting packages or plugins.
 But after learning the fundamentals you can customize basically anything and I really mean ANYTHING.
 
 This will look daunting at first, but don't be scared. This is why I am here.
@@ -128,12 +128,12 @@ https://www.gnu.org/software/emacs/manual/html_node/eintr/
 
 ** Getting Help
 If you get stuck or confused about something, you're in luck:
-Because emacs has a really good help functionality.
+Because Emacs has a really good help functionality.
 Everything under C-h is used for help keybindings.
 
 Using the following keybind: C-h C-h
 Or running the following command M-x: help-for-help
-Will open up the emacs help for help menu (I know it's a really creative name :D).
+Will open up the Emacs help for help menu (I know it's a really creative name :D).
 This is the central place where you can see all possible commands you can use when you are stuck.
 
 The most used commands for me are:
@@ -158,11 +158,11 @@ Basic navigation:
 - d key: Go back to the top-level Info Directory.
 - u key: Go up to the parent node in the document's hierarchy.
 - n key: for next node in the current manual.
-- p key: for previus node in the current manual.
+- p key: for previous node in the current manual.
 
 *Note:* A Node is essentially a specific section or topic, much like a chapter or subsection in a book.
 
-When you are browsing through the emacs manual you can easily search with:
+When you are browsing through the Emacs manual you can easily search with:
 - i key: for specific subjects in the current manual.
 - g key: for nodes (sections).
 - m key: for menu items within the current Info buffer.
@@ -170,7 +170,7 @@ When you are browsing through the emacs manual you can easily search with:
 
 For evil users after setting up evil collection for info mode:
 - g-j: for next node in the current manual.
-- g-k: for previus node in the current manual.
+- g-k: for previous node in the current manual.
 - g-G: for nodes (sections).
 - g-m: for menu items within the current Info buffer.
 - The other keybinds are the same
@@ -270,7 +270,7 @@ C-h i: g for goto-node: Type (use-package)Top
 This code block is not tangled, it is just an example.
 #+begin_src emacs-lisp :tangle no
     ;; Configure the 'foo' package
-    ;; You can also use (use-package emacs) to customize emacs with use-package.
+    ;; You can also use (use-package emacs) to customize Emacs with use-package.
     (use-package foo
       :init (message "Before")    ;; execute code Before a package is loaded.
       :config (message "After")   ;; execute code After a package is loaded.
@@ -464,7 +464,7 @@ The Leader key is what you will press when you want to access your keybindings (
         "e f" '(eglot-format :wk "Eglot Format")
         "e l" '(consult-flymake :wk "Consult Flymake")
         "e r" '(eglot-rename :wk "Eglot Rename")
-        "e i" '(xref-find-definitions :wk "Find defintion")
+        "e i" '(xref-find-definitions :wk "Find definition")
         "e v" '(:ignore t :wk "Elisp")
         "e v b" '(eval-buffer :wk "Evaluate elisp in buffer")
         "e v r" '(eval-region :wk "Evaluate elisp in region"))
@@ -538,7 +538,7 @@ A fancy, fast and customizable mode-line.
 #+end_src
 
 ** Nerd Icons
-This is an icon set that can be used with dired, ibuffer and other emacs packages.
+This is an icon set that can be used with dired, ibuffer and other Emacs packages.
 Don't forget nerd-icons-install-fonts to install the resource fonts.
 
 We use nerd-icons, because it supports both GUI and TUI unlike all-the-icons.
@@ -565,7 +565,7 @@ We use projectile, because it:
 - supports more features and project types.
 - has better integration with projects.
 - has better documentation.
-- developed faster.
+- is developed faster.
 More [[https://docs.projectile.mx/projectile/projectile_vs_project.html][reasons]] to use projectile.
 
 You can also make the [[https://github.com/karthink/consult-dir][consult-dir]] package list all the directories you [[https://github.com/MiniApollo/config/blob/main/emacs/config.org#consult-dir][specified]] and search from them like in tmux-sessionizer.
@@ -654,7 +654,7 @@ Jobban leírni és treesit-auto ideraktni.
 
 *** Lua mode
 Example, how to setup a language mode.
-Use SPC-tab to uncomment the lines.
+Use C-SPC tab to uncomment the lines.
 # #+begin_src emacs-lisp
 #     (use-package lua-mode
 #       :mode "\\.lua\\'") ;; Only start in a lua file
@@ -723,8 +723,8 @@ If you want a faster and more responsive terminal emulator try out vterm.
 
 * Multi File Example
 ** Adding the lisp directory to load-path
-Adds the lisp directory to emacs's load path to search for elisp files.
-This is necessary, because emacs does not search the entire user-emacs-directory.
+Adds the lisp directory to Emacs's load path to search for elisp files.
+This is necessary, because Emacs does not search the entire user-emacs-directory.
 The directory name can be anything, just add it to the load-path.
 #+begin_src emacs-lisp
     ;; (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
@@ -734,7 +734,7 @@ The directory name can be anything, just add it to the load-path.
 To use the elisp files we need to load it.
 Notes:
 - Don't forget the file and the provide name needs to be the same.
-- When naming elisp files, functions, it is recommended to use a group name (e.g init-, start- or any custom name), so it does not get mixed up with other names, functions.
+- When naming elisp files, functions, it is recommended to use a group name (e.g. init-, start- or any custom name), so it does not get mixed up with other names, functions.
 #+begin_src emacs-lisp
     ;; (require 'start-multiFileExample)
 #+end_src
@@ -784,7 +784,7 @@ Notes:
       (corfu-auto t)                 ;; Enable auto completion
       (corfu-auto-prefix 2)          ;; Minimum length of prefix for auto completion.
       (corfu-popupinfo-mode t)       ;; Enable popup information
-      (corfu-popupinfo-delay 0.5)    ;; Lower popupinfo delay to 0.5 seconds from 2 seconds
+      (corfu-popupinfo-delay 0.5)    ;; Lower popup info delay to 0.5 seconds from 2 seconds
       (corfu-separator ?\s)          ;; Orderless field separator, Use M-SPC to enter separator
       ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
       ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
@@ -844,7 +844,7 @@ Read the [[https://github.com/minad/cape#configuration][configuration section]] 
 
 ** Orderless
 Completion style that divides the pattern into space-separated components, and matches candidates that match all of the components in any order.
-Recomended for packages like vertico, corfu.
+Recommended for packages like vertico, corfu.
 #+begin_src emacs-lisp
     (use-package orderless
       :custom
@@ -858,7 +858,7 @@ Recomended for packages like vertico, corfu.
 - Marginalia: Adds extra metadata for completions in the margins (like descriptions).
 - Nerd-icons-completion: Adds icons to completion candidates using the built in completion metadata functions.
 
-We use this packages, because they use emacs native functions. Unlike Ivy or Helm.
+We use this packages, because they use Emacs native functions. Unlike Ivy or Helm.
 One alternative is ivy and counsel, check out the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] for more inforomation.
 #+begin_src emacs-lisp
     (use-package vertico
@@ -987,7 +987,7 @@ Which-key is a helper utility for keychords (which key to press).
 
 * Runtime Performance
 Dial the GC threshold back down so that garbage collection happens more frequently but in less time.
-We also increase Read Process Output Max so emacs can read more data.
+We also increase Read Process Output Max so Emacs can read more data.
 #+begin_src emacs-lisp
     ;; Make gc pauses faster by decreasing the threshold.
     (setq gc-cons-threshold (* 2 1000 1000))
