@@ -38,7 +38,8 @@
   - [[#sourcing-the-files][Sourcing the files]]
   - [[#using-the-file][Using the file]]
 - [[#version-control][Version Control]]
-  - [[#git][Git]]
+  - [[#magit][Magit]]
+  - [[#diff-hl][Diff-hl]]
 - [[#completion][Completion]]
   - [[#corfu][Corfu]]
   - [[#cape][Cape]]
@@ -808,30 +809,26 @@ And now we can use everything from that file.
     ;; (start/hello)
 #+end_src
 
-
 * Version Control
-TODO
-** Git
-*** Magit
+** Magit
 Complete text-based user interface to Git.
 #+begin_src emacs-lisp
     (use-package magit
-      ;; :custom (magit-diff-refine-hunk (quote all)) ;; Shows inline diff
-      :commands magit-status)
+      :defer
+      :custom (magit-diff-refine-hunk (quote all)) ;; Shows inline diff
+      :config (define-key transient-map (kbd "<escape>") 'transient-quit-one) ;; Make escape quit magit prompts
+      )
 #+end_src
 
-*** Diff-hl
+** Diff-hl
 Highlights uncommitted changes on the left side of the window (area also known as the "gutter"), allows you to jump between and revert them selectively.
 #+begin_src emacs-lisp
     (use-package diff-hl
       :hook ((dired-mode         . diff-hl-dired-mode-unless-remote)
-             (magit-pre-refresh  . diff-hl-magit-pre-refresh)
              (magit-post-refresh . diff-hl-magit-post-refresh))
       :init (global-diff-hl-mode))
 #+end_src
 
-
---------------------------------------- Ez után jó
 * Completion
 ** Corfu
 Enhances in-buffer completion with a small completion popup.
