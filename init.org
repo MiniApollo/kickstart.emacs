@@ -409,16 +409,14 @@ Notes:
 ** General Keybindings
 A keybinding framework to set keybindings easily.
 
-TODO
-Why we use it
-easier to write and easy leader key integration
-consistent. Gives a lot of options
-better evil mode and which key integration
-How to set keybinds without it. The vanila way
+We use general, because it gives:
+- a convenient method for binding keys.
+- easy leader key integration.
+- good evil-mode and which-key support.
+- a consistent and unified interface for managing keybinds.
+And it is also really customizable.
 
-If you want to read more about it https://www.masteringemacs.org/article/mastering-key-bindings-emacs
-
-The Leader key is what you will press when you want to access your keybindings (C-SPC + .  Find file).
+Note: The Leader key is what you will press when you want to access your keybindings: C-SPC + .  Find file
 #+begin_src emacs-lisp
     (use-package general
       :config
@@ -428,7 +426,7 @@ The Leader key is what you will press when you want to access your keybindings (
         ;; :states '(normal insert visual motion emacs) ;; <- evil
         :keymaps 'override
         :prefix "C-SPC"
-        :global-prefix "C-SPC") ;; Set global leader key
+        :global-prefix "C-SPC") ;; Set global leader key so we can access our keybindings from any state
 
       (start/leader-keys
         "." '(find-file :wk "Find file")
@@ -495,6 +493,17 @@ The Leader key is what you will press when you want to access your keybindings (
     ;;                 (evil-normalize-keymaps))))
     ;;           nil nil t)
     ;;   )
+#+end_src
+
+*** Creating keybindings the built in way
+If you want to use the built in methods I recommend using these ones:
+To read more about using the built in methods, check out this awesome article from [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][masteringemacs]].
+
+This code block is not tangled, it is just an example.
+#+begin_src emacs-lisp :tangle no
+    (define-key KEYMAP KEY DEF)
+    (global-set-key KEY COMMAND)
+    (use-package :bind (  ))
 #+end_src
 
 * Appearance
