@@ -380,6 +380,9 @@ It integrates Vim's editing style into Emacs, giving you the best of both worlds
 
 If you want to use vim keybindings I left the following comments in the general keybindings section to which lines to uncomment ;; <- evil
 
+If you don't want to interference with the original keybindings.
+You can also try out [[https://github.com/meow-edit/meow][meow]] which is Yet another modal editing on Emacs.
+
 Notes:
 - You can toggle evil mode with C-z.
 - To paste without yank select the text and use P. This line is especially for ThePrimeagen :)
