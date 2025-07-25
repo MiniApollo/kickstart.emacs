@@ -226,7 +226,7 @@
   :ensure nil
   :custom
   (org-edit-src-content-indentation 4) ;; Set src block automatic indent to 4 instead of 2.
-
+  (org-return-follows-link t)   ;; Sets RETURN key in org-mode to follow links
   :hook
   (org-mode . org-indent-mode) ;; Indent text
   ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
