@@ -82,9 +82,6 @@ If you want to see how to configure these, look up their git repositories or che
 -   **[Vterm](https://github.com/akermu/emacs-libvterm):** Fast, Fully-fledged terminal emulator inside GNU Emacs.
 -   **[Multi-vterm](https://github.com/suonlight/multi-vterm):** Managing multiple vterm buffers in Emacs 
 -   **[Sudo-edit](https://github.com/nflath/sudo-edit):** Utilities for opening files with root privileges (also works with doas).
--   **[sideline-flymake](https://github.com/emacs-sideline/sideline-flymake):** Show flymake errors with sideline 
--   **[Ws-butler](https://github.com/lewang/ws-butler):** Removes whitespace from the ends of lines.
-
 
 <a id="orgfaf0570"></a>
 
