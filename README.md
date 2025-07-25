@@ -52,6 +52,7 @@ Their content helped me to create this configuration.
 -   [Nerd Icons](https://github.com/rainstormstudio/nerd-icons.el): For icons and more helpful ui (Supports both GUI and TUI)
 -   [Projectile](https://github.com/bbatsov/projectile): Project interaction library
 -   [Eglot](https://www.gnu.org/software/emacs/manual/html_mono/eglot.html): Language Server Protocol Support
+-   [Sideline-Flymake](https://github.com/emacs-sideline/sideline-flymake): Show flymake errors with sideline 
 -   [Yasnippet](https://github.com/joaotavora/yasnippet): Template system and snippet collection package
 -   Optin [Tree-Sitter](https://tree-sitter.github.io/tree-sitter): A parser generator tool and an incremental parsing library.
 -   Some [Org mode](https://orgmode.org/) packages (toc-org, org-superstar)
@@ -68,6 +69,7 @@ Their content helped me to create this configuration.
 -   [Diminish](https://github.com/myrjola/diminish.el): Hiding or abbreviation of the modeline displays
 -   [Rainbow Delimiters](https://github.com/Fanael/rainbow-delimiters): Adds colors to brackets.
 -   [Which key](https://github.com/justbur/emacs-which-key): Helper utility for keychords
+-   [Ws-butler](https://github.com/lewang/ws-butler): Removes whitespace from the ends of lines.
 
 ### Recommended Packages
 
