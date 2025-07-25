@@ -29,6 +29,7 @@
 - [[#development][Development]]
   - [[#projectile][Projectile]]
   - [[#eglot][Eglot]]
+  - [[#sideline-flymake][Sideline-flymake]]
   - [[#yasnippet][Yasnippet]]
   - [[#tree-sitter][Tree-Sitter]]
   - [[#language-modes][Language modes]]
@@ -440,6 +441,7 @@ Note: The Leader key is what you will press when you want to access your keybind
       (start/leader-keys
         "." '(find-file :wk "Find file")
         "TAB" '(comment-line :wk "Comment lines")
+        "q" '(flymake-show-buffer-diagnostics :wk "Flymake buffer diagnostic")
         "c" '(eat :wk "Eat terminal")
         "p" '(projectile-command-map :wk "Projectile")
         "s p" '(projectile-discover-projects-in-search-path :wk "Search for projects"))
@@ -634,6 +636,16 @@ If you want to use LSP mode check out their [[https://emacs-lsp.github.io/lsp-mo
       ;;(add-to-list 'eglot-server-programs
       ;;             `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
       )
+#+end_src
+
+** Sideline-flymake
+Show flymake errors with sideline.
+#+begin_src emacs-lisp
+    (use-package sideline-flymake
+      :hook (flymake-mode . sideline-mode)
+      :custom
+      (sideline-flymake-display-mode 'line) ;; Show errors on the current line
+      (sideline-backends-right '(sideline-flymake)))
 #+end_src
 
 ** Yasnippet
