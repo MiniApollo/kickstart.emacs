@@ -670,6 +670,8 @@ Using Tree-Sitter is somewhat hacky because it requires you to:
 - remap the major modes you want to use.
 You can also use treesit-auto, but it is updated quite slowly so we don't use it.
 
+To explore the current buffer's syntax tree, use the treesit-explore-mode command.
+
 *To use it, remove :tangle no from the beginning of the source code block.*
 #+begin_src emacs-lisp :tangle no
     (setq treesit-language-source-alist
@@ -720,9 +722,10 @@ You can also use treesit-auto, but it is updated quite slowly so we don't use it
             ))
 
     ;; Or if there is no built in mode
-    (use-package rust-ts-mode :ensure nil :mode "\\.rs\\'")
+    (use-package cmake-ts-mode :ensure nil :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
     (use-package go-ts-mode :ensure nil :mode "\\.go\\'")
     (use-package go-mod-ts-mode :ensure nil :mode "\\.mod\\'")
+    (use-package rust-ts-mode :ensure nil :mode "\\.rs\\'")
     (use-package tsx-ts-mode :ensure nil :mode "\\.tsx\\'")
 #+end_src
 
