@@ -586,7 +586,7 @@ We use projectile because it:
 - is developed faster.
 More [[https://docs.projectile.mx/projectile/projectile_vs_project.html][reasons]] to use projectile.
 
-You can also make the [[https://github.com/karthink/consult-dir][consult-dir]] package list all the directories you [[https://github.com/MiniApollo/config/blob/main/emacs/config.org#consult-dir][specified]] and search from them like in tmux-sessionizer.
+You can also make the [[https://github.com/karthink/consult-dir][consult-dir]] package list all the directories you [[https://github.com/MiniApollo/config/blob/main/emacs/init.org#consult-dir][specified]] and search from them like in tmux-sessionizer.
 #+begin_src emacs-lisp
     (use-package projectile
       :config
