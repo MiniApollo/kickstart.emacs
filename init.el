@@ -27,6 +27,12 @@
                          ("elpa" . "https://elpa.gnu.org/packages/")
                          ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; For Eat Terminal
 
+(use-package exec-path-from-shell
+        	  :ensure t
+    		  :config 
+(exec-path-from-shell-initialize)
+(exec-path-from-shell-copy-env "ROAM_DIR"))
+
 (use-package evil
   :init ;; Execute code Before a package is loaded
   (evil-mode)
@@ -63,6 +69,7 @@
   (start/leader-keys
     "." '(find-file :wk "Find file")
     "TAB" '(comment-line :wk "Comment lines")
+    "SPC" '(consult-buffer :wk "Switch buffer")
     "p" '(projectile-command-map :wk "Projectile command map"))
 
   (start/leader-keys
@@ -76,7 +83,6 @@
 
   (start/leader-keys
     "b" '(:ignore t :wk "Buffer Bookmarks")
-    "b b" '(consult-buffer :wk "Switch buffer")
     "b k" '(kill-this-buffer :wk "Kill this buffer")
     "b i" '(ibuffer :wk "Ibuffer")
     "b n" '(next-buffer :wk "Next buffer")
@@ -120,6 +126,9 @@
   (start/leader-keys
     "r" '(:ignore t :wk "Org Roam")
     "r i" '(org-roam-node-insert :wk "Insert node")
+    "r t" '(org-roam-tag-add :wk "Insert tag")
+    "r d" '(org-roam-dailies-find-today :wk "dailies find today ")
+    "r D" '(org-roam-dailies-capture-today :wk "dailies caputure today ")
     "r f" '(org-roam-node-find :wk "Find node"))
 
   (start/leader-keys
@@ -176,15 +185,19 @@
       )
 
 (use-package catppuccin-theme
-  :config
-  (load-theme 'catppuccin t)) ;; We need to add t to trust this package
+      :config
+      (load-theme 'catppuccin t)
+	  ;;:custom
+	  ;;(setq catppuccin-flavor 'frappe)
+) ;; We need to add t to trust this package
 
 (add-to-list 'default-frame-alist '(alpha-background . 90)) ;; For all new frames henceforth
 
 (set-face-attribute 'default nil
                     ;; :font "JetBrains Mono" ;; Set your favorite type of font or download JetBrains Mono
+					:font "MesloLGL Nerd Font"
                     :height 120
-                    :weight 'medium)
+                    :weight 'bold)
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
@@ -268,7 +281,7 @@
 :ensure t
 :after org
 :custom
-(org-roam-directory "d:/Prasad/roam")
+(org-roam-directory (getenv "ROAM_DIR"))
 :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert))
@@ -289,6 +302,7 @@
   :config
   (setq org-download-method 'directory)
   (setq org-download-image-dir  "d:/Prasad/roam/images")
+  (setq org-download-screenshot-method "powershell.exe -command \"Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Clipboard]::GetImage().Save('%s')\"")
   (org-download-enable))
 
 (org-babel-do-load-languages
@@ -499,7 +513,7 @@
 ;;  - a list that can display an random banner,
 ;;    supported values are: string (filepath), 'official, 'logo and integers.
 
-;; Content is not centered by default. To center, set
+ ;; Content is not centered by default. To center, set
 (setq dashboard-center-content t)
 ;; vertically center content
 (setq dashboard-vertically-center-content t)
@@ -510,3 +524,27 @@
 ;; frames created with emacsclient -c as follows:
 (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
 )
+
+(use-package markdown-mode
+  :ensure t
+  :mode ("\\.md\\'" . markdown-mode)
+  :init
+  (setq markdown-command "multimarkdown"))
+
+(setq ispell-program-name "D:/softwares/hunspell-1.3.2-3-w32-bin/bin/hunspell.exe") ;; Path to Hunspell binary
+
+
+(setq ispell-dictionary "en_US")  ;; Set default dictionary
+
+;; Set dictionary path
+
+(setq ispell-hunspell-dictionary-alist
+      '(("en_US" "[\0-\127]" "[^-\127]" "['-]" nil ("-d" "en_US") nil utf-8)))
+(setq ispell-dictionary "en_US")
+(setq ispell-extra-args '("-a" "-i" "utf-8"))
+(setq ispell-alternate-dictionary "d:/sofwares/hunspell-1.3.2-3-w32-bin/share/hunspell")
+(setenv "DICPATH" "d:/sofwares/hunspell-1.3.2-3-w32-bin/share/hunspell")
+
+;; Enable spell-checking in text modes
+(add-hook 'text-mode-hook 'flyspell-mode)   ;; Enable spell check in text modes
+(add-hook 'prog-mode-hook 'flyspell-prog-mode) ;; Spell check comments in code

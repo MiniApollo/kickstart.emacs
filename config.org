@@ -11,6 +11,7 @@
   - [[#startup-performance][Startup Performance]]
   - [[#auto-tangle-configuration-file][Auto-tangle Configuration file]]
   - [[#use-package][Use Package]]
+  - [[#copy-environmental-variables][Copy environmental variables]]
   - [[#evil-mode][Evil Mode]]
   - [[#general-keybindings][General Keybindings]]
   - [[#good-defaults][Good Defaults]]
@@ -107,7 +108,14 @@ With Emacs 29 use-package is now built-in.
                              ("elpa" . "https://elpa.gnu.org/packages/")
                              ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; For Eat Terminal
 #+end_src
-
+** Copy environmental variables
+#+begin_src emacs-lisp
+            (use-package exec-path-from-shell
+        	  :ensure t
+    		  :config 
+(exec-path-from-shell-initialize)
+(exec-path-from-shell-copy-env "ROAM_DIR"))
+#+end_src
 ** Evil Mode
 An extensible vi/vim layer for Emacs. Because…let’s face it. The Vim keybindings are just plain better.
 Notes:
@@ -470,7 +478,7 @@ and tracking house.
     :ensure t
     :after org
     :custom
-    (org-roam-directory "d:/Prasad/roam")
+    (org-roam-directory (getenv "ROAM_DIR"))
     :bind (("C-c n l" . org-roam-buffer-toggle)
              ("C-c n f" . org-roam-node-find)
              ("C-c n i" . org-roam-node-insert))
