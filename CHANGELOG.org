@@ -1,0 +1,36 @@
+#+title: Kickstart.emacs Changelog
+#+author: MiniApollo
+#+Startup: showeverything
+#+Options: toc:2
+
+* Table Of Contents :toc:
+- [[#changes-2026-02-01][Changes (2026-02-01)]]
+
+* Changes (2026-02-01)
+Performance: Added an early-init.el file (inspired by Doom Emacs) and aggressive lazy-loading for significant speed gains.
+Workflow: Remove init.el from git, it's now auto-generated from init.org. No need to version control two files.
+Documentation: Much better docs. More in depth, like in kickstart.nvim.
+Refactors: The codebase is now much more modular and easier to hack on.
+Tree-sitter: Included a guide/example on writing your own custom font-locking rules.
+
+New packages:
+- Emacs Async: Much faster package installation.
+- Mason.el: Package manager for LSP, DAP, linters.
+- Embark: Right click like menu in Emacs.
+- Hl-todo: Highlight todo keywords.
+- Indent-guide: Show indentation.
+
+New Optional packages:
+ - Undo setup: Undo Fu, Undo-fu-session, Vundo.
+ - Snippy: VSCode/LSP snippet support for Emacs with Yasnippet.
+ - Jinx: Enchanted Spell Checker
+ - Esup: Emacs Start Up Profiler.
+
+and much more.
+
+Enjoy!
+
+Special thanks to:
+- Jan Prunk: For donating! <3
+- Doomemacs as always.
+- Emacs-Kick: Awesome project with good defaults.
