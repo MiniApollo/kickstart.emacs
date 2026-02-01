@@ -729,7 +729,7 @@ We use Eglot because it is fast and minimal.
 For more: C-h i: g: (eglot)Top
 
 Eglot does not automatically download LSP servers. It requires separate download.
-The easiest way to install LSP servers is with a package manager.
+The easiest way to install LSP servers is with a package manager like mason.el.
 
 If you can't use a package manager you can do the following:
 - Download the server (e.g. from github)
@@ -759,6 +759,15 @@ If you want to use LSP mode check out their [[https://emacs-lsp.github.io/lsp-mo
       ;;(add-to-list 'eglot-server-programs
       ;;             `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
       )
+#+end_src
+
+** Mason.el
+Package manager for LSP, DAP, linters, and more for the Emacs Operating System.
+I waited so long for a package like this.
+If you plan to use something like LSP-mode don't forget to remove this.
+#+begin_src emacs-lisp
+    (use-package mason
+      :hook (after-init . mason-ensure))
 #+end_src
 
 ** Sideline-flymake
