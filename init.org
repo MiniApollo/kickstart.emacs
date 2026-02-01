@@ -1046,10 +1046,16 @@ And now we can use everything from that file.
 ** Magit
 Complete text-based user interface to Git.
 #+begin_src emacs-lisp
+    (use-package transient
+      :defer
+      :config
+      (define-key transient-map (kbd "<escape>") 'transient-quit-one)) ;; Make escape quit magit prompts
+
     (use-package magit
       :defer
       :custom (magit-diff-refine-hunk (quote all)) ;; Shows inline diff
-      :config (define-key transient-map (kbd "<escape>") 'transient-quit-one) ;; Make escape quit magit prompts
+      :config
+      (setopt magit-format-file-function #'magit-format-file-nerd-icons) ;; Magit nerd icons
       )
 #+end_src
 
