@@ -784,8 +784,43 @@ Show flymake errors with sideline.
 A template system for Emacs. And yasnippet-snippets is a snippet collection package.
 To use it write out the full keyword (or use autocompletion) and press Tab.
 #+begin_src emacs-lisp
-    (use-package yasnippet-snippets
+    (use-package yasnippet
       :hook (prog-mode . yas-minor-mode))
+
+    (use-package yasnippet-snippets :defer)
+
+    (defun start/corfu-yas-tab-handler ()
+      "Prioritize corfu over yasnippet when yasnippet is active"
+      (interactive)
+      ;; There is no direct way to get if corfu is currently displayed so we watch the completion index
+      (if (> corfu--index -1)
+          (corfu-complete)
+        (yas-next-field-or-maybe-expand)
+        ))
+    (use-package emacs
+      :after (yasnippet corfu)
+      :bind
+      (:map yas-keymap
+            ("TAB" . start/corfu-yas-tab-handler)))
+#+end_src
+
+** Snippy
+VSCode/LSP snippet support for Emacs with Yasnippet.
+Uses friendly snippets.
+Developed by me.
+Note: If you want to use a different package manager you need to change :vc(url ..) part.
+
+*To use it, remove :tangle no from the beginning of the source code block.*
+#+begin_src emacs-lisp :tangle no
+    (use-package snippy
+      :vc (:url "https://github.com/MiniApollo/snippy.git"
+                :branch "main"
+                :rev :newest)
+      :hook (after-init . global-snippy-minor-mode)
+      :custom
+      (snippy-global-languages '("global")) ;; Recomended
+      :config
+      (snippy-install-or-update-snippets)) ;; Autoupdate git repo
 #+end_src
 
 ** Tree-Sitter
