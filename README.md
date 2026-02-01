@@ -44,44 +44,52 @@ Their content helped me to create this configuration.
 
 ### Included Package list
 
--   Package Manager: Package.el with Use-package (built in)
--   Optin [Evil mode](https://github.com/emacs-evil/evil): An extensible vi/vim layer
--   [General](https://github.com/noctuid/general.el): Keybindings
--   [Gruvbox-theme](https://github.com/greduan/emacs-theme-gruvbox): Color scheme
--   [Doom-modeline](https://github.com/seagle0128/doom-modeline): Prettier, more useful modeline
--   [Nerd Icons](https://github.com/rainstormstudio/nerd-icons.el): For icons and more helpful ui (Supports both GUI and TUI)
--   [Projectile](https://github.com/bbatsov/projectile): Project interaction library
--   [Eglot](https://www.gnu.org/software/emacs/manual/html_mono/eglot.html): Language Server Protocol Support
--   [Sideline-Flymake](https://github.com/emacs-sideline/sideline-flymake): Show flymake errors with sideline 
--   [Yasnippet](https://github.com/joaotavora/yasnippet): Template system and snippet collection package
--   Optin [Tree-Sitter](https://tree-sitter.github.io/tree-sitter): A parser generator tool and an incremental parsing library.
--   Some [Org mode](https://orgmode.org/) packages (toc-org, org-superstar)
--   [Eat](https://codeberg.org/akib/emacs-eat): Fast terminal emulator within Emacs
--   [Magit](https://github.com/magit/magit): Complete text-based user interface to Git
--   [Diff-hl](https://github.com/dgutov/diff-hl): Highlights uncommitted changes
--   [Corfu](https://github.com/minad/corfu): Enhances in-buffer completion
--   [Cape](https://github.com/minad/cape): Provides Completion At Point Extensions
--   [Orderless](https://github.com/oantolin/orderless): Completion style that matches candidates in any order
--   [Vertico](https://github.com/minad/vertico): Provides a performant and minimalistic vertical completion UI.
--   [Marginalia](https://github.com/minad/marginalia): Adds extra metadata for completions in the margins (like descriptions).
--   [Consult](https://github.com/minad/consult): Provides search and navigation commands.
--   [Helpful](https://github.com/Wilfred/helpful): A better Emacs *help* buffer 
--   [Diminish](https://github.com/myrjola/diminish.el): Hiding or abbreviation of the modeline displays
--   [Rainbow Delimiters](https://github.com/Fanael/rainbow-delimiters): Adds colors to brackets.
--   [Which key](https://github.com/justbur/emacs-which-key): Helper utility for keychords
--   [Ws-butler](https://github.com/lewang/ws-butler): Removes whitespace from the ends of lines.
+- Package Manager: Package.el with Use-package (built in)
+- [Package Async](https://github.com/jwiegley/emacs-async): A module for doing asynchronous processing in Emacs
+- Optin [Evil mode](https://github.com/emacs-evil/evil): An extensible vi/vim layer
+- [General](https://github.com/noctuid/general.el): Keybindings
+- [Gruvbox-theme](https://github.com/greduan/emacs-theme-gruvbox): Color scheme
+- Optin undo setup: Undo Fu, Undo-fu-session, Vundo
+- [Doom-modeline](https://github.com/seagle0128/doom-modeline): Prettier, more useful modeline
+- [Nerd Icons](https://github.com/rainstormstudio/nerd-icons.el): For icons and more helpful ui (Supports both GUI and TUI)
+- [Projectile](https://github.com/bbatsov/projectile): Project interaction library
+- [Eglot](https://www.gnu.org/software/emacs/manual/html_mono/eglot.html): Language Server Protocol Support
+- [Mason.el](https://github.com/deirn/mason.el): Installer for LSP servers, DAP servers, linters and formatters, inspired by mason.nvim
+- [Sideline-Flymake](https://github.com/emacs-sideline/sideline-flymake): Show flymake errors with sideline 
+- [Yasnippet](https://github.com/joaotavora/yasnippet): Template system and snippet collection package
+- Optin [Snippy](https://github.com/MiniApollo/snippy): VSCode/LSP snippet support for Emacs with Yasnippet.
+- Some [Org mode](https://orgmode.org/) packages (toc-org, org-superstar)
+- [Eat](https://codeberg.org/akib/emacs-eat): Fast terminal emulator within Emacs
+- [Magit](https://github.com/magit/magit): Complete text-based user interface to Git
+- [Diff-hl](https://github.com/dgutov/diff-hl): Highlights uncommitted changes
+- [Corfu](https://github.com/minad/corfu): Enhances in-buffer completion
+- [Cape](https://github.com/minad/cape): Provides Completion At Point Extensions
+- [Orderless](https://github.com/oantolin/orderless): Completion style that matches candidates in any order
+- [Vertico](https://github.com/minad/vertico): Provides a performant and minimalistic vertical completion UI.
+- [Marginalia](https://github.com/minad/marginalia): Adds extra metadata for completions in the margins (like descriptions).
+- [Embark](https://github.com/oantolin/embark): Emacs Mini-Buffer Actions Rooted in Keymaps 
+- [Consult](https://github.com/minad/consult): Provides search and navigation commands.
+- Optin: [Jinx](https://github.com/minad/jinx): Enchanted Spell Checker
+- [Helpful](https://github.com/Wilfred/helpful): A better Emacs *help* buffer 
+- [Diminish](https://github.com/myrjola/diminish.el): Hiding or abbreviation of the modeline displays
+- [Rainbow Delimiters](https://github.com/Fanael/rainbow-delimiters): Adds colors to brackets.
+- [Hl-todo](https://github.com/tarsius/hl-todo): Highlight TODO keywords.
+- [Indent-guide](https://github.com/zk-phi/indent-guide): Show indendation.
+- [Which key](https://github.com/justbur/emacs-which-key): Helper utility for keychords
+- [Ws-butler](https://github.com/lewang/ws-butler): Removes whitespace from the ends of lines.
+- Optin: [Esup](https://github.com/jschaf/esup): Emacs Start Up Profiler.
 
 ### Recommended Packages
 
 If you want to see how to configure these, look up their git repositories or check out my [config](https://github.com/MiniApollo/config/blob/main/emacs/config.org).
 
--   **[DashBoard](https://github.com/emacs-dashboard/emacs-dashboard):** Extensible startup screen.
--   **[Drag Stuff](https://github.com/rejeep/drag-stuff.el):** Makes it possible to move selected text, regions and lines.
--   **[Rainbow Mode](https://github.com/emacsmirror/rainbow-mode):** Displays the actual color as a background for any hex color value (ex. #ffffff).
--   **[UndoTree](https://www.emacswiki.org/emacs/UndoTree):** Visualizes the undo history (alternative: [Vundo](https://github.com/casouri/vundo) with [undo-fu-session](https://github.com/emacsmirror/undo-fu-session)).
--   **[Vterm](https://github.com/akermu/emacs-libvterm):** Fast, Fully-fledged terminal emulator inside GNU Emacs.
--   **[Multi-vterm](https://github.com/suonlight/multi-vterm):** Managing multiple vterm buffers in Emacs 
--   **[Sudo-edit](https://github.com/nflath/sudo-edit):** Utilities for opening files with root privileges (also works with doas).
+- **[DashBoard](https://github.com/emacs-dashboard/emacs-dashboard):** Extensible startup screen.
+- **[Drag Stuff](https://github.com/rejeep/drag-stuff.el):** Makes it possible to move selected text, regions and lines.
+- **[Rainbow Mode](https://github.com/emacsmirror/rainbow-mode):** Displays the actual color as a background for any hex color value (ex. #ffffff).
+- **[Vterm](https://github.com/akermu/emacs-libvterm):** Fast, Fully-fledged terminal emulator inside GNU Emacs.
+- **[Multi-vterm](https://github.com/suonlight/multi-vterm):** Managing multiple vterm buffers in Emacs 
+- **[Sudo-edit](https://github.com/nflath/sudo-edit):** Utilities for opening files with root privileges (also works with doas).
+- **[Eldoc-box](https://github.com/casouri/eldoc-box):** Display eldoc documentation in a popup box
 
 <a id="orgfaf0570"></a>
 
