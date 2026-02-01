@@ -965,6 +965,13 @@ We use an Org mode document for our Emacs configuration because it provides:
 - Better organization: It lets us structure with outlines, headings, and tags.
 - Literate Documentation: It's a document, not just source code.
 - Fast Navigation: Quickly jump to sections with something like Imenu.
+
+If you consider using org mode even more. Check out the [[https://github.com/minad/org-modern][org-modern]] package.
+It makes org mode really beautiful.
+Don't forget to remove org-superstar if you want to use it.
+
+For templates use C-c C-,
+Much easier than org-tempo
 #+begin_src emacs-lisp
     (use-package org
       :ensure nil
@@ -973,12 +980,6 @@ We use an Org mode document for our Emacs configuration because it provides:
       (org-return-follows-link t)   ;; Sets RETURN key in org-mode to follow links
       :hook
       (org-mode . org-indent-mode) ;; Indent text
-      ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
-      ;; Otherwise, org-tempo is broken when you try to <s TAB...
-      ;;(org-mode . (lambda ()
-      ;;              (setq-local electric-pair-inhibit-predicate
-      ;;                          `(lambda (c)
-      ;;                             (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
       )
 #+end_src
 
@@ -995,15 +996,6 @@ Prettify headings and plain lists in Org mode. Modern version of org-bullets.
     (use-package org-superstar
       :after org
       :hook (org-mode . org-superstar-mode))
-#+end_src
-
-**** Source Code Block Tag Expansion
-Org-tempo is not a separate package but a module within org that can be enabled.
-Org-tempo allows for '<s' followed by TAB to expand to a begin_src tag.
-#+begin_src emacs-lisp
-    (use-package org-tempo
-      :ensure nil
-      :after org)
 #+end_src
 
 ** Terminal
