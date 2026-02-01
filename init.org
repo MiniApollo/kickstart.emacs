@@ -1161,14 +1161,22 @@ We use these packages because they use Emacs native functions. Unlike Ivy or Hel
 One alternative is ivy and counsel, check out the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] for more inforomation.
 #+begin_src emacs-lisp
     (use-package vertico
-      :init
-      (vertico-mode))
+      :hook (after-init . vertico-mode)
+      ;; Vim keybinds
+      ;; :bind (:map vertico-map
+      ;;            ("C-j" . vertico-next)
+      ;;            ("C-k" . vertico-previous)
+      ;;            ("C-u" . vertico-scroll-down)
+      ;;            ("C-d" . vertico-scroll-up))
+      :custom
+      (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+      )
 
     (savehist-mode) ;; Enables save history mode
 
     (use-package marginalia
       :after vertico
-      :init
+      :config
       (marginalia-mode))
 
     (use-package nerd-icons-completion
