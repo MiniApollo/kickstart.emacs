@@ -1,6 +1,6 @@
-#+Title: Emacs Kickstarter
+#+Title: Kickstart.emacs
 #+Author: MiniApollo
-#+Description: A starting point for Gnu Emacs with good defaults and packages that most people may want to use.
+#+Description: Blazingly fast starting point for your Emacs configuration.
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 #+Startup: showeverything
 #+Options: toc:2
@@ -1122,8 +1122,8 @@ Notes:
 ** Cape
 Provides Completion At Point Extensions which can be used in combination with Corfu, Company or the default completion UI.
 
-We merge capfs together so they apper together in the completion list.
-The ones not merged will display seperately (Only their list will show up in the completion list).
+We merge capfs together so they appear together in the completion list.
+The ones not merged will display separately (Only their list will show up in the completion list).
 Order matters. Since these functions run in sequence, the first one to return a list will prevent others from running.
 Due to technical details, not all Capfs can be merged successfully (e.g cape-file).
 
@@ -1244,7 +1244,9 @@ Emacs Mini-Buffer Actions Rooted in Keymaps. Right click like menu for Emacs.
 
 ** Jinx
 Enchanted Spell Checker.
-Don't forget to add keybinds.
+Don't forget to add keybindings.
+
+Jinx can cause performance problems in large markdown files.
 *To use it, remove :tangle no from the beginning of the source code block.*
 #+begin_src emacs-lisp :tangle no
     (use-package jinx
@@ -1373,7 +1375,7 @@ Highlight TODO keywords.
 #+end_src
 
 ** Indent-guide
-Show indendation.
+Show indentation.
 #+begin_src emacs-lisp
     (use-package indent-guide
       :hook
