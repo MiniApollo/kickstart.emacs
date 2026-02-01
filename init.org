@@ -1055,6 +1055,24 @@ One alternative is ivy and counsel, check out the [[https://github.com/MiniApoll
       (marginalia-mode . nerd-icons-completion-marginalia-setup))
 #+end_src
 
+** Embark
+Emacs Mini-Buffer Actions Rooted in Keymaps. Right click like menu for Emacs.
+#+begin_src emacs-lisp
+    (use-package embark :defer)
+    (use-package embark-consult
+      :hook
+      (embark-collect-mode . consult-preview-at-point-mode))
+#+end_src
+
+** Jinx
+Enchanted Spell Checker.
+Don't forget to add keybinds.
+*To use it, remove :tangle no from the beginning of the source code block.*
+#+begin_src emacs-lisp :tangle no
+    (use-package jinx
+      :hook (after-init . global-jinx-mode))
+#+end_src
+
 * Other packages
 All the package setups that don't need much tweaking.
 ** Consult
@@ -1141,6 +1159,49 @@ Adds colors to brackets.
 #+begin_src emacs-lisp
     (use-package rainbow-delimiters
       :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+
+** Hl-todo
+Highlight TODO keywords.
+#+begin_src emacs-lisp
+    (use-package hl-todo
+      :hook
+      ((prog-mode yaml-ts-mode) . hl-todo-mode)
+      :config
+      ;; From doom emacs
+      (setq hl-todo-highlight-punctuation ":"
+            hl-todo-keyword-faces
+            '(;; For reminders to change or add something at a later date.
+              ("TODO" warning bold)
+              ;; For code (or code paths) that are broken, unimplemented, or slow,
+              ;; and may become bigger problems later.
+              ("FIXME" error bold)
+              ;; For code that needs to be revisited later, either to upstream it,
+              ;; improve it, or address non-critical issues.
+              ("REVIEW" font-lock-keyword-face bold)
+              ;; For code smells where questionable practices are used
+              ;; intentionally, and/or is likely to break in a future update.
+              ("HACK" font-lock-constant-face bold)
+              ;; For sections of code that just gotta go, and will be gone soon.
+              ;; Specifically, this means the code is deprecated, not necessarily
+              ;; the feature it enables.
+              ("DEPRECATED" font-lock-doc-face bold)
+              ;; Extra keywords commonly found in the wild, whose meaning may vary
+              ;; from project to project.
+              ("NOTE" success bold)
+              ("BUG" error bold)
+              ("XXX" font-lock-constant-face bold)))
+      )
+#+end_src
+
+** Indent-guide
+Show indendation.
+#+begin_src emacs-lisp
+    (use-package indent-guide
+      :hook
+      (prog-mode . indent-guide-mode)
+      :config
+      (setq indent-guide-char "│")) ;; Set the character used for the indent guide.
 #+end_src
 
 ** Which-Key
