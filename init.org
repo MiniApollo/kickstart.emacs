@@ -477,7 +477,18 @@ And it is also really customizable.
 
 Note: The Leader key is what you will press when you want to access your keybindings: C-SPC + .  Find file
 #+begin_src emacs-lisp
+    (defun start/open-init-file ()
+      "Open init.org configuration file"
+      (interactive)
+      (find-file "~/.config/emacs/init.org"))
+
+    (defun start/reload-config()
+      "Reload Emacs config"
+      (interactive)
+      (load-file "~/.config/emacs/init.el"))
+
     (use-package general
+      ;; :after (evil) ;; <- evil
       :config
       ;; (general-evil-setup) ;; <- evil
       ;; Set up 'C-SPC' as the leader key
@@ -489,15 +500,32 @@ Note: The Leader key is what you will press when you want to access your keybind
 
       (start/leader-keys
         "." '(find-file :wk "Find file")
+        "," '(embark-act :wk "Embark act")
         "TAB" '(comment-line :wk "Comment lines")
         "q" '(flymake-show-buffer-diagnostics :wk "Flymake buffer diagnostic")
         "c" '(eat :wk "Eat terminal")
+
+        ;; Projectile
         "p" '(projectile-command-map :wk "Projectile")
         "s p" '(projectile-discover-projects-in-search-path :wk "Search for projects"))
 
       (start/leader-keys
+        "m" '(:ignore t :wk "Bookmarks & Registers")
+        ;; Registers
+        "m s" '(consult-register :wk "Consult register")
+        "m k" '(jump-to-register :wk "Jump to register")
+        "m e" '(point-to-register :wk "Point to register")
+        ;; Bookmarks
+        "m a" '(bookmark-set :wk "Bookmark Set")
+        "m d" '(bookmark-jump :wk "Bookmark Jump")
+        "m r" '(bookmark-delete :wk "Bookmark Delete")
+        "m R" '(bookmark-delete-all :wk "Bookmark Delete All")
+        "m l" '(bookmark-bmenu-list :wk "Bookmark bmenu list")
+        "m c" '(consult-bookmark :wk "Consult Bookmark"))
+
+      (start/leader-keys
         "s" '(:ignore t :wk "Search")
-        "s c" '((lambda () (interactive) (find-file "~/.config/emacs/init.org")) :wk "Find emacs Config")
+        "s c" '(start/open-init-file :wk "Open init file")
         "s r" '(consult-recent-file :wk "Search recent files")
         "s f" '(consult-fd :wk "Search files with fd")
         "s g" '(consult-ripgrep :wk "Search with ripgrep")
@@ -520,9 +548,16 @@ Note: The Leader key is what you will press when you want to access your keybind
         "e e" '(eglot-reconnect :wk "Eglot Reconnect")
         "e d" '(eldoc-doc-buffer :wk "Eldoc Buffer")
         "e f" '(eglot-format :wk "Eglot Format")
+
         "e l" '(consult-flymake :wk "Consult Flymake")
+        "e n" '(flymake-goto-next-error :wk "Flymake next error")
+        "e p" '(flymake-goto-prev-error :wk "Flymake previous error")
+
+        "e a" '(eglot-code-actions :wk "Eglot code actions")
         "e r" '(eglot-rename :wk "Eglot Rename")
         "e i" '(xref-find-definitions :wk "Find definition")
+        "e s" '(xref-find-references :wk "Find references")
+
         "e v" '(:ignore t :wk "Elisp")
         "e v b" '(eval-buffer :wk "Evaluate elisp in buffer")
         "e v r" '(eval-region :wk "Evaluate elisp in region"))
@@ -532,11 +567,20 @@ Note: The Leader key is what you will press when you want to access your keybind
         "g s" '(magit-status :wk "Magit status"))
 
       (start/leader-keys
-        "h" '(:ignore t :wk "Help") ;; To get more help use C-h commands (describe variable, function, etc.)
-        "h q" '(save-buffers-kill-emacs :wk "Quit Emacs and Daemon")
-        "h r" '((lambda () (interactive)
-                  (load-file "~/.config/emacs/init.el"))
-                :wk "Reload Emacs config"))
+        "r" '(:ignore t :wk "Reload & Packages") ;; To get more help use C-h commands (describe variable, function, etc.)
+        ;; Mason.el
+        "r m" '(mason-manager :wk "Mason manager")
+        "r i" '(mason-install :wk "Mason install")
+        ;; Package-menu-mode
+        "r p" '(list-packages :wk "List packages")
+        "r c" '(package-menu-clear-filter :wk "Package clear filters")
+        "r n" '(package-menu-filter-by-name :wk "Package filter by name")
+        "r N" '(package-menu-filter-by-name-or-description :wk "Package filter by name or descriptions")
+        "r s" '(package-menu-filter-by-status :wk "Package filter by status")
+        "r u" '(package-menu-filter-upgradable :wk "Package filter by upgradable")
+
+        "r q" '(save-buffers-kill-emacs :wk "Quit Emacs and Daemon")
+        "r r" '(start/reload-config :wk "Reload Emacs config"))
 
       (start/leader-keys
         "t" '(:ignore t :wk "Toggle")
@@ -545,14 +589,14 @@ Note: The Leader key is what you will press when you want to access your keybind
       )
 
     ;; Fix general.el leader key not working instantly in messages buffer with evil mode
-    ;; (use-package emacs
-    ;;   :ghook ('after-init-hook
-    ;;           (lambda (&rest _)
-    ;;             (when-let ((messages-buffer (get-buffer "*Messages*")))
-    ;;               (with-current-buffer messages-buffer
-    ;;                 (evil-normalize-keymaps))))
-    ;;           nil nil t)
-    ;;   )
+    ;;(use-package emacs
+    ;;  :after (evil general)
+    ;;  :ghook ('after-init-hook
+    ;;          (lambda (&rest _)
+    ;;            (when-let ((messages-buffer (get-buffer "*Messages*")))
+    ;;              (with-current-buffer messages-buffer
+    ;;                (evil-normalize-keymaps))))
+    ;;          nil nil t))
 #+end_src
 
 *** Creating keybindings the built in way
