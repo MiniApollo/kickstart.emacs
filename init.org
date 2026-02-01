@@ -610,6 +610,42 @@ This code block is not tangled, it is just an example.
 #+end_src
 To read more about using the built in methods, check out this awesome article from [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][masteringemacs]].
 
+** Undo
+Undotree like setup.
+
+Undo Fu: Simple, stable linear undo with redo for Emacs.
+Undo-fu-session: Persistent undo history
+Vundo: Visualizes undo history.
+
+If you want to use this. Don't forget to add keybindings for undu-fu and vundo.
+Evil users don't need to add keybindings for undo-fu just change evil-undo-system to undo-fu.
+
+*To use it, remove :tangle no from the beginning of the source code block.*
+#+begin_src emacs-lisp :tangle no
+    (use-package undo-fu
+      :defer
+      :config
+      ;; Increase undo history limits to reduce likelihood of data loss
+      (setq undo-limit (* 1024 1024 64)          ;; 64mb  (default is 160kb)
+            undo-strong-limit (* 1024 1024 96)   ;; 96mb  (default is 240kb)
+            undo-outer-limit (* 1024 1024 960))) ;; 960mb (default is 24mb)
+
+    (use-package undo-fu-session
+      :hook (after-init . undo-fu-session-global-mode)
+      :custom (undo-fu-session-incompatible-files '("\\.gpg$" "/COMMIT_EDITMSG\\'" "/git-rebase-todo\\'"))
+      :config
+      (when (executable-find "zstd")
+        ;; There are other algorithms available, but zstd is the fastest, and speed
+        ;; is our priority within Emacs
+        (setq undo-fu-session-compression 'zst)))
+
+    (use-package vundo
+      :defer
+      :custom
+      (vundo-glyph-alist vundo-unicode-symbols)
+      (vundo-compact-display t))
+#+end_src
+
 * Appearance
 Set fonts in the early-init.el file
 ** Set Theme
