@@ -1109,34 +1109,69 @@ Notes:
 
 ** Cape
 Provides Completion At Point Extensions which can be used in combination with Corfu, Company or the default completion UI.
+
+We merge capfs together so they apper together in the completion list.
+The ones not merged will display seperately (Only their list will show up in the completion list).
+Order matters. Since these functions run in sequence, the first one to return a list will prevent others from running.
+Due to technical details, not all Capfs can be merged successfully (e.g cape-file).
+
 Notes:
-- The functions that are added later will be the first in the completion list.
 - Be aware when adding Capfs (Completion-at-point-functions) to the list since each of the Capfs adds a small runtime cost.
 Read the [[https://github.com/minad/cape#configuration][configuration section]] in Cape's readme for more information.
 #+begin_src emacs-lisp
+    (use-package yasnippet-capf :defer)
+
+    (defun start/setup-capfs ()
+      "Configure completion backends"
+      ;; Take care when adding Capfs to the list since each of the Capfs adds a small runtime cost.
+      (let ((merge-backends (list
+                             #'cape-keyword      ;; Keyword completion
+                             ;; #'cape-abbrev       ;; Complete abbreviation
+                             #'cape-dabbrev      ;; Complete word from current buffers
+                             ;; #'cape-line         ;; Complete entire line from current buffer
+                             ;; #'cape-history      ;; Complete from Eshell, Comint or minibuffer history
+                             ;; #'cape-dict         ;; Dictionary completion (Needs Dictionary file installed)
+                             ;; #'cape-tex          ;; Complete Unicode char from TeX command, e.g. \hbar
+                             ;; #'cape-sgml         ;; Complete Unicode char from SGML entity, e.g., &alpha
+                             ;; #'cape-rfc1345      ;; Complete Unicode char using RFC 1345 mnemonics
+                             ;; #'snippy-capf       ;; Vscode Snippets (Snippy needs to be installed)
+                             #'yasnippet-capf    ;; Yasnippet snippets
+                             ))
+            (seperate-backends (list
+                                #'cape-file ;; Path completion
+                                #'cape-elisp-block ;; Complete elisp in Org or Markdown mode
+                                )))
+        ;; Remove keyword completion in git commits
+        (when (derived-mode-p 'git-commit-mode)
+          (setq merge-backends (remq #'cape-keyword merge-backends)))
+
+        ;; Add Elisp symbols only in Elisp modes
+        (when (derived-mode-p 'emacs-lisp-mode 'ielm-mode)
+          (setq merge-backends (cons #'cape-elisp-symbol merge-backends))) ;; Emacs Lisp code (functions, variables)
+
+        ;; Add Eglot to the front of the list if it's active
+        (when (bound-and-true-p eglot--managed-mode)
+          (setq merge-backends (cons #'eglot-completion-at-point merge-backends)))
+
+        ;; Create the super-capf and set it buffer-locally
+        (setq-local completion-at-point-functions
+                    (append
+                     seperate-backends
+                     (list (apply #'cape-capf-super merge-backends)))
+                    )))
+
     (use-package cape
-      :after corfu
+      :after (corfu)
       :init
       ;; Add to the global default value of `completion-at-point-functions' which is
       ;; used by `completion-at-point'.  The order of the functions matters, the
       ;; first function returning a result wins.  Note that the list of buffer-local
       ;; completion functions takes precedence over the global list.
 
-      ;; The functions that are added later will be the first in the list
-      (add-hook 'completion-at-point-functions #'cape-dabbrev) ;; Complete word from current buffers
-      (add-hook 'completion-at-point-functions #'cape-dict) ;; Dictionary completion
-      (add-hook 'completion-at-point-functions #'cape-file) ;; Path completion
-      (add-hook 'completion-at-point-functions #'cape-elisp-block) ;; Complete elisp in Org or Markdown mode
-      (add-hook 'completion-at-point-functions #'cape-keyword) ;; Keyword completion
-
-      ;;(add-hook 'completion-at-point-functions #'cape-abbrev) ;; Complete abbreviation
-      ;;(add-hook 'completion-at-point-functions #'cape-history) ;; Complete from Eshell, Comint or minibuffer history
-      ;;(add-hook 'completion-at-point-functions #'cape-line) ;; Complete entire line from current buffer
-      ;;(add-hook 'completion-at-point-functions #'cape-elisp-symbol) ;; Complete Elisp symbol
-      ;;(add-hook 'completion-at-point-functions #'cape-tex) ;; Complete Unicode char from TeX command, e.g. \hbar
-      ;;(add-hook 'completion-at-point-functions #'cape-sgml) ;; Complete Unicode char from SGML entity, e.g., &alpha
-      ;;(add-hook 'completion-at-point-functions #'cape-rfc1345) ;; Complete Unicode char using RFC 1345 mnemonics
-      )
+      ;; Seperate function needed, because we use setq-local (everything is replaced)
+      (add-hook 'eglot-managed-mode-hook #'start/setup-capfs)
+      (add-hook 'prog-mode-hook #'start/setup-capfs)
+      (add-hook 'text-mode-hook #'start/setup-capfs))
 #+end_src
 
 ** Orderless
