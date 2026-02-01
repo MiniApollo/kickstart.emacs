@@ -105,11 +105,11 @@ Emacs commands generally involve the CONTROL key (often labeled CTRL)
 or the META key (usually labeled ALT). Rather than writing that
 in full each time, we'll use the following abbreviations:
 
- C-<chr>  means hold the CONTROL key while typing the character <chr>.
-	  Thus, C-f would be: hold the CONTROL key and type f.
- M-<chr>  means hold the META or ALT key down while typing <chr>.
-	  If there is no META or ALT key, instead press and release the
-	  ESC key and then type <chr>.  We write <ESC> for the ESC key.
+C-<chr>  means hold the CONTROL key while typing the character <chr>.
+Thus, C-f would be: hold the CONTROL key and type f.
+M-<chr>  means hold the META or ALT key down while typing <chr>.
+If there is no META or ALT key, instead press and release the
+ESC key and then type <chr>.  We write <ESC> for the ESC key.
 
 ** Where to start?
 First I recommend starting with the Emacs tutorial with the following keybinding: C-h t
@@ -192,11 +192,19 @@ These are essential settings and small tweaks that must load before any packages
 They impact the entire configuration, skipping these could result in significantly slower configuration and potential breakage of your setup.
 
 ** Startup Performance
-Make startup faster by reducing the frequency of garbage collection. This will be set back when startup finishes.
+Core performance tweaks moved to early-init.el
+See: [[https://github.com/doomemacs/doomemacs/issues/310][Why is doom emacs so fast?]]
+
+*** Lexical-bindings
+Gives better performance, lexical closures, and code safety, allowing local variables to remain truly local.
 #+begin_src emacs-lisp
-    ;; The default is 800 kilobytes. Measured in bytes.
-    (setq gc-cons-threshold (* 50 1000 1000))
+    ;; -*- lexical-binding: t; -*-
 #+end_src
+
+*** Early-Init.el
+This file is loaded before anything else.
+Most of the performance tweaks are there.
+We can configure things before the GUI or other packages are loaded.
 
 ** Auto-tangle Configuration file
 Auto-Tangle Org configuration file for better startup times, it refreshes the package-quickstart file.
@@ -216,13 +224,12 @@ automatically exports the configuration here to the associated output files.
       "Automatically tangle our init.org config file and refresh package-quickstart when we save it. Credit to Emacs From Scratch for this one!"
       (interactive)
       (when (string-equal (file-name-directory (buffer-file-name))
-    					  (expand-file-name user-emacs-directory))
+                          (expand-file-name user-emacs-directory))
         ;; Dynamic scoping to the rescue
         (let ((org-confirm-babel-evaluate nil))
-    	  (org-babel-tangle)
-    	  (package-quickstart-refresh)
-    	  )
-        ))
+          (org-babel-tangle)
+          (package-quickstart-refresh)
+          )))
 
     (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'start/org-babel-tangle-config)))
 #+end_src
@@ -230,10 +237,11 @@ automatically exports the configuration here to the associated output files.
 ** Show startup time
 #+begin_src emacs-lisp
     (defun start/display-startup-time ()
+      (interactive)
       (message "Emacs loaded in %s with %d garbage collections."
                (format "%.2f seconds"
                        (float-time
-    					(time-subtract after-init-time before-init-time)))
+                        (time-subtract after-init-time before-init-time)))
                gcs-done))
 
     (add-hook 'emacs-startup-hook #'start/display-startup-time)
@@ -246,7 +254,7 @@ Alternative package managers (straight.el, elpaca, etc.) are useful if you want:
 - Faster package installation.
 - Lock file support for recovery if something goes wrong.
 - Packages that are cloned as Git (or other) repositories, not as opaque tarballs.
-- UI
+- Better UI
 - Async support
 
 If you are interested in using other package managers, check out their git repositories.
@@ -255,6 +263,8 @@ To learn more about why something like [[https://github.com/doomemacs/doomemacs/
 In my experience Package.el is not slow and gets the job done.
 
 To update/upgrade packages, use the package-upgrade-all command.
+Package.el has a UI. Check it out with M-x list-packages.
+
 *** Use-package
 A macro that allows you to isolate package configuration in your .emacs file in a way that is both performance-oriented and, well, tidy.
 We use it because it makes package configuration really easy.
@@ -330,9 +340,11 @@ If you plan to use a different package manager, remember to remove this section 
 #+begin_src emacs-lisp
     (use-package emacs
       :custom
+      ;; Still needed for terminals
       (menu-bar-mode nil)         ;; Disable the menu bar
       (scroll-bar-mode nil)       ;; Disable the scroll bar
       (tool-bar-mode nil)         ;; Disable the tool bar
+
       ;;(inhibit-startup-screen t)  ;; Disable welcome screen
 
       (delete-selection-mode t)   ;; Select text and delete it by typing.
@@ -974,6 +986,7 @@ One alternative is ivy and counsel, check out the [[https://github.com/MiniApoll
 All the package setups that don't need much tweaking.
 ** Consult
 Provides search and navigation commands based on the Emacs completion function.
+Telescope for Emacs.
 Check out their [[https://github.com/minad/consult][git repository]] for more awesome functions.
 #+begin_src emacs-lisp
     (use-package consult
