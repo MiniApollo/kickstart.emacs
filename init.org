@@ -370,24 +370,42 @@ Only works with package.el.
 
       (blink-cursor-mode nil)     ;; Don't blink cursor
       (global-auto-revert-mode t) ;; Automatically reload file and show changes if the file has changed
+      ;; (use-short-answers t)   ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
 
       ;;(dired-kill-when-opening-new-dired-buffer t) ;; Dired don't create new buffer
       ;;(recentf-mode t) ;; Enable recent file mode
 
-      ;;(global-visual-line-mode t)           ;; Enable truncated lines
-      ;;(display-line-numbers-type 'relative) ;; Relative line numbers
+      ;;(global-visual-line-mode t)           ;; Enable line wrapping (NOTE: breaks vundo)
       (global-display-line-numbers-mode t)  ;; Display line numbers
+      ;;(display-line-numbers-type 'relative) ;; Relative line numbers
+      (global-hl-line-mode t)               ;; Highlight current line
+
+      (native-comp-async-report-warnings-errors 'silent) ;; Don't show native comp errors
+      (warning-minimum-level :error) ;; Only show errors in warnings buffer
 
       (mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling
       (scroll-conservatively 10) ;; Smooth scrolling
-      ;;(scroll-margin 8)
+      (scroll-margin 8)
 
+      ;; (pixel-scroll-precision-mode t) ;; Precise pixel scrolling. i.e. smooth scrolling (GUI only)
+      ;; (pixel-scroll-precision-use-momentum nil)
+
+      (indent-tabs-mode nil) ;; Only use spaces for indentation
       (tab-width 4)
+      (sgml-basic-offset 4) ;; Set Html mode indentation to 4
+      (c-ts-mode-indent-offset 4) ;; Fix weird indentation in c-ts (C, C++)
+      (go-ts-mode-indent-offset 4) ;; Fix weird indentation in go-ts
+
+      ;; (display-fill-column-indicator-column 80) ;; Set line length indicator to 80 characters
+      (whitespace-style '(face tabs tab-mark trailing))
 
       (make-backup-files nil) ;; Stop creating ~ backup files
       (auto-save-default nil) ;; Stop creating # auto save files
+      (delete-by-moving-to-trash t)
       :hook
-      (prog-mode . (lambda () (hs-minor-mode t))) ;; Enable folding hide/show globally
+      (prog-mode . hs-minor-mode) ;; Enable folding hide/show globally
+      ;; (prog-mode . display-fill-column-indicator-mode) ;; Display line length indicator
+      (prog-mode . whitespace-mode)
       :config
       ;; Move customization variables to a separate file and load it, avoid filling up init.el with unnecessary variables
       (setq custom-file (locate-user-emacs-file "custom-vars.el"))
@@ -549,6 +567,7 @@ This code block is not tangled, it is just an example.
 To read more about using the built in methods, check out this awesome article from [[https://www.masteringemacs.org/article/mastering-key-bindings-emacs][masteringemacs]].
 
 * Appearance
+Set fonts in the early-init.el file
 ** Set Theme
 Set gruvbox theme, if you want some themes try out doom-themes.
 Use consult-theme to easily try out themes (*Epilepsy* Warning).
@@ -563,20 +582,13 @@ Use consult-theme to easily try out themes (*Epilepsy* Warning).
 With Emacs version 29, true transparency has been added.
 #+begin_src emacs-lisp
     (add-to-list 'default-frame-alist '(alpha-background . 90)) ;; For all new frames henceforth
-#+end_src
 
-** Setting Fonts
-#+begin_src emacs-lisp
-    (set-face-attribute 'default nil
-                        ;; :font "JetBrains Mono" ;; Set your favorite type of font or download JetBrains Mono
-                        :height 120
-                        :weight 'medium)
-    ;; This sets the default font on all graphical frames created after restarting Emacs.
-    ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
-    ;; are not right unless I also add this method of setting the default font.
+    ;; Transparency in terminal
+    (defun start/tui-enable-transparency ()
+      (unless (display-graphic-p (selected-frame))
+        (set-face-background 'default "unspecified-bg" (selected-frame))))
 
-    ;;(add-to-list 'default-frame-alist '(font . "JetBrains Mono")) ;; Set your favorite font
-    (setq-default line-spacing 0.12)
+    (add-hook 'window-setup-hook 'start/tui-enable-transparency)
 #+end_src
 
 ** Doom Modeline
