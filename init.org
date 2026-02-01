@@ -803,9 +803,11 @@ To explore the current buffer's syntax tree, use the treesit-explore-mode comman
             (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
             (css "https://github.com/tree-sitter/tree-sitter-css")
             (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+            (gdscript "https://github.com/PrestonKnopp/tree-sitter-gdscript")
             (go "https://github.com/tree-sitter/tree-sitter-go")
             (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
             (html "https://github.com/tree-sitter/tree-sitter-html")
+            (hyprlang "https://github.com/tree-sitter-grammars/tree-sitter-hyprlang")
             (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
             (json "https://github.com/tree-sitter/tree-sitter-json")
             (make "https://github.com/alemuller/tree-sitter-make")
@@ -815,6 +817,7 @@ To explore the current buffer's syntax tree, use the treesit-explore-mode comman
             (toml "https://github.com/tree-sitter/tree-sitter-toml")
             (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
             (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+            (vue "https://github.com/ikatyang/tree-sitter-vue")
             (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
     (defun start/install-treesit-grammars ()
@@ -838,17 +841,58 @@ To explore the current buffer's syntax tree, use the treesit-explore-mode comman
             (python-mode . python-ts-mode)
             (mhtml-mode . html-ts-mode)
             (javascript-mode . js-ts-mode)
-            (json-mode . json-ts-mode)
+            (js-json-mode . json-ts-mode)
             (typescript-mode . typescript-ts-mode)
             (conf-toml-mode . toml-ts-mode)
+            (gdscript-mode . gdscript-ts-mode)
             ))
+    (setq treesit-font-lock-level 3)
 
     ;; Or if there is no built in mode
     (use-package cmake-ts-mode :ensure nil :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
-    (use-package go-ts-mode :ensure nil :mode "\\.go\\'")
     (use-package go-mod-ts-mode :ensure nil :mode "\\.mod\\'")
+    (use-package lua-ts-mode :ensure nil :mode "\\.lua\\'")
     (use-package rust-ts-mode :ensure nil :mode "\\.rs\\'")
+    (use-package typescript-ts-mode :ensure nil :mode "\\.ts\\'")
     (use-package tsx-ts-mode :ensure nil :mode "\\.tsx\\'")
+    (use-package yaml-ts-mode :ensure nil :mode ("\\.yaml\\'" "\\.yml\\'"))
+#+end_src
+
+*** Writing your own syntax highlight with treesitter
+You can easily write your own font locking with treesitter
+
+*To use it, remove :tangle no from the beginning of the source code block.*
+#+begin_src emacs-lisp :tangle no
+    ;; https://github.com/emacs-mirror/emacs/blob/master/admin/notes/tree-sitter/starter-guide
+    (use-package go-ts-mode
+      :ensure nil
+      :mode "\\.go\\'"
+      :config
+      (defvar start/ts-font-lock-settings
+        (treesit-font-lock-rules
+         :language 'go ;; What language
+         :feature 'function-highlight ;; A unique feature name that we can toggle.
+         `(
+           ;; Function calls
+           (call_expression
+            function: (selector_expression
+                       field: (field_identifier) @font-lock-function-call-face)) ;; Use 'describe-face' to find faces
+           ;; Property values
+           (argument_list
+            (selector_expression
+             field: (field_identifier) @font-lock-property-use-face))
+           (expression_list
+            (selector_expression
+             field: (field_identifier) @font-lock-property-use-face))
+           ;; ((Treesit patern) @defface_Settings)
+           ))
+        "Go-ts-mode settings, fix not highlighting function calls and property values")
+
+      (add-hook 'go-ts-mode-hook
+                (lambda () (setq-local treesit-font-lock-settings
+                                       (append treesit-font-lock-settings
+                                               start/ts-font-lock-settings))))
+      )
 #+end_src
 
 ** Language modes
