@@ -303,6 +303,10 @@ This code block is not tangled, it is just an example.
 
       :command (bar)              ;; Define commands provided by the package to be lazy-loaded.
       :defer t                    ;; Only load this package if it's explicitly needed or a command/hook associated with it is called.
+      ;; Install package with package.el from source.
+      :vc (:url "<You git repo url>"
+                :branch "main"
+                :rev :newest) ;; Use latest commit
       )
 #+end_src
 
@@ -335,6 +339,19 @@ If you plan to use a different package manager, remember to remove this section 
     (setq package-quickstart t) ;; For blazingly fast startup times, this line makes startup miles faster
 #+end_src
 
+*** Package Async
+Simple library for asynchronous processing in Emacs.
+Makes package installation about 30 sec faster.
+Only works with package.el.
+#+begin_src emacs-lisp
+    (use-package async
+      :defer
+      :custom
+      (dired-async-mode t)
+      (async-bytecomp-package-mode t)
+      (async-bytecomp-allowed-packages '(all))
+      (async-package-do-action t))
+#+end_src
 
 ** Good Defaults
 #+begin_src emacs-lisp
