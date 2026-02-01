@@ -1011,6 +1011,13 @@ If you want a faster and more responsive terminal emulator try out vterm.
       :hook ('eshell-load-hook #'eat-eshell-mode))
 #+end_src
 
+*** Exec-path-from-shell
+Make Emacs use the $PATH set up by the user's shell
+#+begin_src emacs-lisp
+    (use-package exec-path-from-shell
+      :hook (after-init . exec-path-from-shell-initialize))
+#+end_src
+
 * Multi File Example
 ** Adding the lisp directory to load-path
 Adds the lisp directory to Emacs's load path to search for elisp files.
