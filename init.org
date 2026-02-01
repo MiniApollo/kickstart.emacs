@@ -300,7 +300,6 @@ This code block is not tangled, it is just an example.
 Like Linux distributions, Emacs uses repositories to manage its packages.
 #+begin_src emacs-lisp
     (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
-                             ("org" . "https://orgmode.org/elpa/")
                              ("elpa" . "https://elpa.gnu.org/packages/")
                              ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; For Eat Terminal
 #+end_src
@@ -371,8 +370,7 @@ If you plan to use a different package manager, remember to remove this section 
              ("C--" . text-scale-decrease)
              ("<C-wheel-up>" . text-scale-increase)
              ("<C-wheel-down>" . text-scale-decrease)
-             )
-      )
+             ))
 #+end_src
 
 * Important to load first
@@ -394,15 +392,19 @@ Notes:
 *To use it, remove :tangle no from the beginning of the source code block.*
 #+begin_src emacs-lisp :tangle no
     (use-package evil
+      :hook (after-init . evil-mode)
       :init
       (evil-mode)
       :config
       (evil-set-initial-state 'eat-mode 'insert) ;; Set initial state in eat terminal to insert mode
+      ;; (global-set-key [C-backspace] 'evil-delete-backward-word) ;; Make C-backspace less agressive
       :custom
       (evil-want-keybinding nil)    ;; Disable evil bindings in other modes (It's not consistent and not good)
       (evil-want-C-u-scroll t)      ;; Set C-u to scroll up
       (evil-want-C-i-jump nil)      ;; Disables C-i jump
       (evil-undo-system 'undo-redo) ;; C-r to redo
+      (evil-want-fine-undo t)
+      ;; (evil-respect-visual-line-mode t) ;; Move in wrap lines
       ;; Unmap keys in 'evil-maps. If not done, org-return-follows-link will not work
       :bind (:map evil-motion-state-map
                   ("SPC" . nil)
@@ -411,8 +413,8 @@ Notes:
     (use-package evil-collection
       :after evil
       :config
-      ;; Setting where to use evil-collection
-      (setq evil-collection-mode-list '(dired ibuffer magit corfu vertico consult info))
+      ;; Setting where to use evil-collection)
+      (setq evil-collection-mode-list '(dired ibuffer magit corfu consult info (package-menu package) bookmark))
       (evil-collection-init))
 #+end_src
 
@@ -564,11 +566,10 @@ Don't forget nerd-icons-install-fonts to install the resource fonts.
 We use nerd-icons because it supports both GUI and TUI unlike all-the-icons.
 Also Doom modeline requires nerd icons.
 #+begin_src emacs-lisp
-    (use-package nerd-icons
-      :if (display-graphic-p))
+    (use-package nerd-icons :defer)
 
     (use-package nerd-icons-dired
-      :hook (dired-mode . (lambda () (nerd-icons-dired-mode t))))
+      :hook (dired-mode . nerd-icons-dired-mode))
 
     (use-package nerd-icons-ibuffer
       :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
@@ -591,6 +592,7 @@ More [[https://docs.projectile.mx/projectile/projectile_vs_project.html][reasons
 You can also make the [[https://github.com/karthink/consult-dir][consult-dir]] package list all the directories you [[https://github.com/MiniApollo/config/blob/main/emacs/init.org#consult-dir][specified]] and search from them like in tmux-sessionizer.
 #+begin_src emacs-lisp
     (use-package projectile
+      :hook (after-init . projectile-mode)
       :config
       (projectile-mode)
       :custom
@@ -703,7 +705,7 @@ To explore the current buffer's syntax tree, use the treesit-explore-mode comman
             (treesit-install-language-grammar lang)))))
 
     ;; Call this function to install missing grammars
-    (start/install-treesit-grammars)
+    (add-hook 'after-init-hook #'start/install-treesit-grammars)
 
     ;; Optionally, add any additional mode remappings not covered by defaults
     (setq major-mode-remap-alist
@@ -804,6 +806,7 @@ We setup eat with eshell, if you want to use bash, zsh etc., check out their git
 If you want a faster and more responsive terminal emulator try out vterm.
 #+begin_src emacs-lisp
     (use-package eat
+      :defer
       :hook ('eshell-load-hook #'eat-eshell-mode))
 #+end_src
 
@@ -847,8 +850,8 @@ Highlights uncommitted changes on the left side of the window (area also known a
 #+begin_src emacs-lisp
     (use-package diff-hl
       :hook ((dired-mode         . diff-hl-dired-mode-unless-remote)
-             (magit-post-refresh . diff-hl-magit-post-refresh))
-      :init (global-diff-hl-mode))
+             (magit-post-refresh . diff-hl-magit-post-refresh)
+             (after-init . global-diff-hl-mode)))
 #+end_src
 
 * Completion
@@ -933,6 +936,7 @@ Completion style that divides the pattern into space-separated components and ma
 Recommended for packages like vertico, corfu.
 #+begin_src emacs-lisp
     (use-package orderless
+      :defer
       :custom
       (completion-styles '(orderless basic))
       (completion-category-overrides '((file (styles basic partial-completion)))))
@@ -963,7 +967,7 @@ One alternative is ivy and counsel, check out the [[https://github.com/MiniApoll
       :config
       (nerd-icons-completion-mode)
       :hook
-      ('marginalia-mode-hook . 'nerd-icons-completion-marginalia-setup))
+      (marginalia-mode . nerd-icons-completion-marginalia-setup))
 #+end_src
 
 * Other packages
@@ -1043,7 +1047,7 @@ An alternative to the built-in Emacs help that provides much more contextual inf
 This package implements hiding or abbreviation of the modeline displays (lighters) of minor-modes.
 With this package installed, you can add ‘:diminish’ to any use-package block to hide that particular mode in the modeline.
 #+begin_src emacs-lisp
-    (use-package diminish)
+    (use-package diminish :defer)
 #+end_src
 
 ** Rainbow Delimiters
@@ -1058,8 +1062,7 @@ Which-key is a helper utility for keychords (which key to press).
 #+begin_src emacs-lisp
     (use-package which-key
       :ensure nil ;; Don't install which-key because it's now built-in
-      :init
-      (which-key-mode 1)
+      :hook (after-init . which-key-mode)
       :diminish
       :custom
       (which-key-side-window-location 'bottom)
@@ -1076,15 +1079,17 @@ Which-key is a helper utility for keychords (which key to press).
 Removes whitespace from the ends of lines.
 #+begin_src emacs-lisp
     (use-package ws-butler
-      :init (ws-butler-global-mode))
+      :hook (after-init . ws-butler-global-mode))
 #+end_src
 
-* Runtime Performance
-Dial the GC threshold back down so that garbage collection happens more frequently but in less time.
-We also increase Read Process Output Max so Emacs can read more data.
-#+begin_src emacs-lisp
-    ;; Make gc pauses faster by decreasing the threshold.
-    (setq gc-cons-threshold (* 2 1000 1000))
-    ;; Increase the amount of data which Emacs reads from the process
-    (setq read-process-output-max (* 1024 1024)) ;; 1mb
+** Esup
+Emacs Start Up Profiler.
+Benchmark Emacs Startup time: M-x esup
+
+*To use it, remove :tangle no from the beginning of the source code block.*
+#+begin_src emacs-lisp :tangle no
+    (use-package esup
+      :defer
+      :custom
+      (esup-depth 0))
 #+end_src
