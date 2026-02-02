@@ -825,6 +825,10 @@ Note: If you want to use a different package manager you need to change :vc(url 
       :hook (after-init . global-snippy-minor-mode)
       :custom
       (snippy-global-languages '("global")) ;; Recomended
+      ;; Optional
+      ;; (snippy-install-dir (expand-file-name <Your location>))
+      ;; Use different snippet collections
+      ;; (snippy-source '("Your git repo" . "my-snippets-dir"))
       :config
       (snippy-install-or-update-snippets)) ;; Autoupdate git repo
 #+end_src
