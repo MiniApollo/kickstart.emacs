@@ -87,9 +87,13 @@ If you want to see how to configure these, look up their git repositories or che
 - **[Drag Stuff](https://github.com/rejeep/drag-stuff.el):** Makes it possible to move selected text, regions and lines.
 - **[Rainbow Mode](https://github.com/emacsmirror/rainbow-mode):** Displays the actual color as a background for any hex color value (ex. #ffffff).
 - **[Vterm](https://github.com/akermu/emacs-libvterm):** Fast, Fully-fledged terminal emulator inside GNU Emacs.
-- **[Multi-vterm](https://github.com/suonlight/multi-vterm):** Managing multiple vterm buffers in Emacs 
+- **[Multi-vterm](https://github.com/suonlight/multi-vterm):** Managing multiple vterm buffers in Emacs.
 - **[Sudo-edit](https://github.com/nflath/sudo-edit):** Utilities for opening files with root privileges (also works with doas).
-- **[Eldoc-box](https://github.com/casouri/eldoc-box):** Display eldoc documentation in a popup box
+- **[Eldoc-box](https://github.com/casouri/eldoc-box):** Display eldoc documentation in a popup box.
+- **[Javelin](https://github.com/DamianB-BitFlipper/javelin.el):** Harpoon for Emacs. Dead simple buffer bookmarks.
+- **[Gptel](https://github.com/karthink/gptel):** A simple, extensible LLM client for Emacs.
+- **[Org Modern](https://github.com/minad/org-modern):** Modern Org Style.
+- **[Consult-dir](https://github.com/karthink/consult-dir):** Insert paths into the minibuffer prompt in Emacs (tmux-sessionizer like setup).
 
 <a id="orgfaf0570"></a>
 
