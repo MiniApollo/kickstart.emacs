@@ -81,7 +81,7 @@ Their content helped me to create this configuration.
 
 ### Recommended Packages
 
-If you want to see how to configure these, look up their git repositories or check out my [config](https://github.com/MiniApollo/config/blob/main/emacs/config.org).
+If you want to see how to configure these, look up their git repositories or check out my [config](https://github.com/MiniApollo/config/blob/main/emacs/init.org).
 
 - **[DashBoard](https://github.com/emacs-dashboard/emacs-dashboard):** Extensible startup screen.
 - **[Drag Stuff](https://github.com/rejeep/drag-stuff.el):** Makes it possible to move selected text, regions and lines.
