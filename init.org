@@ -380,6 +380,7 @@ Only works with package.el.
 
       ;;(dired-kill-when-opening-new-dired-buffer t) ;; Dired don't create new buffer
       ;;(recentf-mode t) ;; Enable recent file mode
+      ;;(context-menu-mode t) ;; Right-click menu
 
       ;;(global-visual-line-mode t)           ;; Enable line wrapping (NOTE: breaks vundo)
       (global-display-line-numbers-mode t)  ;; Display line numbers
