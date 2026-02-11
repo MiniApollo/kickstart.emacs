@@ -18,7 +18,7 @@
 * Naming in other files
 It's recommended to use a group name (e.g init-, start- or any custom name), so it does not get mixed up with other names, functions, etc.
 #+begin_src emacs-lisp
-    (defun start/hello()
+    (defun start/hello ()
       "Say hello from another file"
       (message "Hello from another file"))
 #+end_src
@@ -30,4 +30,5 @@ Note:
 - *Don't forget* the file and the provide name needs to be the same.
 #+begin_src emacs-lisp
     (provide 'start-multiFileExample)
+    ;;; start-multiFileExample.el ends here
 #+end_src
