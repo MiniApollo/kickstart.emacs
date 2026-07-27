@@ -486,7 +486,7 @@ We use general because it gives:
 - a consistent and unified interface for managing keybinds.
 And it is also really customizable.
 
-Note: The Leader key is what you will press when you want to access your keybindings: C-SPC + .  Find file
+Note: The Leader key is what you will press when you want to access your keybindings: M-n + .  Find file
 #+begin_src emacs-lisp
     (defun start/open-init-file ()
       "Open init.org configuration file."
@@ -506,82 +506,69 @@ Note: The Leader key is what you will press when you want to access your keybind
       (general-create-definer start/leader-keys
         ;; :states '(normal insert visual motion emacs) ; <- evil
         :keymaps 'override
-        :prefix "C-SPC"
-        :global-prefix "C-SPC") ;; Set global leader key so we can access our keybindings from any state
+        :prefix "M-n"
+        :global-prefix "M-n") ; Set global leader key so we can access our keybindings from any state
 
       (start/leader-keys
         "." '(find-file :wk "Find file")
         "," '(embark-act :wk "Embark act")
         "TAB" '(comment-line :wk "Comment lines")
-        "q" '(flymake-show-buffer-diagnostics :wk "Flymake buffer diagnostic")
         "c" '(eat :wk "Eat terminal")
-
+        "g" '(magit-status :wk "Magit status")
+        "q" '(flymake-show-buffer-diagnostics :wk "Flymake buffer diagnostic")
         ;; Projectile
         "p" '(projectile-command-map :wk "Projectile")
         "s p" '(projectile-discover-projects-in-search-path :wk "Search for projects"))
 
       (start/leader-keys
-        "m" '(:ignore t :wk "Bookmarks & Registers")
-        ;; Registers
-        "m s" '(consult-register :wk "Consult register")
-        "m k" '(jump-to-register :wk "Jump to register")
-        "m e" '(point-to-register :wk "Point to register")
-        ;; Bookmarks
-        "m a" '(bookmark-set :wk "Bookmark Set")
-        "m d" '(bookmark-jump :wk "Bookmark Jump")
-        "m r" '(bookmark-delete :wk "Bookmark Delete")
-        "m R" '(bookmark-delete-all :wk "Bookmark Delete All")
-        "m l" '(bookmark-bmenu-list :wk "Bookmark bmenu list")
-        "m c" '(consult-bookmark :wk "Consult Bookmark"))
-
-      (start/leader-keys
-        "s" '(:ignore t :wk "Search")
-        "s c" '(start/open-init-file :wk "Open init file")
-        "s r" '(consult-recent-file :wk "Search recent files")
-        "s f" '(consult-fd :wk "Search files with fd")
-        "s g" '(consult-ripgrep :wk "Search with ripgrep")
-        "s l" '(consult-line :wk "Search line")
-        "s i" '(consult-imenu :wk "Search Imenu buffer locations")) ;; This one is really cool
-
-      (start/leader-keys
         "d" '(:ignore t :wk "Buffers & Dired")
-        "d s" '(consult-buffer :wk "Switch buffer")
-        "d k" '(kill-current-buffer :wk "Kill current buffer")
         "d i" '(ibuffer :wk "Ibuffer")
+        "d j" '(dired-jump :wk "Dired jump to current")
+        "d k" '(kill-current-buffer :wk "Kill current buffer")
+
         "d n" '(next-buffer :wk "Next buffer")
         "d p" '(previous-buffer :wk "Previous buffer")
         "d r" '(revert-buffer :wk "Reload buffer")
-        "d v" '(dired :wk "Open dired")
-        "d j" '(dired-jump :wk "Dired jump to current"))
+        "d s" '(consult-buffer :wk "Switch buffer")
+        "d v" '(dired :wk "Open dired"))
 
       (start/leader-keys
         "e" '(:ignore t :wk "Languages")
-        "e e" '(eglot-reconnect :wk "Eglot Reconnect")
+        "e a" '(eglot-code-actions :wk "Eglot code actions")
         "e d" '(eldoc-doc-buffer :wk "Eldoc Buffer")
+        "e e" '(eglot-reconnect :wk "Eglot Reconnect")
         "e f" '(eglot-format :wk "Eglot Format")
-
+        "e i" '(xref-find-definitions :wk "Find definition")
         "e l" '(consult-flymake :wk "Consult Flymake")
+
         "e n" '(flymake-goto-next-error :wk "Flymake next error")
         "e p" '(flymake-goto-prev-error :wk "Flymake previous error")
-
-        "e a" '(eglot-code-actions :wk "Eglot code actions")
         "e r" '(eglot-rename :wk "Eglot Rename")
-        "e i" '(xref-find-definitions :wk "Find definition")
         "e s" '(xref-find-references :wk "Find references")
-
         "e v" '(:ignore t :wk "Elisp")
         "e v b" '(eval-buffer :wk "Evaluate elisp in buffer")
         "e v r" '(eval-region :wk "Evaluate elisp in region"))
 
       (start/leader-keys
-        "g" '(:ignore t :wk "Git")
-        "g s" '(magit-status :wk "Magit status"))
+        "m" '(:ignore t :wk "Bookmarks & Registers")
+        ;; Bookmarks
+        "m a" '(bookmark-set :wk "Bookmark Set")
+        "m b" '(bookmark-bmenu-list :wk "Bookmark bmenu list")
+        "m c" '(consult-bookmark :wk "Consult Bookmark")
+        "m d" '(bookmark-jump :wk "Bookmark Jump")
+        "m r" '(bookmark-delete :wk "Bookmark Delete")
+        "m R" '(bookmark-delete-all :wk "Bookmark Delete All")
+        ;; Registers
+        "m s" '(consult-register :wk "Consult register")
+        "m k" '(jump-to-register :wk "Jump to register")
+        "m e" '(point-to-register :wk "Point to register"))
 
       (start/leader-keys
-        "r" '(:ignore t :wk "Reload & Packages") ;; To get more help use C-h commands (describe variable, function, etc.)
+        "r" '(:ignore t :wk "Reload & Packages") ; To get more help use C-h commands (describe variable, function, etc.)
         ;; Mason.el
-        "r m" '(mason-manager :wk "Mason manager")
         "r i" '(mason-install :wk "Mason install")
+        "r m" '(mason-manager :wk "Mason manager")
+        "r l" '(mason-update-all :wk "Mason update all")
         ;; Package-menu-mode
         "r p" '(list-packages :wk "List packages")
         "r c" '(package-menu-clear-filter :wk "Package clear filters")
@@ -589,15 +576,23 @@ Note: The Leader key is what you will press when you want to access your keybind
         "r N" '(package-menu-filter-by-name-or-description :wk "Package filter by name or descriptions")
         "r s" '(package-menu-filter-by-status :wk "Package filter by status")
         "r u" '(package-menu-filter-upgradable :wk "Package filter by upgradable")
-
+        ;; Session and Configuration Management
         "r q" '(save-buffers-kill-emacs :wk "Quit Emacs and Daemon")
         "r r" '(start/reload-config :wk "Reload Emacs config"))
 
       (start/leader-keys
+        "s" '(:ignore t :wk "Search")
+        "s c" '(start/open-init-file :wk "Open init file")
+        "s f" '(consult-fd :wk "Search files with fd")
+        "s g" '(consult-ripgrep :wk "Search with ripgrep")
+        "s i" '(consult-imenu :wk "Search Imenu buffer locations") ; This one is really cool
+        "s l" '(consult-line :wk "Search line")
+        "s r" '(consult-recent-file :wk "Search recent files"))
+
+      (start/leader-keys
         "t" '(:ignore t :wk "Toggle")
         "t t" '(visual-line-mode :wk "Toggle truncated lines (wrap)")
-        "t l" '(display-line-numbers-mode :wk "Toggle line numbers"))
-      )
+        "t l" '(display-line-numbers-mode :wk "Toggle line numbers")))
 
     ;; Fix general.el leader key not working instantly in messages buffer with evil mode
     ;;(use-package emacs
