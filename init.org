@@ -227,15 +227,15 @@ This function checks to see if the file being saved is the init.org file you’r
 automatically exports the configuration here to the associated output files.
 #+begin_src emacs-lisp
     (defun start/org-babel-tangle-config ()
-      "Automatically tangle our init.org config file and refresh package-quickstart when we save it. Credit to Emacs From Scratch for this one!"
+      "Automatically tangle our init.org config file and refresh `package-quickstart'.
+    Credit to Emacs From Scratch for this one!"
       (interactive)
       (when (string-equal (file-name-directory (buffer-file-name))
                           (expand-file-name user-emacs-directory))
         ;; Dynamic scoping to the rescue
         (let ((org-confirm-babel-evaluate nil))
           (org-babel-tangle)
-          (package-quickstart-refresh)
-          )))
+          (package-quickstart-refresh))))
 
     (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'start/org-babel-tangle-config)))
 #+end_src
@@ -243,6 +243,7 @@ automatically exports the configuration here to the associated output files.
 ** Show startup time
 #+begin_src emacs-lisp
     (defun start/display-startup-time ()
+      "Display Emacs startup time and number of garbage collections."
       (interactive)
       (message "Emacs loaded in %s with %d garbage collections."
                (format "%.2f seconds"
@@ -280,8 +281,8 @@ With Emacs 29 use-package is now built-in.
 This code eliminates the need to type :ensure t for each package download.
 Instead, you'll only need to use :ensure nil when you want to explicitly prevent a package from being downloaded.
 #+begin_src emacs-lisp
-    (require 'use-package-ensure) ;; Load use-package-always-ensure
-    (setq use-package-always-ensure t) ;; Always ensures that a package is installed
+    (require 'use-package-ensure) ; Load use-package-always-ensure
+    (setq use-package-always-ensure t) ; Always ensures that a package is installed
 #+end_src
 
 **** Most used parts of use-package
@@ -294,34 +295,33 @@ This code block is not tangled, it is just an example.
     ;; Configure the 'foo' package
     ;; You can also use (use-package emacs) to customize Emacs with use-package.
     (use-package foo
-      :init (message "Before")    ;; execute code Before a package is loaded.
-      :config (message "After")   ;; execute code After a package is loaded.
-      :custom (foovar t)          ;; Customization of package custom variables same as setq.
-      :ensure t                   ;; Ensure the package is installed if it's not already.
+      :init (message "Before")    ; execute code Before a package is loaded.
+      :config (message "After")   ; execute code After a package is loaded.
+      :custom (foovar t)          ; Customization of package custom variables same as setq.
+      :ensure t                   ; Ensure the package is installed if it's not already.
 
       ;; These are also used for lazy loading.
       ;; Don't load the package until these are not true.
-      :bind ("C-." . myfunc)      ;; Defer package loading until keybindings are invoked.
-      :after (mypackage)          ;; Load package after specified packages have been loaded.
+      :bind ("C-." . myfunc)      ; Defer package loading until keybindings are invoked.
+      :after (mypackage)          ; Load package after specified packages have been loaded.
       ;; If you don't know what a hook is:
       ;; C-h i: g for goto-node: Type (emacs)Hooks
-      :hook (myhook . myfunc)     ;; Add functions to specified hooks when the package is loaded.
+      :hook (myhook . myfunc)     ; Add functions to specified hooks when the package is loaded.
 
-      :command (bar)              ;; Define commands provided by the package to be lazy-loaded.
-      :defer t                    ;; Only load this package if it's explicitly needed or a command/hook associated with it is called.
+      :command (bar)              ; Define commands provided by the package to be lazy-loaded.
+      :defer t                    ; Only load this package if it's explicitly needed or a command/hook associated with it is called.
       ;; Install package with package.el from source.
       :vc (:url "<You git repo url>"
                 :branch "main"
-                :rev :newest) ;; Use latest commit
-      )
+                :rev :newest)) ; Use latest commit
 #+end_src
 
 *** Setting package repositories
 Like Linux distributions, Emacs uses repositories to manage its packages.
 #+begin_src emacs-lisp
-    (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
+    (setq package-archives '(("melpa" . "https://melpa.org/packages/") ; Sets default package repositories
                              ("elpa" . "https://elpa.gnu.org/packages/")
-                             ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; For Eat Terminal
+                             ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ; For Eat Terminal
 #+end_src
 
 *** Package quickstart
@@ -342,7 +342,7 @@ Avg:
 Package quickstart only works with package.el.
 If you plan to use a different package manager, remember to remove this section and the package-quickstart-refresh line in the Auto-tangle hook.
 #+begin_src emacs-lisp
-    (setq package-quickstart t) ;; For blazingly fast startup times, this line makes startup miles faster
+    (setq package-quickstart t) ; For blazingly fast startup times, this line makes startup miles faster
 #+end_src
 
 *** Package Async
@@ -351,7 +351,7 @@ Makes package installation about 30 sec faster.
 Only works with package.el.
 #+begin_src emacs-lisp
     (use-package async
-      :defer
+      :defer t
       :custom
       (dired-async-mode t)
       (async-bytecomp-package-mode t)
@@ -364,67 +364,69 @@ Only works with package.el.
     (use-package emacs
       :custom
       ;; Still needed for terminals
-      (menu-bar-mode nil)         ;; Disable the menu bar
-      (scroll-bar-mode nil)       ;; Disable the scroll bar
-      (tool-bar-mode nil)         ;; Disable the tool bar
+      (menu-bar-mode nil)         ; Disable the menu bar
+      (scroll-bar-mode nil)       ; Disable the scroll bar
+      (tool-bar-mode nil)         ; Disable the tool bar
 
-      ;;(inhibit-startup-screen t)  ;; Disable welcome screen
+      ;;(inhibit-startup-screen t)  ; Disable welcome screen
 
-      (delete-selection-mode t)   ;; Select text and delete it by typing.
-      (electric-indent-mode nil)  ;; Turn off the weird indenting that Emacs does by default.
-      (electric-pair-mode t)      ;; Turns on automatic parens pairing
+      (delete-selection-mode t)   ; Select text and delete it by typing.
+      (electric-indent-mode nil)  ; Turn off the weird indenting that Emacs does by default.
+      (electric-pair-mode t)      ; Turns on automatic parens pairing
 
-      (blink-cursor-mode nil)     ;; Don't blink cursor
-      (global-auto-revert-mode t) ;; Automatically reload file and show changes if the file has changed
-      ;; (use-short-answers t)   ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
+      (blink-cursor-mode nil)     ; Don't blink cursor
+      (global-auto-revert-mode t) ; Automatically reload file and show changes if the file has changed
+      ;; (use-short-answers t)   ; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
 
-      ;;(dired-kill-when-opening-new-dired-buffer t) ;; Dired don't create new buffer
-      ;;(recentf-mode t) ;; Enable recent file mode
-      ;;(context-menu-mode t) ;; Right-click menu
+      ;; (dired-kill-when-opening-new-dired-buffer t) ; Dired don't create new buffer
+      ;; (dired-mouse-drag-files t) ; Enable Drag and Drop support in dired (Only works in X11)
 
-      ;;(global-visual-line-mode t)           ;; Enable line wrapping (NOTE: breaks vundo)
-      (global-display-line-numbers-mode t)  ;; Display line numbers
-      ;;(display-line-numbers-type 'relative) ;; Relative line numbers
-      (global-hl-line-mode t)               ;; Highlight current line
+      ;; (recentf-mode t) ; Enable recent file mode
+      ;; (context-menu-mode t) ; Right-click menu
+      ;; (savehist-mode t) ; Enables save history mode
 
-      (native-comp-async-report-warnings-errors 'silent) ;; Don't show native comp errors
-      (warning-minimum-level :error) ;; Only show errors in warnings buffer
+      ;; (global-visual-line-mode t)           ; Enable line wrapping (NOTE: breaks vundo)
+      (global-display-line-numbers-mode t)  ; Display line numbers
+      ;; (display-line-numbers-type 'relative) ; Relative line numbers
+      (global-hl-line-mode t)               ; Highlight current line
 
-      (mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling
-      (scroll-conservatively 10) ;; Smooth scrolling
+      (native-comp-async-report-warnings-errors 'silent) ; Don't show native comp errors
+      (warning-minimum-level :error) ; Only show errors in warnings buffer
+
+      (mouse-wheel-progressive-speed nil) ; Disable progressive speed when scrolling
+      (scroll-conservatively 10) ; Smooth scrolling
       (scroll-margin 8)
 
-      ;; (pixel-scroll-precision-mode t) ;; Precise pixel scrolling. i.e. smooth scrolling (GUI only)
+      ;; (pixel-scroll-precision-mode t) ; Precise pixel scrolling. i.e. smooth scrolling (GUI only)
       ;; (pixel-scroll-precision-use-momentum nil)
 
-      (indent-tabs-mode nil) ;; Only use spaces for indentation
+      (indent-tabs-mode nil) ; Only use spaces for indentation
       (tab-width 4)
-      (sgml-basic-offset 4) ;; Set Html mode indentation to 4
-      (c-ts-mode-indent-offset 4) ;; Fix weird indentation in c-ts (C, C++)
-      (go-ts-mode-indent-offset 4) ;; Fix weird indentation in go-ts
+      (sgml-basic-offset 4) ; Set Html mode indentation to 4
+      (c-ts-mode-indent-offset 4) ; Fix weird indentation in c-ts (C, C++)
+      (go-ts-mode-indent-offset 4) ; Fix weird indentation in go-ts
 
-      ;; (display-fill-column-indicator-column 80) ;; Set line length indicator to 80 characters
+      ;; (display-fill-column-indicator-column 80) ; Set line length indicator to 80 characters
       (whitespace-style '(face tabs tab-mark trailing))
 
-      (make-backup-files nil) ;; Stop creating ~ backup files
-      (auto-save-default nil) ;; Stop creating # auto save files
+      (make-backup-files nil) ; Stop creating ~ backup files
+      (auto-save-default nil) ; Stop creating # auto save files
       (delete-by-moving-to-trash t)
       :hook
-      (prog-mode . hs-minor-mode) ;; Enable folding hide/show globally
-      ;; (prog-mode . display-fill-column-indicator-mode) ;; Display line length indicator
+      (prog-mode . hs-minor-mode) ; Enable folding hide/show globally
+      ;; (prog-mode . display-fill-column-indicator-mode) ; Display line length indicator
       (prog-mode . whitespace-mode)
       :config
       ;; Move customization variables to a separate file and load it, avoid filling up init.el with unnecessary variables
       (setq custom-file (locate-user-emacs-file "custom-vars.el"))
       (load custom-file 'noerror 'nomessage)
       :bind (
-             ([escape] . keyboard-escape-quit) ;; Makes Escape quit prompts (Minibuffer Escape)
+             ([escape] . keyboard-escape-quit) ; Makes Escape quit prompts (Minibuffer Escape)
              ;; Zooming In/Out
              ("C-+" . text-scale-increase)
              ("C--" . text-scale-decrease)
              ("<C-wheel-up>" . text-scale-increase)
-             ("<C-wheel-down>" . text-scale-decrease)
-             ))
+             ("<C-wheel-down>" . text-scale-decrease)))
 #+end_src
 
 * Important to load first
@@ -441,7 +443,6 @@ You can also try out [[https://github.com/meow-edit/meow][meow]] which is Yet an
 
 Notes:
 - You can toggle evil mode with C-z.
-- To paste without yank select the text and use P. This line is especially for ThePrimeagen :)
 
 *To use it, remove :tangle no from the beginning of the source code block.*
 #+begin_src emacs-lisp :tangle no
@@ -453,12 +454,12 @@ Notes:
       (evil-set-initial-state 'eat-mode 'insert) ;; Set initial state in eat terminal to insert mode
       ;; (global-set-key [C-backspace] 'evil-delete-backward-word) ;; Make C-backspace less agressive
       :custom
-      (evil-want-keybinding nil)    ;; Disable evil bindings in other modes (It's not consistent and not good)
-      (evil-want-C-u-scroll t)      ;; Set C-u to scroll up
-      (evil-want-C-i-jump nil)      ;; Disables C-i jump
-      (evil-undo-system 'undo-redo) ;; C-r to redo
+      (evil-want-keybinding nil)    ; Disable evil bindings in other modes (It's not consistent and not good)
+      (evil-want-C-u-scroll t)      ; Set C-u to scroll up
+      (evil-want-C-i-jump nil)      ; Disables C-i jump
+      (evil-undo-system 'undo-redo) ; C-r to redo
       (evil-want-fine-undo t)
-      ;; (evil-respect-visual-line-mode t) ;; Move in wrap lines
+      ;; (evil-respect-visual-line-mode t) ; Move in wrap lines
       ;; Unmap keys in 'evil-maps. If not done, org-return-follows-link will not work
       :bind (:map evil-motion-state-map
                   ("SPC" . nil)
@@ -485,22 +486,22 @@ And it is also really customizable.
 Note: The Leader key is what you will press when you want to access your keybindings: C-SPC + .  Find file
 #+begin_src emacs-lisp
     (defun start/open-init-file ()
-      "Open init.org configuration file"
+      "Open init.org configuration file."
       (interactive)
       (find-file "~/.config/emacs/init.org"))
 
     (defun start/reload-config()
-      "Reload Emacs config"
+      "Reload Emacs config."
       (interactive)
       (load-file "~/.config/emacs/init.el"))
 
     (use-package general
-      ;; :after (evil) ;; <- evil
+      ;; :after (evil) ; <- evil
       :config
-      ;; (general-evil-setup) ;; <- evil
+      ;; (general-evil-setup) ; <- evil
       ;; Set up 'C-SPC' as the leader key
       (general-create-definer start/leader-keys
-        ;; :states '(normal insert visual motion emacs) ;; <- evil
+        ;; :states '(normal insert visual motion emacs) ; <- evil
         :keymaps 'override
         :prefix "C-SPC"
         :global-prefix "C-SPC") ;; Set global leader key so we can access our keybindings from any state
@@ -630,12 +631,12 @@ Evil users don't need to add keybindings for undo-fu just change evil-undo-syste
 *To use it, remove :tangle no from the beginning of the source code block.*
 #+begin_src emacs-lisp :tangle no
     (use-package undo-fu
-      :defer
+      :defer t
       :config
       ;; Increase undo history limits to reduce likelihood of data loss
-      (setq undo-limit (* 1024 1024 64)          ;; 64mb  (default is 160kb)
-            undo-strong-limit (* 1024 1024 96)   ;; 96mb  (default is 240kb)
-            undo-outer-limit (* 1024 1024 960))) ;; 960mb (default is 24mb)
+      (setq undo-limit (* 1024 1024 64)          ; 64mb  (default is 160kb)
+            undo-strong-limit (* 1024 1024 96)   ; 96mb  (default is 240kb)
+            undo-outer-limit (* 1024 1024 960))) ; 960mb (default is 24mb)
 
     (use-package undo-fu-session
       :hook (after-init . undo-fu-session-global-mode)
@@ -647,7 +648,7 @@ Evil users don't need to add keybindings for undo-fu just change evil-undo-syste
         (setq undo-fu-session-compression 'zst)))
 
     (use-package vundo
-      :defer
+      :defer t
       :custom
       (vundo-glyph-alist vundo-unicode-symbols)
       (vundo-compact-display t))
@@ -668,10 +669,11 @@ Use consult-theme to easily try out themes (*Epilepsy* Warning).
 ** Transparency
 With Emacs version 29, true transparency has been added.
 #+begin_src emacs-lisp
-    (add-to-list 'default-frame-alist '(alpha-background . 90)) ;; For all new frames henceforth
+    (add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
 
     ;; Transparency in terminal
     (defun start/tui-enable-transparency ()
+      "Enable background transparency when running Emacs in a terminal emulator."
       (unless (display-graphic-p (selected-frame))
         (set-face-background 'default "unspecified-bg" (selected-frame))))
 
@@ -683,7 +685,7 @@ A fancy, fast and customizable mode-line.
 #+begin_src emacs-lisp
     (use-package doom-modeline
       :custom
-      (doom-modeline-height 25) ;; Set modeline height
+      (doom-modeline-height 25) ; Set modeline height
       :hook (after-init . doom-modeline-mode))
 #+end_src
 
@@ -694,7 +696,7 @@ Don't forget nerd-icons-install-fonts to install the resource fonts.
 We use nerd-icons because it supports both GUI and TUI unlike all-the-icons.
 Also Doom modeline requires nerd icons.
 #+begin_src emacs-lisp
-    (use-package nerd-icons :defer)
+    (use-package nerd-icons :defer t)
 
     (use-package nerd-icons-dired
       :hook (dired-mode . nerd-icons-dired-mode))
@@ -717,17 +719,18 @@ We use projectile because it:
 - is developed faster.
 More [[https://docs.projectile.mx/projectile/projectile_vs_project.html][reasons]] to use projectile.
 
-You can also make the [[https://github.com/karthink/consult-dir][consult-dir]] package list all the directories you [[https://github.com/MiniApollo/config/blob/main/emacs/init.org#consult-dir][specified]] and search from them like in tmux-sessionizer.
+You can also create a [[https://github.com/theprimeagen/tmux-sessionizer][tmux-sessionizer]] like [[https://github.com/MiniApollo/config/blob/main/emacs/init.org#project-sessionizer][setup]] to easily search your work directories.
+It's useful if don't use standard project structures (or there is none).
 #+begin_src emacs-lisp
     (use-package projectile
       :hook (after-init . projectile-mode)
       :config
       (projectile-mode)
       :custom
-      ;; (projectile-auto-discover nil) ;; Disable auto search for better startup times ;; Search with a keybind
-      (projectile-run-use-comint-mode t) ;; Interactive run dialog when running projects inside emacs (like giving input)
-      (projectile-switch-project-action #'projectile-dired) ;; Open dired when switching to a project
-      (projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search the first subdirectory level for projects
+      ;; (projectile-auto-discover nil) ; Disable auto search for better startup times. Search with a keybind
+      ;; (projectile-run-use-comint-mode t) ; Interactive run dialog when running projects inside emacs (like giving input)
+      (projectile-switch-project-action #'projectile-dired) ; Open dired when switching to a project
+      (projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ; . 1 means only search the first subdirectory level for projects
 #+end_src
 
 ** Eglot
@@ -752,19 +755,19 @@ We don't use it because Eglot is more than enough for most people.
 If you want to use LSP mode check out their [[https://emacs-lsp.github.io/lsp-mode/][documentation]] or the [[https://github.com/MiniApollo/kickstart.emacs/wiki][project wiki]] page for more information.
 #+begin_src emacs-lisp
     (use-package eglot
-      :ensure nil ;; Don't install eglot because it's now built-in
-      :hook ((c-mode c++-mode ;; Autostart lsp servers for a given mode
-                     lua-mode) ;; Lua-mode needs to be installed
+      :ensure nil ; Don't install eglot because it's now built-in
+      :hook ((c-mode c++-mode ; Autostart lsp servers for a given mode
+                     lua-mode) ; Lua-mode needs to be installed
              . eglot-ensure)
       :custom
       ;; Good default
-      (eglot-events-buffer-size 0) ;; No event buffers (LSP server logs)
-      (eglot-autoshutdown t);; Shutdown unused servers.
-      (eglot-report-progress nil) ;; Disable LSP server logs (Don't show lsp messages at the bottom, java)
+      (eglot-events-buffer-size 0) ; No event buffers (LSP server logs)
+      (eglot-autoshutdown t) ; Shutdown unused servers.
+      (eglot-report-progress nil) ; Disable LSP server logs (Don't show lsp messages at the bottom, java)
       ;; Manual lsp servers
       ;;:config
       ;;(add-to-list 'eglot-server-programs
-      ;;             `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
+      ;;             `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ; Adds our lua lsp server to eglot's server list
       )
 #+end_src
 
@@ -783,7 +786,7 @@ Show flymake errors with sideline.
     (use-package sideline-flymake
       :hook (flymake-mode . sideline-mode)
       :custom
-      (sideline-flymake-display-mode 'line) ;; Show errors on the current line
+      (sideline-flymake-display-mode 'line) ; Show errors on the current line
       (sideline-backends-right '(sideline-flymake)))
 #+end_src
 
@@ -797,13 +800,12 @@ To use it write out the full keyword (or use autocompletion) and press Tab.
     (use-package yasnippet-snippets :defer)
 
     (defun start/corfu-yas-tab-handler ()
-      "Prioritize corfu over yasnippet when yasnippet is active"
+      "Prioritize corfu over yasnippet when yasnippet is active."
       (interactive)
       ;; There is no direct way to get if corfu is currently displayed so we watch the completion index
       (if (> corfu--index -1)
           (corfu-complete)
-        (yas-next-field-or-maybe-expand)
-        ))
+        (yas-next-field-or-maybe-expand)))
     (use-package emacs
       :after (yasnippet corfu)
       :bind
@@ -825,13 +827,13 @@ Note: If you want to use a different package manager you need to change :vc(url 
                 :rev :newest)
       :hook (after-init . global-snippy-minor-mode)
       :custom
-      (snippy-global-languages '("global")) ;; Recomended
+      (snippy-global-languages '("global")) ; Recomended
       ;; Optional
       ;; (snippy-install-dir (expand-file-name <Your location>))
       ;; Use different snippet collections
       ;; (snippy-source '("Your git repo" . "my-snippets-dir"))
       :config
-      (snippy-install-or-update-snippets)) ;; Autoupdate git repo
+      (snippy-install-or-update-snippets)) ; Autoupdate git repo
 #+end_src
 
 ** Tree-Sitter
@@ -876,7 +878,7 @@ To explore the current buffer's syntax tree, use the treesit-explore-mode comman
             (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
     (defun start/install-treesit-grammars ()
-      "Install missing treesitter grammars"
+      "Install missing treesitter grammars."
       (interactive)
       (dolist (grammar treesit-language-source-alist)
         (let ((lang (car grammar)))
@@ -899,8 +901,7 @@ To explore the current buffer's syntax tree, use the treesit-explore-mode comman
             (js-json-mode . json-ts-mode)
             (typescript-mode . typescript-ts-mode)
             (conf-toml-mode . toml-ts-mode)
-            (gdscript-mode . gdscript-ts-mode)
-            ))
+            (gdscript-mode . gdscript-ts-mode)))
     (setq treesit-font-lock-level 3)
 
     ;; Or if there is no built in mode
@@ -925,13 +926,13 @@ You can easily write your own font locking with treesitter
       :config
       (defvar start/ts-font-lock-settings
         (treesit-font-lock-rules
-         :language 'go ;; What language
-         :feature 'function-highlight ;; A unique feature name that we can toggle.
+         :language 'go ; What language
+         :feature 'function-highlight ; A unique feature name that we can toggle.
          `(
            ;; Function calls
            (call_expression
             function: (selector_expression
-                       field: (field_identifier) @font-lock-function-call-face)) ;; Use 'describe-face' to find faces
+                       field: (field_identifier) @font-lock-function-call-face)) ; Use 'describe-face' to find faces
            ;; Property values
            (argument_list
             (selector_expression
@@ -941,13 +942,12 @@ You can easily write your own font locking with treesitter
              field: (field_identifier) @font-lock-property-use-face))
            ;; ((Treesit patern) @defface_Settings)
            ))
-        "Go-ts-mode settings, fix not highlighting function calls and property values")
+        "Go-ts-mode settings, fix not highlighting function calls and property values.")
 
       (add-hook 'go-ts-mode-hook
                 (lambda () (setq-local treesit-font-lock-settings
                                        (append treesit-font-lock-settings
-                                               start/ts-font-lock-settings))))
-      )
+                                               start/ts-font-lock-settings)))))
 #+end_src
 
 ** Language modes
@@ -963,7 +963,7 @@ Example, how to setup a language mode.
 Use C-SPC tab to uncomment the lines.
 # #+begin_src emacs-lisp
 #     (use-package lua-mode
-#       :mode "\\.lua\\'") ;; Only start in a lua file
+#       :mode "\\.lua\\'") ; Only start in a lua file
 # #+end_src
 
 *** Org Mode
@@ -987,11 +987,10 @@ Much easier than org-tempo
     (use-package org
       :ensure nil
       :custom
-      (org-edit-src-content-indentation 4) ;; Set src block automatic indent to 4 instead of 2.
-      (org-return-follows-link t)   ;; Sets RETURN key in org-mode to follow links
+      (org-edit-src-content-indentation 4) ; Set src block automatic indent to 4 instead of 2.
+      (org-return-follows-link t)   ; Sets RETURN key in org-mode to follow links
       :hook
-      (org-mode . org-indent-mode) ;; Indent text
-      )
+      (org-mode . org-indent-mode)) ; Indent text
 #+end_src
 
 **** Table of Contents
@@ -1015,10 +1014,11 @@ Eat(Emulate A Terminal) is a terminal emulator within Emacs.
 It's more portable and less overhead for users over like vterm or eshell.
 We setup eat with eshell, if you want to use bash, zsh etc., check out their git [[https://codeberg.org/akib/emacs-eat][repository]] how to do it.
 
-If you want a faster and more responsive terminal emulator try out vterm.
+If you want a faster and more responsive terminal emulator try out vterm or ghostel.
+Ghostel is currently the fastest one I've found. It's nearly as fast as a native terminal.
 #+begin_src emacs-lisp
     (use-package eat
-      :defer
+      :defer t
       :hook ('eshell-load-hook #'eat-eshell-mode))
 #+end_src
 
@@ -1058,16 +1058,15 @@ And now we can use everything from that file.
 Complete text-based user interface to Git.
 #+begin_src emacs-lisp
     (use-package transient
-      :defer
+      :defer t
       :config
-      (define-key transient-map (kbd "<escape>") 'transient-quit-one)) ;; Make escape quit magit prompts
+      (define-key transient-map (kbd "<escape>") 'transient-quit-one)) ; Make escape quit magit prompts
 
     (use-package magit
-      :defer
-      :custom (magit-diff-refine-hunk (quote all)) ;; Shows inline diff
+      :defer t
+      :custom (magit-diff-refine-hunk (quote all)) ; Shows inline diff
       :config
-      (setopt magit-format-file-function #'magit-format-file-nerd-icons) ;; Magit nerd icons
-      )
+      (setopt magit-format-file-function #'magit-format-file-nerd-icons)) ; Magit nerd icons
 #+end_src
 
 ** Diff-hl
@@ -1090,20 +1089,21 @@ Notes:
     (use-package corfu
       ;; Optional customizations
       :custom
-      (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-      (corfu-auto t)                 ;; Enable auto completion
-      (corfu-auto-prefix 2)          ;; Minimum length of prefix for auto completion.
-      (corfu-popupinfo-mode t)       ;; Enable popup information
-      (corfu-popupinfo-delay 0.5)    ;; Lower popup info delay to 0.5 seconds from 2 seconds
-      (corfu-separator ?\s)          ;; Orderless field separator, Use M-SPC to enter separator
-      ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-      ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-      ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-      ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
-      ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-      ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-      (completion-ignore-case t)
+      (corfu-cycle t)                ; Enable cycling for `corfu-next/previous'
+      (corfu-auto t)                 ; Enable auto completion
+      (corfu-auto-prefix 2)          ; Minimum length of prefix for auto completion.
+      (corfu-popupinfo-mode t)       ; Enable popup information
+      (corfu-popupinfo-delay 0.5)    ; Lower popup info delay to 0.5 seconds from 2 seconds
 
+      (corfu-separator ?\s)          ; Orderless field separator, Use M-SPC to enter separator
+      ;; (corfu-quit-at-boundary nil)   ; Never quit at completion boundary
+      ;; (corfu-quit-no-match nil)      ; Never quit, even if there is no match
+      ;; (corfu-preview-current nil)    ; Disable current candidate preview
+      ;; (corfu-preselect 'prompt)      ; Preselect the prompt
+      ;; (corfu-on-exact-match nil)     ; Configure handling of exact matches
+      ;; (corfu-scroll-margin 5)        ; Use scroll margin
+
+      (completion-ignore-case t)
       ;; Emacs 30 and newer: Disable Ispell completion function.
       ;; Try `cape-dict' as an alternative.
       (text-mode-ispell-word-completion nil)
@@ -1112,7 +1112,7 @@ Notes:
       ;; `completion-at-point' is often bound to M-TAB.
       (tab-always-indent 'complete)
 
-      (corfu-preview-current nil) ;; Don't insert completion without confirmation
+      (corfu-preview-current nil) ; Don't insert completion without confirmation
       ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
       ;; be used globally (M-/).  See also the customization variable
       ;; `global-corfu-modes' to exclude certain modes.
@@ -1136,10 +1136,10 @@ Notes:
 - Be aware when adding Capfs (Completion-at-point-functions) to the list since each of the Capfs adds a small runtime cost.
 Read the [[https://github.com/minad/cape#configuration][configuration section]] in Cape's readme for more information.
 #+begin_src emacs-lisp
-    (use-package yasnippet-capf :defer)
+    (use-package yasnippet-capf :defer t)
 
     (defun start/setup-capfs ()
-      "Configure completion backends"
+      "Configure completion backends."
       ;; Take care when adding Capfs to the list since each of the Capfs adds a small runtime cost.
       (let ((merge-backends (list
                              #'cape-keyword      ;; Keyword completion
@@ -1220,10 +1220,7 @@ One alternative is ivy and counsel, check out the [[https://github.com/MiniApoll
       ;;            ("C-u" . vertico-scroll-down)
       ;;            ("C-d" . vertico-scroll-up))
       :custom
-      (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
-      )
-
-    (savehist-mode) ;; Enables save history mode
+      (vertico-cycle t)) ; Enable cycling for `vertico-next/previous'
 
     (use-package marginalia
       :after vertico
@@ -1241,7 +1238,7 @@ One alternative is ivy and counsel, check out the [[https://github.com/MiniApoll
 ** Embark
 Emacs Mini-Buffer Actions Rooted in Keymaps. Right click like menu for Emacs.
 #+begin_src emacs-lisp
-    (use-package embark :defer)
+    (use-package embark :defer t)
     (use-package embark-consult
       :hook
       (embark-collect-mode . consult-preview-at-point-mode))
@@ -1328,15 +1325,14 @@ An alternative to the built-in Emacs help that provides much more contextual inf
       ("C-h f" . helpful-callable)
       ("C-h v" . helpful-variable)
       ("C-h k" . helpful-key)
-      ("C-h x" . helpful-command)
-      )
+      ("C-h x" . helpful-command))
 #+end_src
 
 ** Diminish
 This package implements hiding or abbreviation of the modeline displays (lighters) of minor-modes.
 With this package installed, you can add ‘:diminish’ to any use-package block to hide that particular mode in the modeline.
 #+begin_src emacs-lisp
-    (use-package diminish :defer)
+    (use-package diminish :defer t)
 #+end_src
 
 ** Rainbow Delimiters
@@ -1375,8 +1371,7 @@ Highlight TODO keywords.
               ;; from project to project.
               ("NOTE" success bold)
               ("BUG" error bold)
-              ("XXX" font-lock-constant-face bold)))
-      )
+              ("XXX" font-lock-constant-face bold))))
 #+end_src
 
 ** Indent-guide
@@ -1386,14 +1381,14 @@ Show indentation.
       :hook
       (prog-mode . indent-guide-mode)
       :config
-      (setq indent-guide-char "│")) ;; Set the character used for the indent guide.
+      (setq indent-guide-char "│")) ; Set the character used for the indent guide.
 #+end_src
 
 ** Which-Key
 Which-key is a helper utility for keychords (which key to press).
 #+begin_src emacs-lisp
     (use-package which-key
-      :ensure nil ;; Don't install which-key because it's now built-in
+      :ensure nil ; Don't install which-key because it's now built-in
       :hook (after-init . which-key-mode)
       :diminish
       :custom
@@ -1421,7 +1416,7 @@ Benchmark Emacs Startup time: M-x esup
 *To use it, remove :tangle no from the beginning of the source code block.*
 #+begin_src emacs-lisp :tangle no
     (use-package esup
-      :defer
+      :defer t
       :custom
       (esup-depth 0))
 #+end_src
