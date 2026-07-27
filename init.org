@@ -486,7 +486,7 @@ We use general because it gives:
 - a consistent and unified interface for managing keybinds.
 And it is also really customizable.
 
-Note: The Leader key is what you will press when you want to access your keybindings: M-n + .  Find file
+Note: The Leader key is what you will press when you want to access your keybindings: C-SPC + .  Find file
 #+begin_src emacs-lisp
     (defun start/open-init-file ()
       "Open init.org configuration file."
