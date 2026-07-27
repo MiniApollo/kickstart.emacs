@@ -1141,41 +1141,44 @@ Read the [[https://github.com/minad/cape#configuration][configuration section]] 
       "Configure completion backends."
       ;; Take care when adding Capfs to the list since each of the Capfs adds a small runtime cost.
       (let ((merge-backends (list
-                             #'cape-keyword      ;; Keyword completion
-                             ;; #'cape-abbrev       ;; Complete abbreviation
-                             #'cape-dabbrev      ;; Complete word from current buffers
-                             ;; #'cape-line         ;; Complete entire line from current buffer
-                             ;; #'cape-history      ;; Complete from Eshell, Comint or minibuffer history
-                             ;; #'cape-dict         ;; Dictionary completion (Needs Dictionary file installed)
-                             ;; #'cape-tex          ;; Complete Unicode char from TeX command, e.g. \hbar
-                             ;; #'cape-sgml         ;; Complete Unicode char from SGML entity, e.g., &alpha
-                             ;; #'cape-rfc1345      ;; Complete Unicode char using RFC 1345 mnemonics
-                             ;; #'snippy-capf       ;; Vscode Snippets (Snippy needs to be installed)
-                             #'yasnippet-capf    ;; Yasnippet snippets
+                             ;; Snippy-capf needed to be first, so characters like !,@, etc. Works with Snippy.
+                             ;; When cape-capf-super combines multiple completion functions, it uses the prefix boundaries of the first capf.
+                             ;; Other capf have different prefix boundaries.
+                             ;;#'snippy-capf       ; Vscode Snippets
+                             #'yasnippet-capf    ; Yasnippet snippets
+                             ;; #'cape-abbrev       ; Complete abbreviation
+                             #'cape-dabbrev      ; Complete word from current buffers
+                             #'cape-keyword      ; Keyword completion
+                             ;; #'cape-line         ; Complete entire line from current buffer
+                             ;; #'cape-history      ; Complete from Eshell, Comint or minibuffer history
+                             ;; #'cape-dict         ; Dictionary completion (Needs Dictionary file installed)
+                             ;; #'cape-tex          ; Complete Unicode char from TeX command, e.g. \hbar
+                             ;; #'cape-sgml         ; Complete Unicode char from SGML entity, e.g., &alpha
+                             ;; #'cape-rfc1345      ; Complete Unicode char using RFC 1345 mnemonics
                              ))
             (seperate-backends (list
-                                #'cape-file ;; Path completion
-                                #'cape-elisp-block ;; Complete elisp in Org or Markdown mode
+                                #'cape-file ; Path completion
+                                #'cape-elisp-block ; Complete elisp in Org or Markdown mode
                                 )))
-        ;; Remove keyword completion in git commits
-        (when (derived-mode-p 'git-commit-mode)
-          (setq merge-backends (remq #'cape-keyword merge-backends)))
+
+        ;; Remove keyword and snippet completion in git commits
+        (when (bound-and-true-p git-commit-mode)
+          (dolist (backend '(cape-keyword snippy-capf yasnippet-capf))
+            (setq merge-backends (remq backend merge-backends))))
 
         ;; Add Elisp symbols only in Elisp modes
         (when (derived-mode-p 'emacs-lisp-mode 'ielm-mode)
-          (setq merge-backends (cons #'cape-elisp-symbol merge-backends))) ;; Emacs Lisp code (functions, variables)
+          (setq merge-backends (cons #'cape-elisp-symbol merge-backends))) ; Emacs Lisp code (functions, variables)
 
         ;; Add Eglot to the front of the list if it's active
         (when (bound-and-true-p eglot--managed-mode)
-          (setq merge-backends (cons #'eglot-completion-at-point merge-backends)))
+          (setq merge-backends (append merge-backends (list #'eglot-completion-at-point))))
 
         ;; Create the super-capf and set it buffer-locally
         (setq-local completion-at-point-functions
                     (append
                      seperate-backends
-                     (list (apply #'cape-capf-super merge-backends)))
-                    )))
-
+                     (list (apply #'cape-capf-super merge-backends))))))
     (use-package cape
       :after (corfu)
       :init
@@ -1187,18 +1190,8 @@ Read the [[https://github.com/minad/cape#configuration][configuration section]] 
       ;; Seperate function needed, because we use setq-local (everything is replaced)
       (add-hook 'eglot-managed-mode-hook #'start/setup-capfs)
       (add-hook 'prog-mode-hook #'start/setup-capfs)
-      (add-hook 'text-mode-hook #'start/setup-capfs))
-#+end_src
-
-** Orderless
-Completion style that divides the pattern into space-separated components and matches candidates that match all of the components in any order.
-Recommended for packages like vertico, corfu.
-#+begin_src emacs-lisp
-    (use-package orderless
-      :defer
-      :custom
-      (completion-styles '(orderless basic))
-      (completion-category-overrides '((file (styles basic partial-completion)))))
+      (add-hook 'text-mode-hook #'start/setup-capfs)
+      (add-hook 'git-commit-setup-hook #'start/setup-capfs)) ; Fixes completion in magit commits
 #+end_src
 
 ** Vertico and Marginalia
@@ -1233,6 +1226,18 @@ One alternative is ivy and counsel, check out the [[https://github.com/MiniApoll
       :hook
       (marginalia-mode . nerd-icons-completion-marginalia-setup))
 #+end_src
+
+** Orderless
+Completion style that divides the pattern into space-separated components and matches candidates that match all of the components in any order.
+Recommended for packages like vertico, corfu.
+#+begin_src emacs-lisp
+    (use-package orderless
+      :defer t
+      :custom
+      (completion-styles '(orderless basic))
+      (completion-category-overrides '((file (styles basic partial-completion)))))
+#+end_src
+
 
 ** Embark
 Emacs Mini-Buffer Actions Rooted in Keymaps. Right click like menu for Emacs.
