@@ -5,19 +5,19 @@
 
 ;; Set garbage collector (from doom emacs)
 ;; About 0.02 faster
-(setq gc-cons-threshold (* 1024 1024 128)  ;; 128mb
-      gc-cons-percentage 1.0) ;; Disable the dynamic percentage trigger to ensure GC frequency is fixed.
+(setq gc-cons-threshold (* 1024 1024 128)  ; 128mb
+      gc-cons-percentage 1.0) ; Disable the dynamic percentage trigger to ensure GC frequency is fixed.
 
 ;; Runtime performance
 ;; Dial the GC threshold back down so that garbage collection happens more frequently but in less time.
 ;; Make GC pauses faster by decreasing the threshold.
 ;; About 0.02 faster
 (add-hook 'emacs-startup-hook (lambda ()
-                                (setq gc-cons-threshold (* 1024 1024 2) ;; 2mb
+                                (setq gc-cons-threshold (* 1024 1024 2) ; 2mb
                                       gc-cons-percentage 0.2)))
 
 ;; Increase the amount of data which Emacs reads from the process
-(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq read-process-output-max (* 1024 1024)) ; 1mb
 
 ;; Unset file-name-handler-alist
 ;; About 0.07 faster
@@ -36,20 +36,20 @@
 
 ;; Disable UI elements before UI initialization.
 ;; For faster startup times. It gives 0.05 sec.
-(setq menu-bar-mode nil)         ;; Disable the menu bar
-(setq tool-bar-mode nil)         ;; Disable the tool bar
-(push '(vertical-scroll-bars) default-frame-alist) ;; Disable the scroll bar
+(setq menu-bar-mode nil)         ; Disable the menu bar
+(setq tool-bar-mode nil)         ; Disable the tool bar
+(push '(vertical-scroll-bars) default-frame-alist) ; Disable the scroll bar
 
 ;;; FONTS
 ;; Startup about 0.01 faster
 (set-face-attribute 'default nil
-                    ;; :font "JetBrains Mono" ;; Set your favorite type of font or download JetBrains Mono
+                    ;; :font "JetBrains Mono" ; Set your favorite type of font or download JetBrains Mono
                     :height 120
                     :weight 'medium)
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
-;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono")) ;; Set your favorite font
+;; (add-to-list 'default-frame-alist '(font . "JetBrains Mono")) ; Set your favorite font
 (setq-default line-spacing 0.12)
 
 (prefer-coding-system 'utf-8)
