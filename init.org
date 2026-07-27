@@ -46,8 +46,8 @@
 - [[#completion][Completion]]
   - [[#corfu][Corfu]]
   - [[#cape][Cape]]
-  - [[#orderless][Orderless]]
   - [[#vertico-and-marginalia][Vertico and Marginalia]]
+  - [[#orderless][Orderless]]
   - [[#embark][Embark]]
   - [[#jinx][Jinx]]
 - [[#other-packages][Other packages]]
@@ -797,10 +797,10 @@ Show flymake errors with sideline.
 A template system for Emacs. And yasnippet-snippets is a snippet collection package.
 To use it write out the full keyword (or use autocompletion) and press Tab.
 #+begin_src emacs-lisp
-    (use-package yasnippet
+    (use-package yasnippet-snippets
+      ;; :custom
+      ;; (yas-key-syntaxes '("w_" "w_." "^ ")) ;; Fixes prefixes that have characters like: !,@ etc.
       :hook (prog-mode . yas-minor-mode))
-
-    (use-package yasnippet-snippets :defer)
 
     (defun start/corfu-yas-tab-handler ()
       "Prioritize corfu over yasnippet when yasnippet is active."
