@@ -10,7 +10,7 @@
 
 ;; Runtime performance
 ;; Dial the GC threshold back down so that garbage collection happens more frequently but in less time.
-;; Make gc pauses faster by decreasing the threshold.
+;; Make GC pauses faster by decreasing the threshold.
 ;; About 0.02 faster
 (add-hook 'emacs-startup-hook (lambda ()
                                 (setq gc-cons-threshold (* 1024 1024 2) ;; 2mb

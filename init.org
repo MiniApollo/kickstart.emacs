@@ -123,9 +123,9 @@ Or running the command with M-x: help-with-tutorial
 Even if you plan on using Vim keybindings later on, it's a good idea to learn the standard Emacs keybindings.
 If you already know the standard Emacs keybindings, you can skip this step.
 
-After you completed that, you should start learning Emacs lisp.
+After you complete that, you should start learning Emacs lisp.
 It is not necessary to know elisp, but I recommend it. It will open up a whole new world, trust me.
-I used Emacs and Neovim without knowing much about the core language and just copy pasting packages or plugins.
+I used Emacs and Neovim without knowing much about the core language and just copy-pasting packages or plugins.
 But after learning the fundamentals you can customize basically anything and I really mean ANYTHING.
 
 This will look daunting at first, but don't be scared. This is why I am here.
@@ -286,7 +286,7 @@ Instead, you'll only need to use :ensure nil when you want to explicitly prevent
 #+end_src
 
 **** Most used parts of use-package
-Here is some notes on what each use-package keyword does.
+Here are some notes on what each use-package keyword does.
 For more check out the use-package documentation to see how powerful it is:
 C-h i: g for goto-node: Type (use-package)Top
 
@@ -311,7 +311,7 @@ This code block is not tangled, it is just an example.
       :command (bar)              ; Define commands provided by the package to be lazy-loaded.
       :defer t                    ; Only load this package if it's explicitly needed or a command/hook associated with it is called.
       ;; Install package with package.el from source.
-      :vc (:url "<You git repo url>"
+      :vc (:url "<Your git repo url>"
                 :branch "main"
                 :rev :newest)) ; Use latest commit
 #+end_src
@@ -378,7 +378,7 @@ Only works with package.el.
       (global-auto-revert-mode t) ; Automatically reload file and show changes if the file has changed
       ;; (use-short-answers t)   ; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
 
-      ;; (dired-kill-when-opening-new-dired-buffer t) ; Dired don't create new buffer
+      ;; (dired-kill-when-opening-new-dired-buffer t) ; Dired doesn't create new buffer
       ;; (dired-mouse-drag-files t) ; Enable Drag and Drop support in dired (Only works in X11)
 
       ;; (recentf-mode t) ; Enable recent file mode
@@ -436,10 +436,10 @@ An extensible vi/vim layer for Emacs.
 For users who find Emacs's native keybindings less intuitive.
 It integrates Vim's editing style into Emacs, giving you the best of both worlds.
 
-If you want to use vim keybindings I left the following comments in the General Keybindings section to which lines to uncomment ;; <- evil
+If you want to use vim keybindings I left the following comments in the General Keybindings section as to which lines to uncomment ;; <- evil
 
 If you don't want to interfere with the original keybindings.
-You can also try out [[https://github.com/meow-edit/meow][meow]] which is Yet another modal editing on Emacs.
+You can also try out [[https://github.com/meow-edit/meow][meow]] which is Yet another modal editing for Emacs.
 
 Notes:
 - You can toggle evil mode with C-z.
@@ -452,7 +452,7 @@ Notes:
       (evil-mode)
       :config
       (evil-set-initial-state 'eat-mode 'insert) ; Set initial state in eat terminal to insert mode
-      ;; (global-set-key [C-backspace] 'evil-delete-backward-word) ; Make C-backspace less agressive
+      ;; (global-set-key [C-backspace] 'evil-delete-backward-word) ; Make C-backspace less aggressive
       ;; Center cursor when jumping with C-d, C-u.
       ;; (advice-add 'evil-scroll-down :after (lambda (&rest _) (recenter nil)))
       ;; (advice-add 'evil-scroll-up :after (lambda (&rest _) (recenter nil)))
@@ -573,7 +573,7 @@ Note: The Leader key is what you will press when you want to access your keybind
         "r p" '(list-packages :wk "List packages")
         "r c" '(package-menu-clear-filter :wk "Package clear filters")
         "r n" '(package-menu-filter-by-name :wk "Package filter by name")
-        "r N" '(package-menu-filter-by-name-or-description :wk "Package filter by name or descriptions")
+        "r N" '(package-menu-filter-by-name-or-description :wk "Package filter by name or description")
         "r s" '(package-menu-filter-by-status :wk "Package filter by status")
         "r u" '(package-menu-filter-upgradable :wk "Package filter by upgradable")
         ;; Session and Configuration Management
@@ -623,7 +623,7 @@ Undo Fu: Simple, stable linear undo with redo for Emacs.
 Undo-fu-session: Persistent undo history
 Vundo: Visualizes undo history.
 
-If you want to use this. Don't forget to add keybindings for undu-fu and vundo.
+If you want to use this. Don't forget to add keybindings for undo-fu and vundo.
 Evil users don't need to add keybindings for undo-fu just change evil-undo-system to undo-fu.
 
 *To use it, remove :tangle no from the beginning of the source code block.*
@@ -694,7 +694,7 @@ A fancy, fast and customizable mode-line.
 
 ** Nerd Icons
 This is an icon set that can be used with dired, ibuffer and other Emacs packages.
-Don't forget nerd-icons-install-fonts to install the resource fonts.
+Don't forget to run nerd-icons-install-fonts to install the resource fonts.
 
 We use nerd-icons because it supports both GUI and TUI unlike all-the-icons.
 Also Doom modeline requires nerd icons.
@@ -712,7 +712,7 @@ Also Doom modeline requires nerd icons.
 ** Projectile
 Project interaction library for Emacs.
 
-Emacs has a built in project manager called project.el, but we don't use it.
+Emacs has a built-in project manager called project.el, but we don't use it.
 You can try it out with the keybinds under C-x p because project.el does not require any special setup to use.
 
 We use projectile because it:
@@ -723,7 +723,7 @@ We use projectile because it:
 More [[https://docs.projectile.mx/projectile/projectile_vs_project.html][reasons]] to use projectile.
 
 You can also create a [[https://github.com/theprimeagen/tmux-sessionizer][tmux-sessionizer]] like [[https://github.com/MiniApollo/config/blob/main/emacs/init.org#project-sessionizer][setup]] to easily search your work directories.
-It's useful if don't use standard project structures (or there is none).
+It's useful if you don't use standard project structures (or there is none).
 #+begin_src emacs-lisp
     (use-package projectile
       :hook (after-init . projectile-mode)
@@ -741,14 +741,14 @@ Built in Emacs client for the Language Server Protocol.
 We use Eglot because it is fast and minimal.
 For more: C-h i: g: (eglot)Top
 
-Eglot does not automatically download LSP servers. It requires separate download.
+Eglot does not automatically download LSP servers. It requires a separate download.
 The easiest way to install LSP servers is with a package manager like mason.el.
 
 If you can't use a package manager you can do the following:
 - Download the server (e.g. from github)
 - Add the binary/executable to your path.
 - Or customize the eglot-server-programs list.
-To control how a LSP server is started customize the eglot-server-programs list.
+To control how an LSP server is started customize the eglot-server-programs list.
 
 There are many alternative LSP clients, one of them is LSP-mode.
 Which has more features and supports automatic language server installation.
@@ -826,7 +826,7 @@ Developed by me.
     (use-package snippy
       :hook (after-init . global-snippy-minor-mode)
       :custom
-      (snippy-global-languages '("global")) ; Recomended
+      (snippy-global-languages '("global")) ; Recommended
       ;; Optional
       ;; (snippy-install-dir (expand-file-name <Your location>))
       ;; Use different snippet collections
