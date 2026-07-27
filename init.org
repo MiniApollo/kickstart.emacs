@@ -832,6 +832,7 @@ Developed by me.
       ;; Use different snippet collections
       ;; (snippy-source '("Your git repo" . "my-snippets-dir"))
       :config
+      ;; (snippy-fix-lsp-snippet-mode) ; Fixes lsp server snippets (e.g java lsp)
       (snippy-install-or-update-snippets)) ; Autoupdate git repo
 #+end_src
 
