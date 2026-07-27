@@ -506,8 +506,8 @@ Note: The Leader key is what you will press when you want to access your keybind
       (general-create-definer start/leader-keys
         ;; :states '(normal insert visual motion emacs) ; <- evil
         :keymaps 'override
-        :prefix "M-n"
-        :global-prefix "M-n") ; Set global leader key so we can access our keybindings from any state
+        :prefix "C-SPC"
+        :global-prefix "C-SPC") ; Set global leader key so we can access our keybindings from any state
 
       (start/leader-keys
         "." '(find-file :wk "Find file")
