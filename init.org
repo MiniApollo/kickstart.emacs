@@ -820,14 +820,10 @@ To use it write out the full keyword (or use autocompletion) and press Tab.
 VSCode/LSP snippet support for Emacs with Yasnippet.
 Uses friendly snippets.
 Developed by me.
-Note: If you want to use a different package manager you need to change :vc(url ..) part.
 
 *To use it, remove :tangle no from the beginning of the source code block.*
 #+begin_src emacs-lisp :tangle no
     (use-package snippy
-      :vc (:url "https://github.com/MiniApollo/snippy.git"
-                :branch "main"
-                :rev :newest)
       :hook (after-init . global-snippy-minor-mode)
       :custom
       (snippy-global-languages '("global")) ; Recomended
