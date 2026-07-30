@@ -1157,7 +1157,7 @@ Read the [[https://github.com/minad/cape#configuration][configuration section]] 
                              ;; #'cape-sgml         ; Complete Unicode char from SGML entity, e.g., &alpha
                              ;; #'cape-rfc1345      ; Complete Unicode char using RFC 1345 mnemonics
                              ))
-            (seperate-backends (list
+            (separate-backends (list
                                 #'cape-file ; Path completion
                                 #'cape-elisp-block ; Complete elisp in Org or Markdown mode
                                 )))
@@ -1178,7 +1178,7 @@ Read the [[https://github.com/minad/cape#configuration][configuration section]] 
         ;; Create the super-capf and set it buffer-locally
         (setq-local completion-at-point-functions
                     (append
-                     seperate-backends
+                     separate-backends
                      (list (apply #'cape-capf-super merge-backends))))))
     (use-package cape
       :after (corfu)
@@ -1188,7 +1188,7 @@ Read the [[https://github.com/minad/cape#configuration][configuration section]] 
       ;; first function returning a result wins.  Note that the list of buffer-local
       ;; completion functions takes precedence over the global list.
 
-      ;; Seperate function needed, because we use setq-local (everything is replaced)
+      ;; Separate function needed, because we use setq-local (everything is replaced)
       (add-hook 'eglot-managed-mode-hook #'start/setup-capfs)
       (add-hook 'prog-mode-hook #'start/setup-capfs)
       (add-hook 'text-mode-hook #'start/setup-capfs)
