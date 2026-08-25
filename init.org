@@ -1185,7 +1185,6 @@ Recommended for packages like vertico, corfu.
       (completion-category-overrides '((file (styles basic partial-completion)))))
 #+end_src
 
-
 ** Embark
 Emacs Mini-Buffer Actions Rooted in Keymaps. Right click like menu for Emacs.
 #+begin_src emacs-lisp

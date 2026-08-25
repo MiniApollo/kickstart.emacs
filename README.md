@@ -48,14 +48,13 @@ Their content helped me to create this configuration.
 - [Package Async](https://github.com/jwiegley/emacs-async): A module for doing asynchronous processing in Emacs
 - Optin [Evil mode](https://github.com/emacs-evil/evil): An extensible vi/vim layer
 - [General](https://github.com/noctuid/general.el): Keybindings
-- [Gruvbox-theme](https://github.com/greduan/emacs-theme-gruvbox): Color scheme
+- [Doom-themes](https://github.com/doomemacs/themes): Color scheme
 - Optin undo setup: Undo Fu, Undo-fu-session, Vundo
 - [Doom-modeline](https://github.com/seagle0128/doom-modeline): Prettier, more useful modeline
 - [Nerd Icons](https://github.com/rainstormstudio/nerd-icons.el): For icons and more helpful ui (Supports both GUI and TUI)
 - [Projectile](https://github.com/bbatsov/projectile): Project interaction library
 - [Eglot](https://www.gnu.org/software/emacs/manual/html_mono/eglot.html): Language Server Protocol Support
 - [Mason.el](https://github.com/deirn/mason.el): Installer for LSP servers, DAP servers, linters and formatters, inspired by mason.nvim
-- [Sideline-Flymake](https://github.com/emacs-sideline/sideline-flymake): Show flymake errors with sideline 
 - [Yasnippet](https://github.com/joaotavora/yasnippet): Template system and snippet collection package
 - Optin [Snippy](https://github.com/MiniApollo/snippy): VSCode/LSP snippet support for Emacs with Yasnippet.
 - Some [Org mode](https://orgmode.org/) packages (toc-org, org-superstar)
@@ -64,12 +63,12 @@ Their content helped me to create this configuration.
 - [Diff-hl](https://github.com/dgutov/diff-hl): Highlights uncommitted changes
 - [Corfu](https://github.com/minad/corfu): Enhances in-buffer completion
 - [Cape](https://github.com/minad/cape): Provides Completion At Point Extensions
-- [Orderless](https://github.com/oantolin/orderless): Completion style that matches candidates in any order
 - [Vertico](https://github.com/minad/vertico): Provides a performant and minimalistic vertical completion UI.
 - [Marginalia](https://github.com/minad/marginalia): Adds extra metadata for completions in the margins (like descriptions).
+- [Orderless](https://github.com/oantolin/orderless): Completion style that matches candidates in any order
 - [Embark](https://github.com/oantolin/embark): Emacs Mini-Buffer Actions Rooted in Keymaps 
-- [Consult](https://github.com/minad/consult): Provides search and navigation commands.
 - Optin: [Jinx](https://github.com/minad/jinx): Enchanted Spell Checker
+- [Consult](https://github.com/minad/consult): Provides search and navigation commands.
 - [Helpful](https://github.com/Wilfred/helpful): A better Emacs *help* buffer 
 - [Diminish](https://github.com/myrjola/diminish.el): Hiding or abbreviation of the modeline displays
 - [Rainbow Delimiters](https://github.com/Fanael/rainbow-delimiters): Adds colors to brackets.
@@ -86,6 +85,7 @@ If you want to see how to configure these, look up their git repositories or che
 - **[DashBoard](https://github.com/emacs-dashboard/emacs-dashboard):** Extensible startup screen.
 - **[Drag Stuff](https://github.com/rejeep/drag-stuff.el):** Makes it possible to move selected text, regions and lines.
 - **[Rainbow Mode](https://github.com/emacsmirror/rainbow-mode):** Displays the actual color as a background for any hex color value (ex. #ffffff).
+- **[Ghostel](https://github.com/dakra/ghostel):** Terminal emulator powered by libghostty
 - **[Vterm](https://github.com/akermu/emacs-libvterm):** Fast, Fully-fledged terminal emulator inside GNU Emacs.
 - **[Multi-vterm](https://github.com/suonlight/multi-vterm):** Managing multiple vterm buffers in Emacs.
 - **[Sudo-edit](https://github.com/nflath/sudo-edit):** Utilities for opening files with root privileges (also works with doas).
@@ -93,7 +93,6 @@ If you want to see how to configure these, look up their git repositories or che
 - **[Javelin](https://github.com/DamianB-BitFlipper/javelin.el):** Harpoon for Emacs. Dead simple buffer bookmarks.
 - **[Gptel](https://github.com/karthink/gptel):** A simple, extensible LLM client for Emacs.
 - **[Org Modern](https://github.com/minad/org-modern):** Modern Org Style.
-- **[Consult-dir](https://github.com/karthink/consult-dir):** Insert paths into the minibuffer prompt in Emacs (tmux-sessionizer like setup).
 
 <a id="orgfaf0570"></a>
 
@@ -127,7 +126,6 @@ Videos and configurations to get started.
 
 -   ripgrep
 -   fd (improves file indexing performance for some commands)
--   Gnu Emacs with [native-compilation](https://www.emacswiki.org/emacs/GccEmacs) (provides noticeable performance improvements)
 
 
 <a id="org6189661"></a>
