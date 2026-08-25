@@ -855,7 +855,6 @@ To explore the current buffer's syntax tree, use the treesit-explore command.
 
     ;; Credits to LionyxML
     (use-package markdown-ts-mode
-      :if (>= emacs-major-version 31)
       :ensure nil
       :mode ("\\.md\\'" "\\.mdx\\'" "\\.markdown\\'")
       :init (load-library "markdown-ts-mode"))
