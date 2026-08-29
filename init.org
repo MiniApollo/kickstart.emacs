@@ -857,7 +857,8 @@ To explore the current buffer's syntax tree, use the treesit-explore command.
     (use-package markdown-ts-mode
       :ensure nil
       :mode ("\\.md\\'" "\\.mdx\\'" "\\.markdown\\'")
-      :init (load-library "markdown-ts-mode"))
+      :config
+      (require 'markdown-ts-mode-x))
 #+end_src
 
 *** Writing your own syntax highlight with treesitter
